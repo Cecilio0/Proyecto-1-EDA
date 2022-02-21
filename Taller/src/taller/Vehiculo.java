@@ -2,7 +2,7 @@ package taller;
 
 public class Vehiculo {
 	
-	protected String modelo;
+	protected String placa;
 	protected String marca;
 	protected String color;
 	protected Historial[] historial;
@@ -12,8 +12,8 @@ public class Vehiculo {
 	protected int cilindraje;
 	
 	//constructor
-	public Vehiculo(String modelo, String marca, String color, int ano, boolean automatico, boolean estado, int cilindraje) {
-		this.modelo = modelo;
+	public Vehiculo(String placa, String marca, String color, int ano, boolean automatico, boolean estado, int cilindraje) {
+		this.placa = placa;
 		this.marca = marca;
 		this.color = color;
 		this.historial = new Historial[0];
@@ -24,8 +24,8 @@ public class Vehiculo {
 	}
 	
 	//metodos get
-	public String getModelo() {
-		return modelo;
+	public String getPlaca() {
+		return placa;
 	}
 
 	public String getMarca() {
