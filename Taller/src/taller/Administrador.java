@@ -2,7 +2,7 @@ package taller;
 
 public class Administrador {
 	private Cliente[] clientes;
-	private mecanicos[] mecanicos;
+	private Mecanico[] mecanicos;
 	
 	public Administrador() {
 		
