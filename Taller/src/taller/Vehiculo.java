@@ -1,5 +1,8 @@
 package taller;
 
+import java.util.Arrays;
+import java.util.Date;
+
 public class Vehiculo {
 	
 	protected String placa;
@@ -59,6 +62,11 @@ public class Vehiculo {
 	//metodos set
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+	
+	public void addHistorial(Date fechaIngreso, Date fechaDevolucion, Mecanico mecanico, String accion, double precio) {
+		historial = Arrays.copyOf(historial, historial.length+1);
+		historial[historial.length-1] = new Historial(fechaIngreso, fechaDevolucion, mecanico, accion, precio);
 	}
 	
 	
