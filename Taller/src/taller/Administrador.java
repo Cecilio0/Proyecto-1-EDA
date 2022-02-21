@@ -12,7 +12,7 @@ public class Administrador {
 		mecanicos = new Mecanico [0];
 	}
 
-	public double calcularNomina() {
+	public double calcularNomina() {//calcular nomina, es decir cuantoen salarios se debe pagar al final del mes
 		double nomina = 0;
 		for (int i = 0; i < mecanicos.length; i++) {
 			nomina += mecanicos[i].getSalario();
@@ -20,7 +20,7 @@ public class Administrador {
 		return nomina;
 	}
 	
-	public void addHistorial(Date fechaIngreso, Date fechaDevolucion, Mecanico mecanico, String accion, double precio, String cedulaCliente, String placa) {
+	public void addHistorial(Date fechaIngreso, Date fechaDevolucion, Mecanico mecanico, String accion, double precio, String cedulaCliente, String placa) {//Añadir historial a un vehiculo
 		int i = -1;
 		int j = -1;
 		while (++i < clientes.length && !clientes[i].getCedula().equalsIgnoreCase(cedulaCliente));
@@ -34,12 +34,7 @@ public class Administrador {
 	
 	public void addCliente(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, Vehiculo[] vehiculos, String correo, Date fechaRegistro) {
 		Cliente c = new Cliente(nombre, cedula, fechaNacimiento, direccion, telefono, vehiculos, correo, fechaRegistro);
-		clientes[clientes.length] = c;
+		clientes[clientes.length-1] = c;
 	}
-	
-	
-	
-
-
 	
 }
