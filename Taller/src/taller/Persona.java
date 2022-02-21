@@ -1,17 +1,19 @@
 package taller;
 
+import java.util.*;
+
 public class Persona {
     protected String nombre;
     protected String cedula;
-    protected int edad;
+    protected Date fechaNacimiento;
     protected String direccion;
     protected String telefono;
     protected String correo;
 
-    public Persona(String nombre, String cedula, int edad, String direccion, String telefono, String correo) {
+    public Persona(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, String correo) {
         this.nombre = nombre;
         this.cedula = cedula;
-        this.edad = edad;
+        this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
@@ -33,12 +35,8 @@ public class Persona {
         this.cedula = cedula;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     public String getDireccion() {
