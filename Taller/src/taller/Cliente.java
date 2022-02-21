@@ -7,8 +7,8 @@ public class Cliente extends Persona {
     private double deuda;
     private Date fechaRegistro;
 
-    public Cliente(String nombre, String cedula, int edad, String direccion, String telefono, Vehiculo[] vehiculos, String correo, Date fechaRegistro) {
-        super(nombre, cedula, edad, direccion, telefono, correo);
+    public Cliente(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, Vehiculo[] vehiculos, String correo, Date fechaRegistro) {
+        super(nombre, cedula, fechaNacimiento, direccion, telefono, correo);
         this.vehiculos = vehiculos;
         this.fechaRegistro = fechaRegistro;
         this.deuda = 0;
