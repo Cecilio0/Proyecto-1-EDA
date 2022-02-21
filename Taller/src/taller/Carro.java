@@ -21,6 +21,10 @@ public class Carro extends Vehiculo{
 		return traccion;
 	}
 	
+	public void setTraccion(String traccion) {
+		this.traccion = traccion;
+	}
+	
 	
 
 }
