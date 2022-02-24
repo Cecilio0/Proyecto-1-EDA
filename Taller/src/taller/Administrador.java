@@ -75,4 +75,41 @@ public class Administrador {
 		buscarCliente(CC).setVehiculos(aux);
 	}
 	
+	//eliminar Cliente
+	public void eliminarCliente(String CC){
+		int index = 0;
+		while(index < clientes.length && clientes[index] != null && !clientes[index].getCedula().equals(CC)) {
+			index++;
+		}
+		if (index < clientes.length && clientes[index] != null && clientes[index].getCedula().equals(CC)) {
+			Cliente[] clientesRestantes = new Cliente[clientes.length-1];
+			System.arraycopy(clientes, 0, clientesRestantes, 0, index);
+			System.arraycopy(clientesRestantes, index+1, clientesRestantes, index, clientes.length-index-1);
+			clientes = clientesRestantes;
+		}
+	}
+	
+	//eliminar Mecanico
+	public void eliminarMecanico(String id) {
+		int index = 0;
+		while(index<mecanicos.length && mecanicos[index]!= null && !mecanicos[index].getId().equals(id)) {
+			index++;
+		}
+		if (index<mecanicos.length && mecanicos[index]!= null && mecanicos[index].getId().equals(id)) {
+			Mecanico[] mecanicosRestantes = new Mecanico[mecanicos.length-1];
+			System.arraycopy(mecanicos, 0, mecanicosRestantes, 0, index);
+			System.arraycopy(mecanicos, index+1, mecanicosRestantes, index, mecanicos.length-index-1);
+			mecanicos = mecanicosRestantes;
+		}
+	}
+	
+	//eliminar Vehiculo
+	public void eliminarVehiculo(String placa, String CC) {
+		for(int i = 0; i< clientes.length; i++) {
+			if(clientes[i].getCedula().equals(CC)) {
+				clientes[i].eliminarVehiculo(placa);
+				break;
+			}
+		}
+	}
 }
