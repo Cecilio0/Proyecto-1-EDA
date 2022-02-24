@@ -33,5 +33,18 @@ public class Cliente extends Persona {
     public void setVehiculos(Vehiculo[] vehiculos) {
         this.vehiculos = vehiculos;
     }
+    
+    public void eliminarVehiculo(String placa) {
+    	int index = 0;
+    	while (index < vehiculos.length && vehiculos[index]!= null && !vehiculos[index].getPlaca().equals(placa)) {
+    		index++;
+    	}
+    	if (index < vehiculos.length && vehiculos[index]!= null && vehiculos[index].getPlaca().equals(placa)) {
+    		Vehiculo[] vehiculosRestantes = new Vehiculo[vehiculos.length-1];
+    		System.arraycopy(vehiculos, 0, vehiculosRestantes, 0, index);
+    		System.arraycopy(vehiculos, index+1, vehiculosRestantes, index, vehiculos.length-index-1);
+    		vehiculos = vehiculosRestantes;
+    	}
+    }
 
 }
