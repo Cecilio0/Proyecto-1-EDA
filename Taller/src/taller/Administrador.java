@@ -112,4 +112,44 @@ public class Administrador {
 			}
 		}
 	}
+//	buscar Cliente
+	public Cliente buscarCliente(String cc) {
+		int num=clientes.length;
+		for(int i =0; i<clientes.length; i++) {
+			if(cc==clientes[i].getCedula()) {
+				num=i;
+				i=clientes.length;
+			}
+		}
+		if(num==clientes.length) {
+			return null;
+		} else return clientes[num];
+	}
+//	buscar Mecanico
+	public Mecanico buscarMecanico(String id) {
+		int num=mecanicos.length;
+		for(int i =0; i<mecanicos.length; i++) {
+			if(id==mecanicos[i].getId()) {
+				num=i;
+				i=mecanicos.length;
+			}
+		}
+		if(num==mecanicos.length) {
+			return null;
+		} else return mecanicos[num];
+	}
+//	buscar Vehiculo
+	public Vehiculo buscarVehiculo(String placa) {
+		int num=clientes.length;
+		for(int i =0; i<clientes.length; i++) {
+			if(clientes[i].buscarVehiculo(placa).equals(placa)) {
+				num=i;
+				i=clientes.length;
+			}
+		}
+		if(num==clientes.length) {
+			return null;
+		} else return clientes[num].buscarVehiculo(placa);
+	}
+	
 }

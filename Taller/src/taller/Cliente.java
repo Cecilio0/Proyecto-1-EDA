@@ -46,5 +46,17 @@ public class Cliente extends Persona {
     		vehiculos = vehiculosRestantes;
     	}
     }
-
+//	buscar Vehiculo
+	public Vehiculo buscarVehiculo(String placa) {
+		int num=vehiculos.length;
+		for(int i =0; i<vehiculos.length; i++) {
+			if(placa==vehiculos[i].getPlaca()) {
+				num=i;
+				i=vehiculos.length;
+			}
+		}
+		if(num==vehiculos.length) {
+			return null;
+		} else return vehiculos[num];
+	}
 }
