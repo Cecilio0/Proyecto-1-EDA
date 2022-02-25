@@ -22,16 +22,24 @@ public class Cliente extends Persona {
         return deuda;
     }
 
-    public void setDeuda(double deuda) {
-        this.deuda = deuda;
-    }
-
     public Date getFechaRegistro() {
         return fechaRegistro;
     }
-
-    public void setVehiculos(Vehiculo[] vehiculos) {
-        this.vehiculos = vehiculos;
+    
+    public void setDeuda(double deuda) {
+        this.deuda = deuda;
+    }
+    
+    // addVehiculo || carro
+    public void addVehiculo(String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion) {
+    	vehiculos  = Arrays.copyOf(vehiculos, vehiculos.length+1);
+    	vehiculos[vehiculos.length-1] = new Carro(placa, color, estado, kilometraje, estadoLlantas, numPuertas, traccion);
+    }
+    
+    // addVehiculo || moto
+    public void addVehiculo(String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int tiempos) {
+    	vehiculos  = Arrays.copyOf(vehiculos, vehiculos.length+1);
+    	vehiculos[vehiculos.length-1] = new Moto(placa, color, estado, kilometraje, estadoLlantas, tiempos);
     }
     
     public void eliminarVehiculo(String placa) {
@@ -46,6 +54,7 @@ public class Cliente extends Persona {
     		vehiculos = vehiculosRestantes;
     	}
     }
+    
 //	buscar Vehiculo
 	public Vehiculo buscarVehiculo(String placa) {
 		int num=vehiculos.length;

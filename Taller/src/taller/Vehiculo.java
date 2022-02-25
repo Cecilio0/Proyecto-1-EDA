@@ -6,33 +6,27 @@ import java.util.Date;
 public class Vehiculo {
 	
 	protected String placa;
-	protected String marca;
 	protected String color;
 	protected Historial[] historial;
-	protected int ano;
-	protected boolean automatico;
 	protected boolean estado;
-	protected int cilindraje;
+	protected int kilometraje;
+	protected int kilometrajeUltimaRevision;
+	protected boolean estadoLlantas;
 	
 	//constructor
-	public Vehiculo(String placa, String marca, String color, int ano, boolean automatico, boolean estado, int cilindraje) {
+	public Vehiculo(String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas) {
 		this.placa = placa;
-		this.marca = marca;
 		this.color = color;
 		this.historial = new Historial[0];
-		this.ano = ano;
-		this.automatico = automatico;
 		this.estado = estado;
-		this.cilindraje = cilindraje;
+		this.kilometraje = kilometraje;
+		this.kilometrajeUltimaRevision = 0;
+		this.estadoLlantas = estadoLlantas;
 	}
 	
 	//metodos get
 	public String getPlaca() {
 		return placa;
-	}
-
-	public String getMarca() {
-		return marca;
 	}
 
 	public String getColor() {
@@ -43,30 +37,47 @@ public class Vehiculo {
 		return historial;
 	}
 
-	public int getAno() {
-		return ano;
-	}
-
-	public boolean isAutomatico() {
-		return automatico;
-	}
-
 	public boolean isEstado() {
 		return estado;
 	}
+	
+	public int getKilometraje() {
+		return kilometraje;
+	}
 
-	public int getCilindraje() {
-		return cilindraje;
+	public int getKilometrajeUltimaRevision() {
+		return kilometrajeUltimaRevision;
+	}
+
+	public boolean isEstadoLlantas() {
+		return estadoLlantas;
+	}
+
+	//metodos set
+	
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
-	//metodos set
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 	
-	public void addHistorial(Date fechaIngreso, Date fechaDevolucion, Mecanico mecanico, String accion, double precio) {
+	public void setKilometraje(int kilometraje) {
+		this.kilometraje = kilometraje;
+	}
+
+	public void setKilometrajeUltimaRevision(int kilometrajeUltimaRevision) {
+		this.kilometrajeUltimaRevision = kilometrajeUltimaRevision;
+	}
+
+	public void setEstadoLlantas(boolean estadoLlantas) {
+		this.estadoLlantas = estadoLlantas;
+	}
+
+	public void addHistorial(Date fechaIngreso, Mecanico mecanico, String accion, double precio) {
 		historial = Arrays.copyOf(historial, historial.length+1);
-		historial[historial.length-1] = new Historial(fechaIngreso, fechaDevolucion, mecanico, accion, precio);
+		historial[historial.length-1] = new Historial(fechaIngreso, mecanico, accion, precio);
 	}
 	
 	
