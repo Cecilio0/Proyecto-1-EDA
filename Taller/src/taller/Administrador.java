@@ -186,12 +186,32 @@ public class Administrador {
 	}
 	
 	//a cargo de Daniel
-	public boolean[] diagnostico(String cedula, String placa) {//
-		return null;
+	public boolean[] diagnostico(String cedula, String placa) {//revisa si es necesario o se recomendaria hacer algun servicio al vehiculo en cuestion y devuelve cuales si y cuales no en un vector de booleans
+		boolean [] diagnostico = new boolean[2];
+		Arrays.fill(diagnostico, false);
+		Vehiculo v = buscarVehiculo(placa);
+		if (v.getKilometraje() - v.getKilometrajeUltimaRevision() > 10000) {
+			diagnostico [0] = true;
+		}
+		if (!v.isEstadoLlantas()) {
+			diagnostico [1] = true;
+		}
+		
+		return diagnostico;
 	}
 	
-	public String[] mantenimientoGeneral (String cedula, String placa) {
+	public String[] mantenimientoGeneral (String cedula, String placa) {//lee el vector de boolean que devuelve diagnostico y los ejecuta
+		String [] cambios = new String [2];
 		boolean [] diagnostico = diagnostico (cedula, placa);
-		return null;
-	}
+		Vehiculo v = buscarVehiculo(placa);
+		if (diagnostico[0]) {
+			cambioAceite(cedula, placa, v.getKilometraje());
+			cambios[0] = "Se le cambió el aceite al vehiculo ";
+		}
+		if (diagnostico[1]) {
+			inflarLlantas(cedula, placa, v.isEstadoLlantas());
+			cambios[1] = "Se le inflaron las llantas al vehiculo ";
+		}
+		return cambios;//leer el vector cambios con un ciclo for y que adentro lleve un if que revise que el vector en cada posicion NO sea null
+	}//considerar la creacion de un metodo que este orientado a la actualizacion de los datos del vehiculo que se llame actualizarVehiculo (String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion)
 }
