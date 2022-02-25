@@ -11,9 +11,9 @@ public class Historial {
 		private String accion;
 		private double precio;
 
-		public Historial(Date fechaIngreso, Date fechaDevolucion, Mecanico mecanico, String accion, double precio) {
+		public Historial(Date fechaIngreso, Mecanico mecanico, String accion, double precio) {
 			this.fechaIngreso = fechaIngreso;
-			this.fechaDevolucion = fechaDevolucion;
+			this.fechaDevolucion = new Date();
 			this.mecanico = mecanico;
 			this.accion = accion;
 			this.precio = precio;
