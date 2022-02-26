@@ -11,10 +11,27 @@ public class Administrador {
 		mecanicos = new Mecanico [0];
 	}
 
+	/*
 	public double calcularNomina() {//calcular nomina, es decir cuanto en salarios se debe pagar al final del mes
 		double nomina = 0;
 		for (int i = 0; i < mecanicos.length; i++) {
 			nomina += mecanicos[i].getSalario();
+		}
+		return nomina;
+	}
+	*/
+
+	// Nuevo metodo calcularNomina dependiente de una fecha especifica, necesario para calcular la utilidad del taller en cualquier fecha, para hacerlo funcionar
+	// se tuvo que crear dos variables nuevas en Mecanico de tipo Date.
+	// En caso de que se me olvide, sugiero tratar los despidos de los empleados con un booleano en su clase (requeriria crear un metodo para despedir al trabajador), asi no debemos elminarlos cuando
+	// sean despedidos y en caso de buscar informacion relacionada a ese objeto que ya no existe el programa no implosione en si mismo.
+	// Ademas de que es logico que una empresa guarde registro de los empleados que tuvo y lo que ellos hicieron, aunque ya no trabajen alli. att Simon
+	public double calcularNomina(Date fecha) {
+		double nomina = 0;
+		for (Mecanico mecanico : mecanicos) {
+			if (mecanico.getFechaSalida() == null || mecanico.getFechaSalida().before(fecha)) {
+				nomina += mecanico.getSalario();
+			}
 		}
 		return nomina;
 	}
@@ -143,11 +160,7 @@ public class Administrador {
 			return null;//de nuevo, mejor una excepcion
 		} else return clientes[num].buscarVehiculo(placa);
 	}
-	
-	//a cargo de Simon
-	public Historial[] mostrarHistorial(String cedula, String placa) {//devuelve el historial de un vehiculo
-		return null;
-	}
+
 	
 	//a cargo de Pablo
 	//método para buscar si la cédula ingresada ya se encuentra asociada a un cliente creado
@@ -189,18 +202,53 @@ public class Administrador {
 			return false;
 		}
 	}
-	
+
 	//a cargo de Simon
+	public Historial[] mostrarHistorial(String cedula, String placa) {//devuelve el historial de un vehiculo
+		return buscarCliente(cedula).buscarVehiculo(placa).getHistorial();
+	}
+
 	public String generarId() {//genera un codigo para un mecanico nuevo del formato 000 tres numeros aleatorios
-		return null;
+		StringBuilder id = new StringBuilder();
+		for (int i = 0; i < 3; i++) {
+			id.append((int) (Math.random() * 10));
+		}
+		while (existeId(id.toString())) {
+			id.delete(0, id.length());
+			for (int i = 0; i < 3; i++) {
+				id.append((int) (Math.random() * 10));
+			}
+		}
+		return id.toString();
 	}
-	
-	public double calcularIngresos() {//
-		return null;
+
+	public boolean existeId(String id) {
+		boolean a = false;
+		for (Mecanico mecanico : mecanicos) {
+			if (mecanico.getId().equals(id)) {
+				a = true;
+				break;
+			}
+		}
+		return a;
 	}
-	
-	public double calcularUtilidad() {//
-		return null;
+
+	public double calcularIngresos(Date fecha) {//
+		double sumIngresos = 0;
+		for (Cliente cliente : clientes) {
+			for (int j = 0; j < cliente.getVehiculos().length; j++) {
+				for (int k = 0; k < cliente.getVehiculos()[j].getHistorial().length; k++) {
+					if (cliente.getVehiculos()[j].getHistorial()[k].getMes() == fecha.getMonth()) {
+						sumIngresos += cliente.getVehiculos()[j].getHistorial()[k].getPrecio();
+					}
+				}
+			}
+		}
+		return sumIngresos;
+	}
+
+	public double calcularUtilidad(Date fecha) {//
+		return calcularIngresos(fecha) - calcularNomina(fecha);
 	}
 	
 	//a cargo de camilo
