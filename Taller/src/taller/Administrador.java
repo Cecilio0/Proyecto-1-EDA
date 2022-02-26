@@ -101,6 +101,7 @@ public class Administrador {
 			clientes[i].eliminarVehiculo(placa);
 		}
 	}
+	
 //	buscar Cliente
 	public Cliente buscarCliente(String cedula) {
 		int num=clientes.length;
@@ -114,6 +115,7 @@ public class Administrador {
 			return null;//mejor tirar excepcion, pero mas tarde
 		} else return clientes[num];
 	}
+	
 //	buscar Mecanico
 	public Mecanico buscarMecanico(String id) {
 		int num=mecanicos.length;
@@ -127,6 +129,7 @@ public class Administrador {
 			return null;//basicamente la misma excepcion del anterior
 		} else return mecanicos[num];
 	}
+	
 //	buscar Vehiculo
 	public Vehiculo buscarVehiculo(String placa) {
 		int num=clientes.length;
@@ -147,16 +150,44 @@ public class Administrador {
 	}
 	
 	//a cargo de Pablo
+	//método para buscar si la cédula ingresada ya se encuentra asociada a un cliente creado
 	public boolean existeCedula (String cedula) {//devuelve si ya existe un cliente con esa cedula
-		return true;
+		int index = 0;
+		while(index< clientes.length && clientes[index] != null && !clientes[index].getCedula().equals(cedula)) {
+			index++;
+		}
+		if(index< clientes.length && clientes[index] != null && clientes[index].getCedula().equals(cedula)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
+	//método para buscar si la placa ingresada ya se encuentra asocida al vehículo de alguno de los clientes existentes
 	public boolean existeVehiculo (String placa) {//devuelve si ya existe un vehiculo con esa placa;
-		return true;
+		int index=0;
+		while(index< clientes.length && clientes[index]!= null && !clientes[index].buscarVehiculo(placa).getPlaca().equals(placa)) {
+			index++;
+		}
+		if(index< clientes.length && clientes[index]!= null && clientes[index].buscarVehiculo(placa).getPlaca().equals(placa)) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
+	//método que busca si existe un mecánico ya creado que posee el id específico
 	public boolean existeMecanico (String id) {//devuelve si ya existe un mecanico con ese id
-		return true;
+		int index = 0;
+		while (index< mecanicos.length && mecanicos[index] != null && !mecanicos[index].getId().equals(id)) {
+			index++;
+		}
+		if(index < mecanicos.length && mecanicos[index] != null && mecanicos[index].getId().equals(id)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	//a cargo de Simon

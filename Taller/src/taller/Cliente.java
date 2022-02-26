@@ -17,6 +17,7 @@ public class Cliente extends Persona {
     public Vehiculo[] getVehiculos() {
         return vehiculos;
     }
+    
 
     public double getDeuda() {
         return deuda;
