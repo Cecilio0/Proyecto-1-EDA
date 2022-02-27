@@ -5,6 +5,7 @@ import java.util.*;
 public class Administrador {
 	private Cliente[] clientes;
 	private Mecanico[] mecanicos;
+	//considerar la creacion ya sea de un atributo o un metodo que sea capaz de calcular la nomina en un momento dado
 
 	public Administrador() {
 		clientes = new Cliente [0];
@@ -36,7 +37,7 @@ public class Administrador {
 		return nomina;
 	}
 	
-	public void addHistorial(Date fechaIngreso, Mecanico mecanico, String accion, double precio, String cedulaCliente, String placa) {//Añadir historial a un vehiculo
+	public void addHistorial(Date fechaIngreso, Mecanico mecanico, String accion, double precio, String cedulaCliente, String placa) {//AÃ±adir historial a un vehiculo
 		int i = -1;
 		int j = -1;
 		while (++i < clientes.length && !clientes[i].getCedula().equalsIgnoreCase(cedulaCliente));
@@ -97,7 +98,7 @@ public class Administrador {
 	}
 	
 	//eliminar Mecanico
-	public void eliminarMecanico(String id) {
+	public void eliminarMecanico(String id) {//considerar la creacion de un nuevo metodo llamado despedirMecanico y revisar si despues de eliminar a un mecanico da error un dato de tipo historial 
 		int index = 0;
 		while(index<mecanicos.length && mecanicos[index]!= null && !mecanicos[index].getId().equals(id)) {
 			index++;
@@ -163,7 +164,7 @@ public class Administrador {
 
 	
 	//a cargo de Pablo
-	//método para buscar si la cédula ingresada ya se encuentra asociada a un cliente creado
+	//mÃ©todo para buscar si la cÃ©dula ingresada ya se encuentra asociada a un cliente creado
 	public boolean existeCedula (String cedula) {//devuelve si ya existe un cliente con esa cedula
 		int index = 0;
 		while(index< clientes.length && clientes[index] != null && !clientes[index].getCedula().equals(cedula)) {
@@ -176,7 +177,7 @@ public class Administrador {
 		}
 	}
 	
-	//método para buscar si la placa ingresada ya se encuentra asocida al vehículo de alguno de los clientes existentes
+	//mÃ©todo para buscar si la placa ingresada ya se encuentra asocida al vehÃ­culo de alguno de los clientes existentes
 	public boolean existeVehiculo (String placa) {//devuelve si ya existe un vehiculo con esa placa;
 		int index=0;
 		while(index< clientes.length && clientes[index]!= null && !clientes[index].buscarVehiculo(placa).getPlaca().equals(placa)) {
@@ -190,7 +191,7 @@ public class Administrador {
 		
 	}
 	
-	//método que busca si existe un mecánico ya creado que posee el id específico
+	//mÃ©todo que busca si existe un mecÃ¡nico ya creado que posee el id especÃ­fico
 	public boolean existeMecanico (String id) {//devuelve si ya existe un mecanico con ese id
 		int index = 0;
 		while (index< mecanicos.length && mecanicos[index] != null && !mecanicos[index].getId().equals(id)) {
@@ -303,7 +304,7 @@ public class Administrador {
 		Vehiculo v = buscarVehiculo(placa);
 		if (diagnostico[0]) {
 			cambioAceite(cedula, placa, v.getKilometraje(), idMecanico);
-			cambios[0] = "Se le cambió el aceite al vehiculo ";
+			cambios[0] = "Se le cambiÃ³ el aceite al vehiculo ";
 		}
 		if (diagnostico[1]) {
 			inflarLlantas(cedula, placa, v.isEstadoLlantas(), idMecanico);
