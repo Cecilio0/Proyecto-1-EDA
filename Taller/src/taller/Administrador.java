@@ -5,6 +5,7 @@ import java.util.*;
 public class Administrador {
 	private Cliente[] clientes;
 	private Mecanico[] mecanicos;
+	//considerar la creacion de un atributo que guarde las facturas de los pagos de los clientes
 	//considerar la creacion ya sea de un atributo o un metodo que sea capaz de calcular la nomina en un momento dado
 
 	public Administrador() {
@@ -163,7 +164,7 @@ public class Administrador {
 	}
 
 	
-	//a cargo de Pablo
+	//a cargo de Pablo y recordar unir estos metodos a los respectivos add
 	//método para buscar si la cédula ingresada ya se encuentra asociada a un cliente creado
 	public boolean existeCedula (String cedula) {//devuelve si ya existe un cliente con esa cedula
 		int index = 0;
@@ -252,36 +253,47 @@ public class Administrador {
 		return calcularIngresos(fecha) - calcularNomina(fecha);
 	}
 	
-	//a cargo de camilo
-	public void cambioAceite (String cedula, String placa, int kilometraje, String idMecanico) {// "cambia" el aceite de un vehiculo, para su correcto funcionamiento debe cambiar el kilometrajeUltimaRevision por kilometraje, ademas debe crear un dato tipo historial
+	//a cargo de camilo y acordar precios de cada tipo de servicio
+	public void cambioAceite (String cedula, String placa, String idMecanico, int kilometraje) {// "cambia" el aceite de un vehiculo, para su correcto funcionamiento debe cambiar el kilometrajeUltimaRevision por kilometraje, ademas debe crear un dato tipo historial
 		Date date = new Date();		
 		String accion = "Cambio de aceite";
 		Mecanico mecanico = buscarMecanico(idMecanico);
-		double precio= 0;
-		Vehiculo v = buscarVehiculo(placa);
-		v.setKilometrajeUltimaRevision(kilometraje);
+		double precio = 50;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
+		buscarVehiculo(placa).setKilometrajeUltimaRevision(kilometraje);
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
 	
-	public void inflarLlantas (String cedula, String placa, boolean estadoLlantas, String idMecanico) {// "infla" las llantas de un vehiculo, para su correcto funcionamiento debe cambiar el estadoLlantas a true, ademas debe crear un dato tipo historial
+	public void inflarLlantas (String cedula, String placa,String idMecanico, boolean estadoLlantas) {// "infla" las llantas de un vehiculo, para su correcto funcionamiento debe cambiar el estadoLlantas a true, ademas debe crear un dato tipo historial
 		Date date = new Date();		
 		String accion = "Inflar llantas";
 		Mecanico mecanico = buscarMecanico(idMecanico);
-		double precio= 0;
-		Vehiculo v = buscarVehiculo(placa);
-		v.setEstadoLlantas(true);
+		double precio= 25;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
+		buscarVehiculo(placa).setEstadoLlantas(true);
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
 	
-	public void cambioPintura (String cedula, String placa, String color, String idMecanico) {// "cambia" el color de un vehiculo, para su correcto funcionamiento debe cambiar el color del vehiculo al color nuevo, ademas debe crear un dato tipo historial
+	public void cambioPintura (String cedula, String placa, String idMecanico, String color) {// "cambia" el color de un vehiculo, para su correcto funcionamiento debe cambiar el color del vehiculo al color nuevo, ademas debe crear un dato tipo historial
 		Date date = new Date();		
 		String accion = "Cambio de pintura";
 		Mecanico mecanico = buscarMecanico(idMecanico);
-		double precio= 0;
-		Vehiculo v = buscarVehiculo(placa);
-		v.setColor(color);
+		double precio= 100;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
+		buscarVehiculo(placa).setColor(color);//revisar si esto si cambia el dato original en el main
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
+	
+	//a cargo de Simon y Camilo
+	public void cambioPastas (String cedula, String placa,String idMecanico) {
+		
+	}
+	
+	public void lavadoVehiculo (String cedula, String placa, String idMecanico) {//para desarrollar este crear atributo en la clase vehiculo que sea un boolean llamado "limpio"
+		
+	}
+	
+	public void servicioEspecial (String cedula, String placa, String idMecanico, String accion, double precio) {//para desarrollar un servicio no estandarisado con precio y accion variable
+		
+	}
+	
 	
 	//a cargo de Daniel
 	public boolean[] diagnostico(String cedula, String placa) {//revisa si es necesario o se recomendaria hacer algun servicio al vehiculo en cuestion y devuelve cuales si y cuales no en un vector de booleans
@@ -303,13 +315,24 @@ public class Administrador {
 		boolean [] diagnostico = diagnostico (cedula, placa);
 		Vehiculo v = buscarVehiculo(placa);
 		if (diagnostico[0]) {
-			cambioAceite(cedula, placa, v.getKilometraje(), idMecanico);
-			cambios[0] = "Se le cambió el aceite al vehiculo ";
+			cambioAceite(cedula, placa, idMecanico, v.getKilometraje());
+			cambios[0] = "Se le cambia el aceite al vehiculo ";
 		}
 		if (diagnostico[1]) {
-			inflarLlantas(cedula, placa, v.isEstadoLlantas(), idMecanico);
+			inflarLlantas(cedula, placa, idMecanico, v.isEstadoLlantas());
 			cambios[1] = "Se le inflaron las llantas al vehiculo ";
 		}
 		return cambios;//leer el vector cambios con un ciclo for y que adentro lleve un if que revise que el vector en cada posicion NO sea null
 	}//considerar la creacion de un metodo que este orientado a la actualizacion de los datos del vehiculo que se llame actualizarVehiculo (String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion)
+
+	public double mostrarDeuda(String cedula) {//muestra la deuda de un cliente en especifico
+		return 0;
+	}
+	
+	public void pagoDeuda(String cedula) {//para que cierto cliente pague por completo su deuda
+		
+	}
+	
+	//a cargo de Pablo
+	//Creacion de una clase factura que utilice los historiales no pagos del cliente y que su principal funcion sea imprirlos junto con su precio y un total
 }

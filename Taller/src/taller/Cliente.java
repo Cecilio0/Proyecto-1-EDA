@@ -55,7 +55,7 @@ public class Cliente extends Persona {
     	}
     }
     
-//	buscar Vehiculo
+    //buscar Vehiculo
 	public Vehiculo buscarVehiculo(String placa) {
 		int num=vehiculos.length;
 		for(int i =0; i<vehiculos.length; i++) {
@@ -67,5 +67,22 @@ public class Cliente extends Persona {
 		if(num==vehiculos.length) {
 			return null;
 		} else return vehiculos[num];
+	}
+	
+	//Considerar el metodo pagoDeuda que permita al cliente pagar la deuda que tiene con el taller
+	public double calcularDeuda() {
+		double deudaTotal = 0; 
+		for (int i = 0; i < vehiculos.length; i++) {
+			for (int j = 0; j < vehiculos[i].getHistorial().length; j++) {
+				if (!vehiculos[i].getHistorial()[j].isPagada()) {
+					deudaTotal += vehiculos[i].getHistorial()[j].getPrecio();
+				}
+			}
+		}
+		return deudaTotal;
+	}
+	
+	public void pagoDeuda() {//paga toda la deuda del cliente y convierte todos los historiales no pagos a pagos
+		
 	}
 }
