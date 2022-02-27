@@ -8,6 +8,7 @@ public class Historial {
     private Mecanico mecanico;
     private String accion;
     private double precio;
+    private boolean pagada;
 
     public Historial(Date fechaIngreso, Mecanico mecanico, String accion, double precio) {
         this.fechaIngreso = fechaIngreso;
@@ -15,6 +16,7 @@ public class Historial {
         this.mecanico = mecanico;
         this.accion = accion;
         this.precio = precio;
+        this.pagada = false;
     }
 
     public Date getFechaIngreso() {
@@ -32,6 +34,10 @@ public class Historial {
     public String getAccion() {
         return accion;
     }
+    
+    public boolean isPagada() {
+    	return pagada;
+    }
 
     public void setAccion(String accion) {
         this.accion = accion;
@@ -39,6 +45,10 @@ public class Historial {
 
     public double getPrecio() {
         return precio;
+    }
+    
+    public void setPagada(boolean pagada) {
+    	this.pagada = pagada;
     }
 
     @Override

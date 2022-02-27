@@ -10,7 +10,7 @@ public class Vehiculo {
 	protected Historial[] historial;
 	protected boolean estado;
 	protected int kilometraje;
-	protected int kilometrajeUltimaRevision;
+	protected int kilometrajeUltimaRevision;//hacer cambio de kilometrajeUltimaRevision a kilometrajePastas y kilometrajeAceite los cuales corresponden al kilometraje de la ultima vez que se cambiaron
 	protected boolean estadoLlantas;
 	
 	//constructor
