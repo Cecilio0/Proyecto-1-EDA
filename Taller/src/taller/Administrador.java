@@ -252,16 +252,34 @@ public class Administrador {
 	}
 	
 	//a cargo de camilo
-	public void cambioAceite (String cedula, String placa, int kilometraje) {// "cambia" el aceite de un vehiculo, para su correcto funcionamiento debe cambiar el kilometrajeUltimaRevision por kilometraje, ademas debe crear un dato tipo historial
-		
+	public void cambioAceite (String cedula, String placa, int kilometraje, String idMecanico) {// "cambia" el aceite de un vehiculo, para su correcto funcionamiento debe cambiar el kilometrajeUltimaRevision por kilometraje, ademas debe crear un dato tipo historial
+		Date date = new Date();		
+		String accion = "Cambio de aceite";
+		Mecanico mecanico = buscarMecanico(idMecanico);
+		double precio= 0;
+		Vehiculo v = buscarVehiculo(placa);
+		v.setKilometrajeUltimaRevision(kilometraje);
+		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
 	
-	public void inflarLlantas (String cedula, String placa, boolean estadoLlantas) {// "infla" las llantas de un vehiculo, para su correcto funcionamiento debe cambiar el estadoLlantas a true, ademas debe crear un dato tipo historial
-		
+	public void inflarLlantas (String cedula, String placa, boolean estadoLlantas, String idMecanico) {// "infla" las llantas de un vehiculo, para su correcto funcionamiento debe cambiar el estadoLlantas a true, ademas debe crear un dato tipo historial
+		Date date = new Date();		
+		String accion = "Inflar llantas";
+		Mecanico mecanico = buscarMecanico(idMecanico);
+		double precio= 0;
+		Vehiculo v = buscarVehiculo(placa);
+		v.setEstadoLlantas(true);
+		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
 	
-	public void cambioPintura (String cedula, String placa, String color) {// "cambia" el color de un vehiculo, para su correcto funcionamiento debe cambiar el color del vehiculo al color nuevo, ademas debe crear un dato tipo historial
-		
+	public void cambioPintura (String cedula, String placa, String color, String idMecanico) {// "cambia" el color de un vehiculo, para su correcto funcionamiento debe cambiar el color del vehiculo al color nuevo, ademas debe crear un dato tipo historial
+		Date date = new Date();		
+		String accion = "Cambio de pintura";
+		Mecanico mecanico = buscarMecanico(idMecanico);
+		double precio= 0;
+		Vehiculo v = buscarVehiculo(placa);
+		v.setColor(color);
+		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
 	
 	//a cargo de Daniel
@@ -279,16 +297,16 @@ public class Administrador {
 		return diagnostico;
 	}
 	
-	public String[] mantenimientoGeneral (String cedula, String placa) {//lee el vector de boolean que devuelve diagnostico y los ejecuta
+	public String[] mantenimientoGeneral (String cedula, String placa, String idMecanico) {//lee el vector de boolean que devuelve diagnostico y los ejecuta
 		String [] cambios = new String [2];
 		boolean [] diagnostico = diagnostico (cedula, placa);
 		Vehiculo v = buscarVehiculo(placa);
 		if (diagnostico[0]) {
-			cambioAceite(cedula, placa, v.getKilometraje());
+			cambioAceite(cedula, placa, v.getKilometraje(), idMecanico);
 			cambios[0] = "Se le cambió el aceite al vehiculo ";
 		}
 		if (diagnostico[1]) {
-			inflarLlantas(cedula, placa, v.isEstadoLlantas());
+			inflarLlantas(cedula, placa, v.isEstadoLlantas(), idMecanico);
 			cambios[1] = "Se le inflaron las llantas al vehiculo ";
 		}
 		return cambios;//leer el vector cambios con un ciclo for y que adentro lleve un if que revise que el vector en cada posicion NO sea null
