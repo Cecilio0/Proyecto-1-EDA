@@ -69,6 +69,8 @@ public class Cliente extends Persona {
 		} else return vehiculos[num];
 	}
 	
+	//crear metodo factura que devuelva un STring que contiene los historiales que se cobran junto con el total de lo que se cobra y que para mostrar esto se llame dentro de pagoDeuda 
+	
 	//Considerar el metodo pagoDeuda que permita al cliente pagar la deuda que tiene con el taller
 	public double calcularDeuda() {
 		double deudaTotal = 0; 

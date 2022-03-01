@@ -51,7 +51,7 @@ public class Administrador {
 	}
 	
 		// addCliente | Carro
-	public void addCliente(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, String correo, Date fechaRegistro, String placa, String marca, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion ){
+	public void addCliente(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, String correo, Date fechaRegistro, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion ){//que devuelva el error ya hay cliente con esta cedula
 		Cliente c = new Cliente(nombre, cedula, fechaNacimiento, direccion, telefono, correo, fechaRegistro);
 		clientes = Arrays.copyOf(clientes, clientes.length + 1);
 		clientes[clientes.length - 1] = c;
@@ -60,7 +60,7 @@ public class Administrador {
 	}
 
 	// addCliente | Moto
-	public void addCliente(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, String correo, Date fechaRegistro, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int tiempos){
+	public void addCliente(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, String correo, Date fechaRegistro, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int tiempos){//que devuelva el error ya hay cliente con esta cedula
 		Cliente c = new Cliente(nombre, cedula, fechaNacimiento, direccion, telefono, correo, fechaRegistro);
 		clientes = Arrays.copyOf(clientes, clientes.length + 1);
 		clientes[clientes.length - 1] = c;
@@ -75,22 +75,22 @@ public class Administrador {
 	}
 
 	// addVehiculo | Carro
-	public void addVehiculo(String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion) {
+	public void addVehiculo(String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion) {//que devuelva el error ya hay vehiculo con esta placa
 		buscarCliente(cedula).addVehiculo(placa, color, estado, kilometraje, estadoLlantas, numPuertas, traccion);
 	}
 
 	// addVehiculo | Moto
-	public void addVehiculo(String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int tiempos) {
+	public void addVehiculo(String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int tiempos) {//que devuelva el error ya hay vehiculo con esta placa
 		buscarCliente(cedula).addVehiculo(placa, color, estado, kilometraje, estadoLlantas, tiempos);
 	}
 	
 	//eliminar Cliente
 	public void eliminarCliente(String cedula){
 		int index = 0;
-		while(index < clientes.length && clientes[index] != null && !clientes[index].getCedula().equals(cedula)) {
+		while(index < clientes.length && clientes[index] != null && !clientes[index].getCedula().equalsIgnoreCase(cedula)) {
 			index++;
 		}
-		if (index < clientes.length && clientes[index] != null && clientes[index].getCedula().equals(cedula)) {
+		if (index < clientes.length && clientes[index] != null && clientes[index].getCedula().equalsIgnoreCase(cedula)) {
 			Cliente[] clientesRestantes = new Cliente[clientes.length-1];
 			System.arraycopy(clientes, 0, clientesRestantes, 0, index);
 			System.arraycopy(clientesRestantes, index+1, clientesRestantes, index, clientes.length-index-1);
@@ -101,10 +101,10 @@ public class Administrador {
 	//eliminar Mecanico
 	public void eliminarMecanico(String id) {//considerar la creacion de un nuevo metodo llamado despedirMecanico y revisar si despues de eliminar a un mecanico da error un dato de tipo historial 
 		int index = 0;
-		while(index<mecanicos.length && mecanicos[index]!= null && !mecanicos[index].getId().equals(id)) {
+		while(index<mecanicos.length && mecanicos[index]!= null && !mecanicos[index].getId().equalsIgnoreCase(id)) {
 			index++;
 		}
-		if (index<mecanicos.length && mecanicos[index]!= null && mecanicos[index].getId().equals(id)) {
+		if (index<mecanicos.length && mecanicos[index]!= null && mecanicos[index].getId().equalsIgnoreCase(id)) {
 			Mecanico[] mecanicosRestantes = new Mecanico[mecanicos.length-1];
 			System.arraycopy(mecanicos, 0, mecanicosRestantes, 0, index);
 			System.arraycopy(mecanicos, index+1, mecanicosRestantes, index, mecanicos.length-index-1);
@@ -115,8 +115,8 @@ public class Administrador {
 	//eliminar Vehiculo
 	public void eliminarVehiculo(String placa, String cedula) {
 		int i = -1;
-		while (++i < clientes.length && !clientes[i].getCedula().equals(cedula));
-		if (i < clientes.length && clientes[i].getCedula().equals(cedula)) {
+		while (++i < clientes.length && !clientes[i].getCedula().equalsIgnoreCase(cedula));
+		if (i < clientes.length && clientes[i].getCedula().equalsIgnoreCase(cedula)) {
 			clientes[i].eliminarVehiculo(placa);
 		}
 	}
@@ -125,7 +125,7 @@ public class Administrador {
 	public Cliente buscarCliente(String cedula) {
 		int num=clientes.length;
 		for(int i =0; i<clientes.length; i++) {
-			if(clientes[i].getCedula().equals(cedula)) {
+			if(clientes[i].getCedula().equalsIgnoreCase(cedula)) {
 				num=i;
 				i=clientes.length;
 			}
@@ -139,7 +139,7 @@ public class Administrador {
 	public Mecanico buscarMecanico(String id) {
 		int num=mecanicos.length;
 		for(int i =0; i<mecanicos.length; i++) {
-			if(mecanicos[i].getId().equals(id)) {
+			if(mecanicos[i].getId().equalsIgnoreCase(id)) {
 				num=i;
 				i=mecanicos.length;
 			}
@@ -153,7 +153,7 @@ public class Administrador {
 	public Vehiculo buscarVehiculo(String placa) {
 		int num=clientes.length;
 		for(int i =0; i<clientes.length; i++) {
-			if(clientes[i].buscarVehiculo(placa).equals(placa)) {
+			if(clientes[i].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
 				num=i;
 				i=clientes.length;
 			}
@@ -168,10 +168,10 @@ public class Administrador {
 	//método para buscar si la cédula ingresada ya se encuentra asociada a un cliente creado
 	public boolean existeCedula (String cedula) {//devuelve si ya existe un cliente con esa cedula
 		int index = 0;
-		while(index< clientes.length && clientes[index] != null && !clientes[index].getCedula().equals(cedula)) {
+		while(index< clientes.length && clientes[index] != null && !clientes[index].getCedula().equalsIgnoreCase(cedula)) {
 			index++;
 		}
-		if(index< clientes.length && clientes[index] != null && clientes[index].getCedula().equals(cedula)) {
+		if(index< clientes.length && clientes[index] != null && clientes[index].getCedula().equalsIgnoreCase(cedula)) {
 			return true;
 		} else {
 			return false;
@@ -181,10 +181,10 @@ public class Administrador {
 	//método para buscar si la placa ingresada ya se encuentra asocida al vehículo de alguno de los clientes existentes
 	public boolean existeVehiculo (String placa) {//devuelve si ya existe un vehiculo con esa placa;
 		int index=0;
-		while(index< clientes.length && clientes[index]!= null && !clientes[index].buscarVehiculo(placa).getPlaca().equals(placa)) {
+		while(index< clientes.length && clientes[index]!= null && !clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
 			index++;
 		}
-		if(index< clientes.length && clientes[index]!= null && clientes[index].buscarVehiculo(placa).getPlaca().equals(placa)) {
+		if(index< clientes.length && clientes[index]!= null && clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
 			return true;
 		} else {
 			return false;
@@ -195,10 +195,10 @@ public class Administrador {
 	//método que busca si existe un mecánico ya creado que posee el id específico
 	public boolean existeMecanico (String id) {//devuelve si ya existe un mecanico con ese id
 		int index = 0;
-		while (index< mecanicos.length && mecanicos[index] != null && !mecanicos[index].getId().equals(id)) {
+		while (index< mecanicos.length && mecanicos[index] != null && !mecanicos[index].getId().equalsIgnoreCase(id)) {
 			index++;
 		}
-		if(index < mecanicos.length && mecanicos[index] != null && mecanicos[index].getId().equals(id)) {
+		if(index < mecanicos.length && mecanicos[index] != null && mecanicos[index].getId().equalsIgnoreCase(id)) {
 			return true;
 		} else {
 			return false;
@@ -227,7 +227,7 @@ public class Administrador {
 	public boolean existeId(String id) {
 		boolean a = false;
 		for (Mecanico mecanico : mecanicos) {
-			if (mecanico.getId().equals(id)) {
+			if (mecanico.getId().equalsIgnoreCase(id)) {
 				a = true;
 				break;
 			}
@@ -263,7 +263,7 @@ public class Administrador {
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
 	
-	public void inflarLlantas (String cedula, String placa,String idMecanico, boolean estadoLlantas) {// "infla" las llantas de un vehiculo, para su correcto funcionamiento debe cambiar el estadoLlantas a true, ademas debe crear un dato tipo historial
+	public void inflarLlantas (String cedula, String placa,String idMecanico) {// "infla" las llantas de un vehiculo, para su correcto funcionamiento debe cambiar el estadoLlantas a true, ademas debe crear un dato tipo historial
 		Date date = new Date();		
 		String accion = "Inflar llantas";
 		Mecanico mecanico = buscarMecanico(idMecanico);
@@ -319,7 +319,7 @@ public class Administrador {
 			cambios[0] = "Se le cambia el aceite al vehiculo ";
 		}
 		if (diagnostico[1]) {
-			inflarLlantas(cedula, placa, idMecanico, v.isEstadoLlantas());
+			inflarLlantas(cedula, placa, idMecanico);
 			cambios[1] = "Se le inflaron las llantas al vehiculo ";
 		}
 		return cambios;//leer el vector cambios con un ciclo for y que adentro lleve un if que revise que el vector en cada posicion NO sea null
