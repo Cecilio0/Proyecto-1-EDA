@@ -23,11 +23,7 @@ public class Administrador {
 	}
 	*/
 
-	// Nuevo metodo calcularNomina dependiente de una fecha especifica, necesario para calcular la utilidad del taller en cualquier fecha, para hacerlo funcionar
-	// se tuvo que crear dos variables nuevas en Mecanico de tipo Date.
-	// En caso de que se me olvide, sugiero tratar los despidos de los empleados con un booleano en su clase (requeriria crear un metodo para despedir al trabajador), asi no debemos elminarlos cuando
-	// sean despedidos y en caso de buscar informacion relacionada a ese objeto que ya no existe el programa no implosione en si mismo.
-	// Ademas de que es logico que una empresa guarde registro de los empleados que tuvo y lo que ellos hicieron, aunque ya no trabajen alli. att Simon
+	
 	public double calcularNomina(Date fecha) {//Excepcion de vector nulo
 		double nomina = 0;
 		for (Mecanico mecanico : mecanicos) {
@@ -337,7 +333,6 @@ public class Administrador {
 		if (!v.isEstadoLlantas()) {
 			diagnostico [1] = true;
 		}
-		
 		return diagnostico;
 	}
 	
@@ -355,15 +350,12 @@ public class Administrador {
 		}
 		return cambios;//leer el vector cambios con un ciclo for y que adentro lleve un if que revise que el vector en cada posicion NO sea null
 	}//considerar la creacion de un metodo que este orientado a la actualizacion de los datos del vehiculo que se llame actualizarVehiculo (String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion)
-
-	public double mostrarDeuda(String cedula) {//muestra la deuda de un cliente en especifico
-		return 0;
-	}
 	
-	public void pagoDeuda(String cedula) {//para que cierto cliente pague por completo su deuda
-		
+	public String[] pagoDeuda(String cedula) {//para que cierto cliente pague por completo su deuda
+		return buscarCliente(cedula).pagoDeuda();
 	}
 	
 	//a cargo de Pablo
-	//Creacion de una clase factura que utilice los historiales no pagos del cliente y que su principal funcion sea imprirlos junto con su precio y un total
+	//Creacion de un método factura que utilice los historiales no pagos del cliente y que su principal funcion sea imprirlos junto con su precio y un total
+	
 }

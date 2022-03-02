@@ -84,7 +84,25 @@ public class Cliente extends Persona {
 		return deudaTotal;
 	}
 	
-	public void pagoDeuda() {//paga toda la deuda del cliente y convierte todos los historiales no pagos a pagos
-		
+	public String[] pagoDeuda() {//paga toda la deuda del cliente y convierte todos los historiales no pagos a pagos
+		deuda = 0;
+		return factura();
+	}
+	public String[] factura() {
+		double total = 0;
+		String [] infoFactura = new String [0];
+		for(int i = 0; i< vehiculos.length; i++) {
+			for(int j = 0; j< vehiculos[i].getHistorial().length; j++) {
+				if(!vehiculos[i].getHistorial()[j].isPagada()) {
+					total+= vehiculos[i].getHistorial()[j].getPrecio();
+					infoFactura = Arrays.copyOf(infoFactura, infoFactura.length+1);
+					infoFactura[infoFactura.length-1] = vehiculos[i].getHistorial()[j].toString();
+					vehiculos[i].getHistorial()[j].setPagada(true);
+				}
+			}
+		}
+		infoFactura = Arrays.copyOf(infoFactura, infoFactura.length+1);
+		infoFactura[infoFactura.length-1] = "Total: " + total;
+		return infoFactura;
 	}
 }
