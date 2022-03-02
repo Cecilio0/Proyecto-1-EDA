@@ -1,10 +1,13 @@
 package taller;
 
-import java.util.Date;
+import java.util.*;
+
 
 public class Main {
 
 	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner (System.in);
 		
 		Administrador admin = new Administrador(); //crear dos clientes y uno con carro y uno con moto
 		Date fecha = new Date();
@@ -12,7 +15,9 @@ public class Main {
 		admin.addCliente("Natalia", "1001001000", fecha, "algun lugar", "311", "Natalia@gmail.com", fecha, "jqq788", "rojo", true, 10000, false, 2);
 		admin.addMecanico("joe", "1", fecha, "aqui", "310", "Joe@gmail.com", fecha, 100);
 		System.out.println(admin.mostrarMecanicos());
-		admin.inflarLlantas("1001001000", "JQQ788", "");;
+		String codigo = sc.next();
+		
+		admin.inflarLlantas("1001001000", "JQQ788", codigo);
 	}
 
 }

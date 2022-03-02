@@ -3,7 +3,7 @@ package taller;
 import java.util.Date;
 
 public class Historial {
-    private Date fechaIngreso;
+    private Date fechaIngreso;//revisar si es mejor borrar este dato para no tener que ingresar un dato de tipo Date
     private Date fechaDevolucion;
     private Mecanico mecanico;
     private String accion;
@@ -51,9 +51,8 @@ public class Historial {
     	this.pagada = pagada;
     }
 
-    @Override
     public String toString() {
-        return "Historial []";
+        return "Servicio: " + accion + "\tPrecio: " + precio + "Fecha: " + fechaDevolucion;
     }
 
     public int getMes() {

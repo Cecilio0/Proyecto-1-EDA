@@ -5,33 +5,60 @@ import java.util.*;
 public class Administrador {
 	private Cliente[] clientes;
 	private Mecanico[] mecanicos;
-	//considerar la creacion de un atributo que guarde las facturas de los pagos de los clientes
-	//considerar la creacion ya sea de un atributo o un metodo que sea capaz de calcular la nomina en un momento dado
 
 	public Administrador() {
 		clientes = new Cliente [0];
 		mecanicos = new Mecanico [0];
 	}
-
-	/*
-	public double calcularNomina() {//calcular nomina, es decir cuanto en salarios se debe pagar al final del mes
-		double nomina = 0;
-		for (int i = 0; i < mecanicos.length; i++) {
-			nomina += mecanicos[i].getSalario();
-		}
-		return nomina;
-	}
-	*/
-
 	
-	public double calcularNomina(Date fecha) {//Excepcion de vector nulo
-		double nomina = 0;
+	public boolean existeCedula (String cedula) {//devuelve si ya existe un cliente con esa cedula
+		int index = 0;
+		while(index< clientes.length && clientes[index] != null && !clientes[index].getCedula().equalsIgnoreCase(cedula)) {
+			index++;
+		}
+		if(index< clientes.length && clientes[index] != null && clientes[index].getCedula().equalsIgnoreCase(cedula)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean existeVehiculo (String placa) {//devuelve si ya existe un vehiculo con esa placa;
+		int index=0;
+		while(index< clientes.length && clientes[index]!= null && !clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
+			index++;
+		}
+		if(index< clientes.length && clientes[index]!= null && clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+	public boolean existeId(String id) {
+		boolean a = false;
 		for (Mecanico mecanico : mecanicos) {
-			if (mecanico.getFechaSalida() == null || mecanico.getFechaSalida().before(fecha)) {
-				nomina += mecanico.getSalario();
+			if (mecanico.getId().equalsIgnoreCase(id)) {
+				a = true;
+				break;
 			}
 		}
-		return nomina;
+		return a;
+	}
+	
+	public String generarId() {//genera un codigo para un mecanico nuevo del formato 000 tres numeros aleatorios
+		StringBuilder id = new StringBuilder();
+		for (int i = 0; i < 3; i++) {
+			id.append((int) (Math.random() * 10));
+		}
+		while (existeId(id.toString())) {
+			id.delete(0, id.length());
+			for (int i = 0; i < 3; i++) {
+				id.append((int) (Math.random() * 10));
+			}
+		}
+		return id.toString();
 	}
 	
 	public void addHistorial(Date fechaIngreso, Mecanico mecanico, String accion, double precio, String cedulaCliente, String placa) {//Añadir historial a un vehiculo
@@ -107,6 +134,48 @@ public class Administrador {
 		
 	}
 	
+//	buscar Cliente
+	public Cliente buscarCliente(String cedula) {
+		int num=clientes.length;
+		for(int i =0; i<clientes.length; i++) {
+			if(clientes[i].getCedula().equalsIgnoreCase(cedula)) {
+				num=i;
+				i=clientes.length;
+			}
+		}
+		if(num==clientes.length) {
+			return null;//crear en vez de null excepcion de no hay cliente con esa cedula
+		} else return clientes[num];
+	}
+	
+//	buscar Mecanico
+	public Mecanico buscarMecanico(String id) {
+		int num=mecanicos.length;
+		for(int i =0; i<mecanicos.length; i++) {
+			if(mecanicos[i].getId().equalsIgnoreCase(id)) {
+				num=i;
+				i=mecanicos.length;
+			}
+		}
+		if(num==mecanicos.length) {
+			return null;//crear en vez de null excepcion de no hay mecanico con ese id
+		} else return mecanicos[num];
+	}
+	
+//	buscar Vehiculo
+	public Vehiculo buscarVehiculo(String placa) {
+		int num=clientes.length;
+		for(int i =0; i<clientes.length; i++) {
+			if(clientes[i].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
+				num=i;
+				i=clientes.length;
+			}
+		}
+		if(num==clientes.length) {
+			return null;//crear en vez de null excepcion de no hay vehiculo con esa placa
+		} else return clientes[num].buscarVehiculo(placa);
+	}
+	
 	//eliminar Cliente
 	public void eliminarCliente(String cedula){
 		int index = 0;
@@ -150,102 +219,6 @@ public class Administrador {
 		}
 	}
 	
-//	buscar Cliente
-	public Cliente buscarCliente(String cedula) {
-		int num=clientes.length;
-		for(int i =0; i<clientes.length; i++) {
-			if(clientes[i].getCedula().equalsIgnoreCase(cedula)) {
-				num=i;
-				i=clientes.length;
-			}
-		}
-		if(num==clientes.length) {
-			return null;//crear en vez de null excepcion de no hay cliente con esa cedula
-		} else return clientes[num];
-	}
-	
-//	buscar Mecanico
-	public Mecanico buscarMecanico(String id) {
-		int num=mecanicos.length;
-		for(int i =0; i<mecanicos.length; i++) {
-			if(mecanicos[i].getId().equalsIgnoreCase(id)) {
-				num=i;
-				i=mecanicos.length;
-			}
-		}
-		if(num==mecanicos.length) {
-			return null;//crear en vez de null excepcion de no hay mecanico con ese id
-		} else return mecanicos[num];
-	}
-	
-//	buscar Vehiculo
-	public Vehiculo buscarVehiculo(String placa) {
-		int num=clientes.length;
-		for(int i =0; i<clientes.length; i++) {
-			if(clientes[i].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
-				num=i;
-				i=clientes.length;
-			}
-		}
-		if(num==clientes.length) {
-			return null;//crear en vez de null excepcion de no hay vehiculo con esa placa
-		} else return clientes[num].buscarVehiculo(placa);
-	}
-
-	
-	//a cargo de Pablo y recordar unir estos metodos a los respectivos add
-	//método para buscar si la cédula ingresada ya se encuentra asociada a un cliente creado
-	public boolean existeCedula (String cedula) {//devuelve si ya existe un cliente con esa cedula
-		int index = 0;
-		while(index< clientes.length && clientes[index] != null && !clientes[index].getCedula().equalsIgnoreCase(cedula)) {
-			index++;
-		}
-		if(index< clientes.length && clientes[index] != null && clientes[index].getCedula().equalsIgnoreCase(cedula)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	//método para buscar si la placa ingresada ya se encuentra asocida al vehículo de alguno de los clientes existentes
-	public boolean existeVehiculo (String placa) {//devuelve si ya existe un vehiculo con esa placa;
-		int index=0;
-		while(index< clientes.length && clientes[index]!= null && !clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
-			index++;
-		}
-		if(index< clientes.length && clientes[index]!= null && clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
-
-	public boolean existeId(String id) {
-		boolean a = false;
-		for (Mecanico mecanico : mecanicos) {
-			if (mecanico.getId().equalsIgnoreCase(id)) {
-				a = true;
-				break;
-			}
-		}
-		return a;
-	}
-	
-	public String generarId() {//genera un codigo para un mecanico nuevo del formato 000 tres numeros aleatorios
-		StringBuilder id = new StringBuilder();
-		for (int i = 0; i < 3; i++) {
-			id.append((int) (Math.random() * 10));
-		}
-		while (existeId(id.toString())) {
-			id.delete(0, id.length());
-			for (int i = 0; i < 3; i++) {
-				id.append((int) (Math.random() * 10));
-			}
-		}
-		return id.toString();
-	}
-	
 	public Historial[] mostrarHistorial(String cedula, String placa) {//devuelve el historial de un vehiculo
 		return buscarCliente(cedula).buscarVehiculo(placa).getHistorial();//hacer try catch de no hay cliente con esa cedula, try catch de no hay vehiculo con esa placa y Crear excepcion de no hay historial
 	}
@@ -262,7 +235,17 @@ public class Administrador {
 		return info;
 	}
 
-	public double calcularIngresos(Date fecha) {//
+	public double calcularNomina(Date fecha) {//Excepcion de vector nulo
+		double nomina = 0;
+		for (Mecanico mecanico : mecanicos) {
+			if (mecanico.getFechaSalida() == null || mecanico.getFechaSalida().before(fecha)) {
+				nomina += mecanico.getSalario();
+			}
+		}
+		return nomina;
+	}
+	
+	public double calcularIngresos(Date fecha) {//calcula ingresos antes de gastos del taller
 		double sumIngresos = 0;
 		for (Cliente cliente : clientes) {
 			for (int j = 0; j < cliente.getVehiculos().length; j++) {
@@ -276,11 +259,10 @@ public class Administrador {
 		return sumIngresos;
 	}
 
-	public double calcularUtilidad(Date fecha) {//
+	public double calcularUtilidad(Date fecha) {//calcula la utilidad del taller
 		return calcularIngresos(fecha) - calcularNomina(fecha);
 	}
 	
-	//a cargo de camilo y acordar precios de cada tipo de servicio
 	public void cambioAceite (String cedula, String placa, String idMecanico, int kilometraje) {// "cambia" el aceite de un vehiculo, para su correcto funcionamiento debe cambiar el kilometrajeUltimaRevision por kilometraje, ademas debe crear un dato tipo historial
 		Date date = new Date();		
 		String accion = "Cambio de aceite";
@@ -321,8 +303,11 @@ public class Administrador {
 		
 	}
 	
+	public void actualizarVehiculo(String placa, int kilometraje, boolean estadoLlantas){//actualiza la informacion del vehiculo
+		buscarVehiculo(placa).setKilometraje(kilometraje);
+		buscarVehiculo(placa).setEstadoLlantas(estadoLlantas);
+	}
 	
-	//a cargo de Daniel
 	public boolean[] diagnostico(String cedula, String placa) {//revisa si es necesario o se recomendaria hacer algun servicio al vehiculo en cuestion y devuelve cuales si y cuales no en un vector de booleans
 		boolean [] diagnostico = new boolean[2];
 		Arrays.fill(diagnostico, false);
@@ -351,11 +336,8 @@ public class Administrador {
 		return cambios;//leer el vector cambios con un ciclo for y que adentro lleve un if que revise que el vector en cada posicion NO sea null
 	}//considerar la creacion de un metodo que este orientado a la actualizacion de los datos del vehiculo que se llame actualizarVehiculo (String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion)
 	
-	public String[] pagoDeuda(String cedula) {//para que cierto cliente pague por completo su deuda
+	public String[] pagoDeuda(String cedula) {//para que un cliente pague su deuda
 		return buscarCliente(cedula).pagoDeuda();
 	}
-	
-	//a cargo de Pablo
-	//Creacion de un m�todo factura que utilice los historiales no pagos del cliente y que su principal funcion sea imprirlos junto con su precio y un total
 	
 }
