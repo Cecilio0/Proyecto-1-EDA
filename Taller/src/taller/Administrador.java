@@ -268,7 +268,8 @@ public class Administrador {
 		String accion = "Cambio de aceite";
 		Mecanico mecanico = buscarMecanico(idMecanico);//hacer try catch de no hay mecanico con ese id
 		double precio = 50;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto y escribir los precios en ficheros para poderlos cambiar(extra)
-		buscarVehiculo(placa).setKilometrajeUltimaRevision(kilometraje);
+		buscarVehiculo(placa).setKilometraje(kilometraje);
+		buscarVehiculo(placa).setKilometrajeAceite(kilometraje);
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
 	
@@ -281,21 +282,13 @@ public class Administrador {
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
 	}
 	
-	public void cambioPintura (String cedula, String placa, String idMecanico, String color) {// "cambia" el color de un vehiculo, para su correcto funcionamiento debe cambiar el color del vehiculo al color nuevo, ademas debe crear un dato tipo historial
-		Date date = new Date();		
-		String accion = "Cambio de pintura";
-		Mecanico mecanico = buscarMecanico(idMecanico);//hacer try catch de no hay mecanico con ese id
-		double precio= 100;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
-		buscarVehiculo(placa).setColor(color);//revisar si esto si cambia el dato original en el main
-		addHistorial(date, mecanico, accion, precio, cedula, placa);
-	}
-	
-	//a cargo de Simon y Camilo
-	public void cambioPastas (String cedula, String placa,String idMecanico) {
+	public void cambioPastas (String cedula, String placa,String idMecanico, int kilometraje) {
 		Date hoy = Calendar.getInstance().getTime();
 		String accion = "Cambio de pastas";
 		Mecanico m = buscarMecanico(idMecanico);
 		double precio = 50;
+		buscarVehiculo(placa).setKilometraje(kilometraje);
+		buscarVehiculo(placa).setKilometrajePastas(kilometraje);
 		addHistorial(hoy, m, accion, precio, cedula, placa);
 	}
 	
@@ -314,35 +307,60 @@ public class Administrador {
 		addHistorial(hoy, m, accion, precio, cedula, placa);
 	}
 	
-	public void actualizarVehiculo(String placa, int kilometraje, boolean estadoLlantas){//actualiza la informacion del vehiculo
+	public void cambioPintura (String cedula, String placa, String idMecanico, String color) {// "cambia" el color de un vehiculo, para su correcto funcionamiento debe cambiar el color del vehiculo al color nuevo, ademas debe crear un dato tipo historial
+		Date date = new Date();		
+		String accion = "Cambio de pintura";
+		Mecanico mecanico = buscarMecanico(idMecanico);//hacer try catch de no hay mecanico con ese id
+		double precio= 100;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
+		buscarVehiculo(placa).setColor(color);//revisar si esto si cambia el dato original en el main
+		addHistorial(date, mecanico, accion, precio, cedula, placa);
+	}
+	
+	public void actualizarVehiculo(String placa, int kilometraje, boolean estadoLlantas, boolean limpio){//actualiza la informacion del vehiculo
 		buscarVehiculo(placa).setKilometraje(kilometraje);
 		buscarVehiculo(placa).setEstadoLlantas(estadoLlantas);
+		buscarVehiculo(placa).setLimpio(limpio);
 	}
 	
 	public boolean[] diagnostico(String cedula, String placa) {//revisa si es necesario o se recomendaria hacer algun servicio al vehiculo en cuestion y devuelve cuales si y cuales no en un vector de booleans
-		boolean [] diagnostico = new boolean[2];
+		boolean [] diagnostico = new boolean[4];
 		Arrays.fill(diagnostico, false);
 		Vehiculo v = buscarVehiculo(placa);
-		if (v.getKilometraje() - v.getKilometrajeUltimaRevision() > 10000) {
+		if (v.getKilometraje() - v.getKilometrajeAceite() > 10000) {
 			diagnostico [0] = true;
 		}
 		if (!v.isEstadoLlantas()) {
 			diagnostico [1] = true;
 		}
+		if (v.getKilometraje() - v.getKilometrajePastas() > 10000) {
+			diagnostico[2] = true;
+		}
+		if (!v.isLimpio()) {
+			diagnostico[3] = true;
+		}
+		
 		return diagnostico;
 	}
 	
 	public String[] mantenimientoGeneral (String cedula, String placa, String idMecanico) {//lee el vector de boolean que devuelve diagnostico y los ejecuta
-		String [] cambios = new String [2];
+		String [] cambios = new String [4];
 		boolean [] diagnostico = diagnostico (cedula, placa);
 		Vehiculo v = buscarVehiculo(placa);//hacer try catch de no hya vehiculo con esa placa
 		if (diagnostico[0]) {
 			cambioAceite(cedula, placa, idMecanico, v.getKilometraje());
-			cambios[0] = "Se le cambia el aceite al vehiculo ";
+			cambios[0] = "Se le cambio el aceite al vehiculo ";
 		}
 		if (diagnostico[1]) {
 			inflarLlantas(cedula, placa, idMecanico);
 			cambios[1] = "Se le inflaron las llantas al vehiculo ";
+		}
+		if (diagnostico[2]) {
+			cambioPastas(cedula, placa, idMecanico, v.getKilometraje());
+			cambios[2] = "Se le cambiaron las pastas de frenos al vehiculo";
+		}
+		if (diagnostico[3]) {
+			lavadoVehiculo(cedula, placa, idMecanico);
+			cambios[3] = "Se lavo el vehiculo";
 		}
 		return cambios;//leer el vector cambios con un ciclo for y que adentro lleve un if que revise que el vector en cada posicion NO sea null
 	}//considerar la creacion de un metodo que este orientado a la actualizacion de los datos del vehiculo que se llame actualizarVehiculo (String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion)

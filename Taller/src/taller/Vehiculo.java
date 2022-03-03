@@ -10,7 +10,8 @@ public class Vehiculo {
 	protected Historial[] historial;
 	protected boolean estado;
 	protected int kilometraje;
-	protected int kilometrajeUltimaRevision;//hacer cambio de kilometrajeUltimaRevision a kilometrajePastas y kilometrajeAceite los cuales corresponden al kilometraje de la ultima vez que se cambiaron
+	protected int kilometrajeAceite;//hacer cambio de kilometrajeUltimaRevision a kilometrajePastas y kilometrajeAceite los cuales corresponden al kilometraje de la ultima vez que se cambiaron
+	protected int kilometrajePastas;
 	protected boolean estadoLlantas;
 	protected boolean limpio;
 	
@@ -21,7 +22,8 @@ public class Vehiculo {
 		this.historial = new Historial[0];
 		this.estado = estado;
 		this.kilometraje = kilometraje;
-		this.kilometrajeUltimaRevision = 0;
+		this.kilometrajeAceite = 0;
+		this.kilometrajePastas = 0;
 		this.estadoLlantas = estadoLlantas;
 		this.limpio = false;
 	}
@@ -46,9 +48,13 @@ public class Vehiculo {
 	public int getKilometraje() {
 		return kilometraje;
 	}
+	
+	public int getKilometrajeAceite() {
+		return kilometrajeAceite;
+	}
 
-	public int getKilometrajeUltimaRevision() {
-		return kilometrajeUltimaRevision;
+	public int getKilometrajePastas() {
+		return kilometrajePastas;
 	}
 
 	public boolean isEstadoLlantas() {
@@ -69,8 +75,12 @@ public class Vehiculo {
 		this.kilometraje = kilometraje;
 	}
 
-	public void setKilometrajeUltimaRevision(int kilometrajeUltimaRevision) {
-		this.kilometrajeUltimaRevision = kilometrajeUltimaRevision;
+	public void setKilometrajeAceite(int kilometrajeAceite) {
+		this.kilometrajeAceite = kilometrajeAceite;
+	}
+	
+	public void setKilometrajePastas(int kilometrajePastas) {
+		this.kilometrajePastas = kilometrajePastas;
 	}
 
 	public void setEstadoLlantas(boolean estadoLlantas) {
