@@ -12,6 +12,7 @@ public class Vehiculo {
 	protected int kilometraje;
 	protected int kilometrajeUltimaRevision;//hacer cambio de kilometrajeUltimaRevision a kilometrajePastas y kilometrajeAceite los cuales corresponden al kilometraje de la ultima vez que se cambiaron
 	protected boolean estadoLlantas;
+	protected boolean limpio;
 	
 	//constructor
 	public Vehiculo(String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas) {
@@ -22,6 +23,7 @@ public class Vehiculo {
 		this.kilometraje = kilometraje;
 		this.kilometrajeUltimaRevision = 0;
 		this.estadoLlantas = estadoLlantas;
+		this.limpio = false;
 	}
 	
 	//metodos get
@@ -79,6 +81,12 @@ public class Vehiculo {
 		historial = Arrays.copyOf(historial, historial.length+1);
 		historial[historial.length-1] = new Historial(fechaIngreso, mecanico, accion, precio);
 	}
-	
-	
+
+	public boolean isLimpio() {
+		return limpio;
+	}
+
+	public void setLimpio(boolean limpio) {
+		this.limpio = limpio;
+	}
 }

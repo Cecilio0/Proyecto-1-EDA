@@ -292,15 +292,26 @@ public class Administrador {
 	
 	//a cargo de Simon y Camilo
 	public void cambioPastas (String cedula, String placa,String idMecanico) {
-		
+		Date hoy = Calendar.getInstance().getTime();
+		String accion = "Cambio de pastas";
+		Mecanico m = buscarMecanico(idMecanico);
+		double precio = 50;
+		addHistorial(hoy, m, accion, precio, cedula, placa);
 	}
 	
 	public void lavadoVehiculo (String cedula, String placa, String idMecanico) {//para desarrollar este crear atributo en la clase vehiculo que sea un boolean llamado "limpio"
-		
+		Date hoy = Calendar.getInstance().getTime();
+		String accion = "Lavado";
+		Mecanico m = buscarMecanico(idMecanico);
+		double precio = 50;
+		buscarVehiculo(placa).setLimpio(true);
+		addHistorial(hoy, m, accion, precio, cedula, placa);
 	}
 	
 	public void servicioEspecial (String cedula, String placa, String idMecanico, String accion, double precio) {//para desarrollar un servicio no estandarisado con precio y accion variable
-		
+		Date hoy = Calendar.getInstance().getTime();
+		Mecanico m = buscarMecanico(idMecanico);
+		addHistorial(hoy, m, accion, precio, cedula, placa);
 	}
 	
 	public void actualizarVehiculo(String placa, int kilometraje, boolean estadoLlantas){//actualiza la informacion del vehiculo
