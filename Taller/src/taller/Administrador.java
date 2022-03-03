@@ -25,10 +25,10 @@ public class Administrador {
 	
 	public boolean existeVehiculo (String placa) {//devuelve si ya existe un vehiculo con esa placa;
 		int index=0;
-		while(index< clientes.length && clientes[index]!= null && !clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
+		while(index< clientes.length && clientes[index]!= null && clientes[index].buscarVehiculo(placa) != null && !clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
 			index++;
 		}
-		if(index< clientes.length && clientes[index]!= null && clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
+		if(index < clientes.length && clientes[index]!= null && clientes[index].buscarVehiculo(placa) != null && clientes[index].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
 			return true;
 		} else {
 			return false;
@@ -166,7 +166,7 @@ public class Administrador {
 	public Vehiculo buscarVehiculo(String placa) {
 		int num=clientes.length;
 		for(int i =0; i<clientes.length; i++) {
-			if(clientes[i].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
+			if(clientes[i].buscarVehiculo(placa) != null && clientes[i].buscarVehiculo(placa).getPlaca().equalsIgnoreCase(placa)) {
 				num=i;
 				i=clientes.length;
 			}
