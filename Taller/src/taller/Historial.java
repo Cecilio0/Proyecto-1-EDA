@@ -51,8 +51,8 @@ public class Historial {
     	this.pagada = pagada;
     }
 
-    public String toString() {
-        return "Servicio: " + accion + "\tPrecio: " + precio + "Fecha: " + fechaDevolucion;
+    public String mostrar() {
+        return "Servicio: " + accion + "\tPrecio: " + precio + "\tFecha: " + fechaDevolucion;
     }
 
     public int getMes() {

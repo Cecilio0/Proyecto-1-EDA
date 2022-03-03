@@ -19,6 +19,10 @@ public class Main {
 		String codigo = sc.next();
 		admin.cambioPintura("1001001000", "JQQ788", codigo, "verde");
 		System.out.println(admin.buscarVehiculo("JQQ788").getColor());
+		for (int i = 0; i < admin.mostrarHistorial("1001001000", "jQq788").length; i++) {
+			String aux = admin.mostrarHistorial("1001001000", "jQq788")[i];
+			System.out.println(aux);
+		}
 		sc.close();
 	}
 

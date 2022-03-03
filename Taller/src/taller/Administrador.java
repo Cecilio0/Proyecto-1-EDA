@@ -62,15 +62,7 @@ public class Administrador {
 	}
 	
 	public void addHistorial(Date fechaIngreso, Mecanico mecanico, String accion, double precio, String cedulaCliente, String placa) {//Añadir historial a un vehiculo
-		int i = -1;
-		int j = -1;
-		while (++i < clientes.length && !clientes[i].getCedula().equalsIgnoreCase(cedulaCliente));
-		if (i < clientes.length) {
-			while (++j < clientes[i].getVehiculos().length && clientes[i].getVehiculos()[j].getPlaca().equalsIgnoreCase(placa));
-			if (j < clientes[i].getVehiculos().length) {
-				clientes[i].getVehiculos()[j].addHistorial(fechaIngreso, mecanico, accion, precio);
-			}
-		}
+		buscarVehiculo(placa).addHistorial(fechaIngreso, mecanico, accion, precio);
 	}
 	
 	// addCliente | Carro
@@ -219,8 +211,18 @@ public class Administrador {
 		}
 	}
 	
-	public Historial[] mostrarHistorial(String cedula, String placa) {//devuelve el historial de un vehiculo
-		return buscarCliente(cedula).buscarVehiculo(placa).getHistorial();//hacer try catch de no hay cliente con esa cedula, try catch de no hay vehiculo con esa placa y Crear excepcion de no hay historial
+	public String[] mostrarHistorial(String cedula, String placa) {//devuelve el historial de un vehiculo
+		int j = buscarCliente(cedula).buscarVehiculo(placa).getHistorial().length;
+		String[] info = new String[j];
+		for (int i = 0; i < j; i++) {
+			info[i] = buscarCliente(cedula).buscarVehiculo(placa).getHistorial()[i].mostrar();
+		}
+		if (info == null || info.length == 0) {
+			info = Arrays.copyOf(info, info.length+1);
+			info[info.length-1] = "Este vehiculo no tiene historial";
+		}
+		return info;
+		//hacer try catch de no hay cliente con esa cedula, try catch de no hay vehiculo con esa placa y Crear excepcion de no hay historial
 	}
 
 	public String[] mostrarMecanicos() {//devuelve un string que cada posicion muestre un mecanico con nombre y id y es necesario considerar la creacion de excepciones cuando no haya mecanicos
