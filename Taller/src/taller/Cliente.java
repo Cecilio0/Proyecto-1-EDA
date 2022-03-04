@@ -4,6 +4,7 @@ import java.io.Serial;
 import java.util.*;
 import java.io.*;
 
+
 public class Cliente extends Persona implements Serializable {
     private Vehiculo[] vehiculos;
     private double deuda;
@@ -60,16 +61,15 @@ public class Cliente extends Persona implements Serializable {
     
     //buscar Vehiculo
 	public Vehiculo buscarVehiculo(String placa) {
-		int num=vehiculos.length;
-		for(int i =0; i<vehiculos.length; i++) {
-			if(vehiculos[i].getPlaca().equalsIgnoreCase(placa)) {
-				num=i;
-				i=vehiculos.length;
-			}
+		int i = 0;
+		while (i < vehiculos.length && vehiculos[i] != null && !vehiculos[i].getPlaca().equalsIgnoreCase(placa)) {
+			i++;
 		}
-		if(num==vehiculos.length) {
+		if (i < vehiculos.length && vehiculos[i].getPlaca().equalsIgnoreCase(placa)) {
+			return vehiculos[i];
+		} else {
 			return null;
-		} else return vehiculos[num];
+		}
 	}
 	
 	public double calcularDeuda() {
