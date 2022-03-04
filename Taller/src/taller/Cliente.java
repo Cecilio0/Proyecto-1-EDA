@@ -1,8 +1,10 @@
 package taller;
 
+import java.io.Serial;
 import java.util.*;
+import java.io.*;
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Serializable {
     private Vehiculo[] vehiculos;
     private double deuda;
     private Date fechaRegistro;
