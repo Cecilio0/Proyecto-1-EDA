@@ -47,6 +47,7 @@ public class Cliente extends Persona {
     	while (index < vehiculos.length && vehiculos[index]!= null && !vehiculos[index].getPlaca().equals(placa)) {
     		index++;
     	}
+    	//poner un IgnoreCase
     	if (index < vehiculos.length && vehiculos[index]!= null && vehiculos[index].getPlaca().equals(placa)) {
     		Vehiculo[] vehiculosRestantes = new Vehiculo[vehiculos.length-1];
     		System.arraycopy(vehiculos, 0, vehiculosRestantes, 0, index);
