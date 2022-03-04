@@ -199,7 +199,6 @@ public class Administrador {
 			// en vez de if else try catch de no hay mecanico con ese id
 		}
 	}
-	
 	//eliminar Vehiculo
 	public void eliminarVehiculo(String placa, String cedula) {
 		int i = -1;
