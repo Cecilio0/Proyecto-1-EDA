@@ -1,8 +1,10 @@
 package taller;
 
+import java.io.Serial;
 import java.util.Date;
+import java.io.*;
 
-public class Historial {
+public class Historial implements Serializable {
     private Date fechaIngreso;//revisar si es mejor borrar este dato para no tener que ingresar un dato de tipo Date
     private Date fechaDevolucion;
     private Mecanico mecanico;

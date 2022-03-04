@@ -1,6 +1,7 @@
 package taller;
 
-public class Carro extends Vehiculo{
+import java.io.*;
+public class Carro extends Vehiculo implements Serializable{
 	
 	private int numPuertas;
 	private String traccion;

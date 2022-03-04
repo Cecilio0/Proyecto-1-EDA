@@ -1,8 +1,9 @@
 package taller;
 
 import java.util.*;
+import java.io.*;
 
-public class Persona {
+public class Persona implements Serializable {
     protected String nombre;
     protected String cedula;
     protected Date fechaNacimiento;

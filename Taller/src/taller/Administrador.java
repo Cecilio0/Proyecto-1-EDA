@@ -1,6 +1,7 @@
 package taller;
 
 import java.util.*;
+import java.io.*;
 
 public class Administrador {
 	private Cliente[] clientes;
@@ -9,6 +10,51 @@ public class Administrador {
 	public Administrador() {
 		clientes = new Cliente [0];
 		mecanicos = new Mecanico [0];
+
+		cargarFicheros();
+	}
+
+	public void cargarFicheros() {
+		try {
+			FileInputStream fis = new FileInputStream("Clientes.dat");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			clientes = (Cliente[]) ois.readObject();
+			ois.close();
+			fis.close();
+		} catch (IOException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+
+		try {
+			FileInputStream fis = new FileInputStream("Mecanicos.dat");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			mecanicos = (Mecanico[]) ois.readObject();
+			ois.close();
+			fis.close();
+		} catch (IOException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public void guardarFicheros() {
+		try {
+			FileOutputStream fos = new FileOutputStream("Clientes.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(clientes);
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
+		try {
+			FileOutputStream fos = new FileOutputStream("Mecanicos.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(mecanicos);
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public boolean existeCedula (String cedula) {//devuelve si ya existe un cliente con esa cedula
@@ -63,6 +109,8 @@ public class Administrador {
 	
 	public void addHistorial(Date fechaIngreso, Mecanico mecanico, String accion, double precio, String cedulaCliente, String placa) {//Añadir historial a un vehiculo
 		buscarVehiculo(placa).addHistorial(fechaIngreso, mecanico, accion, precio);
+
+		guardarFicheros();
 	}
 	
 	// addCliente | Carro
@@ -73,6 +121,8 @@ public class Administrador {
 			clientes[clientes.length - 1] = c;
 
 			addVehiculo(cedula, placa, color, estado, kilometraje, estadoLlantas, numPuertas, traccion);
+
+			guardarFicheros();
 		} else {
 			//crear excepcion de ya hay cliente con esa cedula
 		}	
@@ -86,6 +136,8 @@ public class Administrador {
 			clientes[clientes.length - 1] = c;
 
 			addVehiculo(cedula, placa, color, estado, kilometraje, estadoLlantas, tiempos);
+
+			guardarFicheros();
 		} else {
 			//crear excepcion de ya hay cliente con esa cedula
 		}
@@ -95,6 +147,8 @@ public class Administrador {
 		Mecanico m = new Mecanico(nombre, cedula, fechaNacimiento, direccion, telefono, correo, generarId(), salario);
 		mecanicos = Arrays.copyOf(mecanicos, mecanicos.length + 1);
 		mecanicos[mecanicos.length - 1] = m;
+
+		guardarFicheros();
 	}
 
 	// addVehiculo | Carro
@@ -102,6 +156,7 @@ public class Administrador {
 		if (buscarCliente(cedula) != null) {//tal vez cambiar por un try catch mas adelante
 			if (!existeVehiculo(placa)) {
 				buscarCliente(cedula).addVehiculo(placa, color, estado, kilometraje, estadoLlantas, numPuertas, traccion);
+				guardarFicheros();
 			} else {
 				//crear excepcion de ya hay vehiculo con esa placa
 			}
@@ -117,6 +172,7 @@ public class Administrador {
 		if (buscarCliente(cedula) != null) {//tal vez cambiar por un try catch mas adelante
 			if (!existeVehiculo(placa)) {
 				buscarCliente(cedula).addVehiculo(placa, color, estado, kilometraje, estadoLlantas, tiempos);
+				guardarFicheros();
 			} else {
 				//crear excepcion de ya hay vehiculo con esa placa
 			}
@@ -179,6 +235,7 @@ public class Administrador {
 			System.arraycopy(clientes, 0, clientesRestantes, 0, index);
 			System.arraycopy(clientesRestantes, index+1, clientesRestantes, index, clientes.length-index-1);
 			clientes = clientesRestantes;
+			guardarFicheros();
 		} else {
 			// en vez de if else try catch de no hay cliente con esa cedula
 		}
@@ -195,6 +252,7 @@ public class Administrador {
 			System.arraycopy(mecanicos, 0, mecanicosRestantes, 0, index);
 			System.arraycopy(mecanicos, index+1, mecanicosRestantes, index, mecanicos.length-index-1);
 			mecanicos = mecanicosRestantes;
+			guardarFicheros();
 		} else {
 			// en vez de if else try catch de no hay mecanico con ese id
 		}
@@ -206,6 +264,7 @@ public class Administrador {
 		while (++i < clientes.length && !clientes[i].getCedula().equalsIgnoreCase(cedula));
 		if (i < clientes.length && clientes[i].getCedula().equalsIgnoreCase(cedula)) {
 			clientes[i].eliminarVehiculo(placa);
+			guardarFicheros();
 		} else {
 			// en vez de if else try catch de no hay vehiculo con esa placa
 		}
@@ -273,6 +332,8 @@ public class Administrador {
 		buscarVehiculo(placa).setKilometraje(kilometraje);
 		buscarVehiculo(placa).setKilometrajeAceite(kilometraje);
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
+
+		guardarFicheros();
 	}
 	
 	public void inflarLlantas (String cedula, String placa,String idMecanico) {// "infla" las llantas de un vehiculo, para su correcto funcionamiento debe cambiar el estadoLlantas a true, ademas debe crear un dato tipo historial
@@ -282,6 +343,8 @@ public class Administrador {
 		double precio= 25;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
 		buscarVehiculo(placa).setEstadoLlantas(true);
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
+
+		guardarFicheros();
 	}
 	
 	public void cambioPastas (String cedula, String placa,String idMecanico, int kilometraje) {
@@ -292,6 +355,8 @@ public class Administrador {
 		buscarVehiculo(placa).setKilometraje(kilometraje);
 		buscarVehiculo(placa).setKilometrajePastas(kilometraje);
 		addHistorial(hoy, m, accion, precio, cedula, placa);
+
+		guardarFicheros();
 	}
 	
 	public void lavadoVehiculo (String cedula, String placa, String idMecanico) {//para desarrollar este crear atributo en la clase vehiculo que sea un boolean llamado "limpio"
@@ -301,12 +366,16 @@ public class Administrador {
 		double precio = 50;
 		buscarVehiculo(placa).setLimpio(true);
 		addHistorial(hoy, m, accion, precio, cedula, placa);
+
+		guardarFicheros();
 	}
 	
 	public void servicioEspecial (String cedula, String placa, String idMecanico, String accion, double precio) {//para desarrollar un servicio no estandarisado con precio y accion variable
 		Date hoy = Calendar.getInstance().getTime();
 		Mecanico m = buscarMecanico(idMecanico);
 		addHistorial(hoy, m, accion, precio, cedula, placa);
+
+		guardarFicheros();
 	}
 	
 	public void cambioPintura (String cedula, String placa, String idMecanico, String color) {// "cambia" el color de un vehiculo, para su correcto funcionamiento debe cambiar el color del vehiculo al color nuevo, ademas debe crear un dato tipo historial
@@ -316,6 +385,8 @@ public class Administrador {
 		double precio= 100;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
 		buscarVehiculo(placa).setColor(color);//revisar si esto si cambia el dato original en el main
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
+
+		guardarFicheros();
 	}
 	
 	public void actualizarVehiculo(String placa, int kilometraje, boolean estadoLlantas, boolean limpio){//actualiza la informacion del vehiculo
@@ -368,6 +439,7 @@ public class Administrador {
 	}//considerar la creacion de un metodo que este orientado a la actualizacion de los datos del vehiculo que se llame actualizarVehiculo (String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion)
 	
 	public String[] pagoDeuda(String cedula) {//para que un cliente pague su deuda
+		guardarFicheros();
 		return buscarCliente(cedula).pagoDeuda();
 	}
 	
