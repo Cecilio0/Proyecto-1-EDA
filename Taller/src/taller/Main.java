@@ -66,7 +66,6 @@ public class Main {
 				System.out.println("Por favor ingrese una opcion valida");
 			}
 		}
-		sc.close();
-	}
-
+    sc.close();
+  }
 }

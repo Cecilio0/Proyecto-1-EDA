@@ -2,8 +2,9 @@ package taller;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.io.*;
 
-public class Vehiculo {
+public class Vehiculo implements Serializable{
 	
 	protected String placa;
 	protected String color;

@@ -1,6 +1,7 @@
 package taller;
 
-public class Moto extends Vehiculo {
+import java.io.*;
+public class Moto extends Vehiculo implements Serializable{
 	
 	private int tiempos;
 

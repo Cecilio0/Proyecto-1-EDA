@@ -1,8 +1,9 @@
 package taller;
 
 import java.util.*;
+import java.io.*;
 
-public class Mecanico extends Persona {
+public class Mecanico extends Persona implements Serializable {
     private String id;
     private double salario;
     private Date fechaIngreso, fechaSalida;

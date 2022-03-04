@@ -1,10 +1,11 @@
 package taller;
 
+import java.io.Serial;
 import java.util.*;
+import java.io.*;
 
-import taller.Administrador.ENoExiste;
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Serializable {
     private Vehiculo[] vehiculos;
     private double deuda;
     private Date fechaRegistro;
@@ -46,11 +47,11 @@ public class Cliente extends Persona {
     
     public void eliminarVehiculo(String placa) {
     	int index = 0;
-    	while (index < vehiculos.length && vehiculos[index]!= null && !vehiculos[index].getPlaca().equals(placa)) {
+    	while (index < vehiculos.length && vehiculos[index]!= null && !vehiculos[index].getPlaca().equalsIgnoreCase(placa)) {
     		index++;
     	}
     	//poner un IgnoreCase
-    	if (index < vehiculos.length && vehiculos[index]!= null && vehiculos[index].getPlaca().equals(placa)) {
+    	if (index < vehiculos.length && vehiculos[index]!= null && vehiculos[index].getPlaca().equalsIgnoreCase(placa)) {
     		Vehiculo[] vehiculosRestantes = new Vehiculo[vehiculos.length-1];
     		System.arraycopy(vehiculos, 0, vehiculosRestantes, 0, index);
     		System.arraycopy(vehiculos, index+1, vehiculosRestantes, index, vehiculos.length-index-1);
