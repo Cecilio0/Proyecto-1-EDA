@@ -141,6 +141,7 @@ public class Administrador {
 
 			addVehiculo(cedula, placa, color, estado, kilometraje, estadoLlantas, numPuertas, traccion);
 			guardarFicheros();
+		}
 	}
 
 	// addCliente | Moto
@@ -412,8 +413,8 @@ public class Administrador {
 	}//considerar la creacion de un metodo que este orientado a la actualizacion de los datos del vehiculo que se llame actualizarVehiculo (String cedula, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int numPuertas, String traccion)
 	
 	public String[] pagoDeuda(String cedula) throws ENoExiste {//para que un cliente pague su deuda
-		string [] info = buscarCliente(cedula).pagoDeuda();
-    guardarFicheros();
+		String [] info = buscarCliente(cedula).pagoDeuda();
+		guardarFicheros();
 		return info;
 	}
 	
