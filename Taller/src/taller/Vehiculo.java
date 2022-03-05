@@ -87,12 +87,7 @@ public class Vehiculo implements Serializable{
 	public void setEstadoLlantas(boolean estadoLlantas) {
 		this.estadoLlantas = estadoLlantas;
 	}
-
-	public void addHistorial(Date fechaIngreso, Mecanico mecanico, String accion, double precio) {
-		historial = Arrays.copyOf(historial, historial.length+1);
-		historial[historial.length-1] = new Historial(fechaIngreso, mecanico, accion, precio);
-	}
-
+	
 	public boolean isLimpio() {
 		return limpio;
 	}
@@ -100,4 +95,10 @@ public class Vehiculo implements Serializable{
 	public void setLimpio(boolean limpio) {
 		this.limpio = limpio;
 	}
+
+	public void addHistorial(Date fechaIngreso, Mecanico mecanico, String accion, double precio) {
+		historial = Arrays.copyOf(historial, historial.length+1);
+		historial[historial.length-1] = new Historial(fechaIngreso, mecanico, accion, precio);
+	}
+	
 }

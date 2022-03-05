@@ -6,7 +6,12 @@ package taller;
 
 import java.util.Date;
 import javax.swing.JOptionPane;
+
+import taller.Administrador.ENoExiste;
+import taller.Administrador.EYaExiste;
+
 import java.util.*;
+import java.awt.HeadlessException;
 import java.io.*;
 
 /**
@@ -175,7 +180,21 @@ public class AgregarCliente extends javax.swing.JFrame {
         botonGuardar.setText("Guardar");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarActionPerformed(evt);
+                try {
+					botonGuardarActionPerformed(evt);
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (HeadlessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (EYaExiste e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ENoExiste e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -368,7 +387,7 @@ public class AgregarCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_checkMotoActionPerformed
 
-    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, HeadlessException, EYaExiste, ENoExiste {//GEN-FIRST:event_botonGuardarActionPerformed
         // TODO add your handling code here:
         if (clienteNombre.getText().isEmpty() || clienteCedula.getText().isEmpty()
                 || clienteDireccion.getText().isEmpty() || clienteTelefono.getText().isEmpty()

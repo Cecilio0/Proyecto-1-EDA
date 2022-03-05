@@ -4,6 +4,7 @@
  */
 package taller;
 
+import java.awt.HeadlessException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,6 +12,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 import javax.swing.JOptionPane;
+
+import taller.Administrador.ENoExiste;
+import taller.Administrador.EYaExiste;
 
 /**
  *
@@ -99,12 +103,23 @@ public class BuscarCliente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("BUSCAR CLIENTE");
 
-        jLabel2.setText("Número de Cédula:");
+        jLabel2.setText("NÃºmero de CÃ©dula:");
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBuscarActionPerformed(evt);
+                try {
+					botonBuscarActionPerformed(evt);
+				} catch (HeadlessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (EYaExiste e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ENoExiste e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -154,7 +169,7 @@ public class BuscarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException, EYaExiste, ENoExiste {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
         Administrador a = new Administrador();
         String cedula = clienteCedula.getText().trim();
@@ -162,14 +177,14 @@ public class BuscarCliente extends javax.swing.JFrame {
         if (a.existeCedula(cedula)) {
             Cliente c = a.buscarCliente(cedula);
             String[] info = new String[2];
-            info[0] = ("----------INFORMACIÓN PERSONAL----------\nNombre: " + c.getNombre() + "\nNúmero de Cédula: " + c.getCedula() + "\nTeléfono: " + c.getTelefono() + "\nDirección: " + c.getDireccion() + "\nCorreo: "+c.getCorreo()+"\nDeuda: $"+c.getDeuda()+"\n\n");
-            info[1] = ("----------INFORMACIÓN VEHÍCULOS----------\n");
+            info[0] = ("----------INFORMACIÃ“N PERSONAL----------\nNombre: " + c.getNombre() + "\nNÃºmero de CÃ©dula: " + c.getCedula() + "\nTelÃ©fono: " + c.getTelefono() + "\nDirecciÃ³n: " + c.getDireccion() + "\nCorreo: "+c.getCorreo()+"\nDeuda: $"+c.getDeuda()+"\n\n");
+            info[1] = ("----------INFORMACIÃ“N VEHÃ�CULOS----------\n");
             for (int j = 0; j < c.getVehiculos().length; j++) {
                 String llantas, limpio, retiro, tipo;
                 if(c.getVehiculos()[j].isEstadoLlantas()) {
-                    llantas = "Óptimas";
+                    llantas = "Ã“ptimas";
                 } else {
-                    llantas = "No óptimas";
+                    llantas = "No Ã³ptimas";
                 }
                 
                 if(c.getVehiculos()[j].isLimpio()) {
@@ -192,8 +207,8 @@ public class BuscarCliente extends javax.swing.JFrame {
                 }
       
                 info = Arrays.copyOf(info, info.length + 1);
-                info[info.length - 1] = ("Tipo: " + tipo + "\nPlaca: "+c.getVehiculos()[j].getPlaca() + "\nColor: " + c.getVehiculos()[j].getColor() + "\nKilometraje: " + c.getVehiculos()[j].getKilometraje() + "\nKm. Última Rev. Aceite: " + 
-                c.getVehiculos()[j].getKilometrajeAceite() + "\nKm. Última Rev. Pastas: " + c.getVehiculos()[j].getKilometrajePastas() + "\nLimpio: " + limpio + "\nLlantas: " + llantas + "\nListo para Retiro: "+ retiro + "\n\n");
+                info[info.length - 1] = ("Tipo: " + tipo + "\nPlaca: "+c.getVehiculos()[j].getPlaca() + "\nColor: " + c.getVehiculos()[j].getColor() + "\nKilometraje: " + c.getVehiculos()[j].getKilometraje() + "\nKm. Ãšltima Rev. Aceite: " + 
+                c.getVehiculos()[j].getKilometrajeAceite() + "\nKm. Ãšltima Rev. Pastas: " + c.getVehiculos()[j].getKilometrajePastas() + "\nLimpio: " + limpio + "\nLlantas: " + llantas + "\nListo para Retiro: "+ retiro + "\n\n");
             }
 
             for(int i=0; i<info.length;i++){
