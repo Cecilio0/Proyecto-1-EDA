@@ -4,7 +4,6 @@
  */
 package taller;
 
-import java.awt.HeadlessException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,9 +11,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 import javax.swing.JOptionPane;
-
-import taller.Administrador.ENoExiste;
-import taller.Administrador.EYaExiste;
 
 /**
  *
@@ -206,7 +202,7 @@ public class EditarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException, EYaExiste, ENoExiste {//GEN-FIRST:event_botonBuscarActionPerformed
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
         String cedula = clienteCedula.getText().trim();
         Administrador a = new Administrador();

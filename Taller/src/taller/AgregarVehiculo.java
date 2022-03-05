@@ -6,12 +6,7 @@ package taller;
 
 import java.util.Date;
 import javax.swing.JOptionPane;
-
-import taller.Administrador.ENoExiste;
-import taller.Administrador.EYaExiste;
-
 import java.util.*;
-import java.awt.HeadlessException;
 import java.io.*;
 
 /**
@@ -119,9 +114,9 @@ public class AgregarVehiculo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("AGREGAR VEHÃ�CULO");
+        jLabel1.setText("AGREGAR VEHÍCULO");
 
-        jLabel2.setText("NÃºmero de CÃ©dula:");
+        jLabel2.setText("Número de Cédula:");
 
         clienteCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,55 +152,30 @@ public class AgregarVehiculo extends javax.swing.JFrame {
 
         jLabel15.setText("Kilometraje:");
 
-        jLabel16.setText("NÃºmero de Puertas:");
+        jLabel16.setText("Número de Puertas:");
 
         botonGuardarMoto.setText("Guardar");
         botonGuardarMoto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					botonGuardarMotoActionPerformed(evt);
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ENoExiste e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (EYaExiste e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                botonGuardarMotoActionPerformed(evt);
             }
         });
 
-        jLabel17.setText("TracciÃ³n:");
+        jLabel17.setText("Tracción:");
 
-        carroCheckLlantas.setText("Â¿Llantas Ã³ptimas?");
+        carroCheckLlantas.setText("¿Llantas óptimas?");
         carroCheckLlantas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carroCheckLlantasActionPerformed(evt);
             }
         });
 
-        motoCheckLlantas.setText("Â¿Llantas Ã“ptimas?");
+        motoCheckLlantas.setText("¿Llantas Óptimas?");
 
         botonGuardarCarro.setText("Guardar");
         botonGuardarCarro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					botonGuardarCarroActionPerformed(evt);
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (HeadlessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (EYaExiste e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ENoExiste e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                botonGuardarCarroActionPerformed(evt);
             }
         });
 
@@ -355,7 +325,7 @@ public class AgregarVehiculo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkCarroActionPerformed
 
-    private void botonGuardarMotoActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, ENoExiste, EYaExiste {//GEN-FIRST:event_botonGuardarMotoActionPerformed
+    private void botonGuardarMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarMotoActionPerformed
         // TODO add your handling code here:
         if (clienteCedula.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
@@ -381,7 +351,7 @@ public class AgregarVehiculo extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Guardado Exitoso");
                             //this.dispose();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Ya existe un vehÃ­culo con placa: " + mtPlaca);
+                            JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + mtPlaca);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
@@ -396,7 +366,7 @@ public class AgregarVehiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_carroCheckLlantasActionPerformed
 
-    private void botonGuardarCarroActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, HeadlessException, EYaExiste, ENoExiste {//GEN-FIRST:event_botonGuardarCarroActionPerformed
+    private void botonGuardarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCarroActionPerformed
         // TODO add your handling code here:
         if (clienteCedula.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
@@ -422,7 +392,7 @@ public class AgregarVehiculo extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Guardado Exitoso");
                             //this.dispose();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Ya existe un vehÃ­culo con placa: " + crPlaca);
+                            JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + crPlaca);
                         }
 
                     } else {

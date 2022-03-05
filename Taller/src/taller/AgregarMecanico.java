@@ -5,6 +5,7 @@
 package taller;
 import java.util.*;
 import java.io.*;
+import java.time.*;
 import javax.swing.JOptionPane;
 /**
  *
@@ -237,9 +238,12 @@ public class AgregarMecanico extends javax.swing.JFrame {
         double salario = Double.parseDouble(empleadoSalario.getText().trim());
         
         int FNDia = Integer.parseInt(empleadoFNDia.getText().trim());
-        int FNMes = Integer.parseInt(empleadoFNMes.getText().trim())-1;
-        int FNAno = Integer.parseInt(empleadoFNAno.getText().trim())-1900;
-        Date FN = new Date(FNDia, FNMes, FNAno);
+        int FNMes = Integer.parseInt(empleadoFNMes.getText().trim());
+        int FNAno = Integer.parseInt(empleadoFNAno.getText().trim());
+        LocalDate FN1 = LocalDate.of(FNAno, FNMes, FNDia);
+        ZoneId dziD = ZoneId.systemDefault();
+        Date FN = Date.from(FN1.atStartOfDay(dziD).toInstant());
+        
         String id = a.generarId();
         
         Mecanico m = new Mecanico(nombre, cedula, FN, direccion, telefono, correo, id, salario);
@@ -248,7 +252,7 @@ public class AgregarMecanico extends javax.swing.JFrame {
         
         guardarFicheros();
         
-        JOptionPane.showMessageDialog(null, "Guardado Exitoso");
+        JOptionPane.showMessageDialog(null, "Guardado Exitoso\nEl ID generado es: " + id);
         this.dispose();
         }
     }//GEN-LAST:event_botonCrearActionPerformed
