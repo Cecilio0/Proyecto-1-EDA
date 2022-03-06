@@ -25,7 +25,7 @@ public class PagarDeuda extends JFrame{
 	Administrador admin;
 
 	public PagarDeuda() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,7 +44,7 @@ public class PagarDeuda extends JFrame{
 	public void inicializar() {
 		admin = new Administrador();
 		btnPagoDeuda = new JButton("Pagar Deuda");
-		btnPagoDeuda.setBounds(177, 140, 96, 21);
+		btnPagoDeuda.setBounds(177, 140, 110, 21);
 		btnPagoDeuda.addActionListener(new java.awt.event.ActionListener(){
 			public void actionPerformed(java.awt.event.ActionEvent e) {
 				btnPagoDeudaActionPerformed(e);
@@ -53,12 +53,12 @@ public class PagarDeuda extends JFrame{
 		contentPane.add(btnPagoDeuda);
 		
 		txtCedula = new JTextField();
-		txtCedula.setBounds(177, 111, 96, 22);
+		txtCedula.setBounds(177, 111, 110, 22);
 		contentPane.add(txtCedula);
 		txtCedula.setColumns(10);
 		
 		JLabel lblCedula = new JLabel("Cedula: ");
-		lblCedula.setBounds(128, 115, 45, 13);
+		lblCedula.setBounds(128, 115, 50, 13);
 		contentPane.add(lblCedula);
 	}
 
