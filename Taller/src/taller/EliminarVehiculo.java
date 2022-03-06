@@ -169,23 +169,16 @@ public class EliminarVehiculo extends javax.swing.JFrame {
             String placaVehiculo = placa.getText().trim();
             Administrador a = new Administrador();
             try {
-                if(a.existeCedula(cedulaCliente)){
-                    if(a.existeVehiculo(placaVehiculo)){
-                        try {
-                            a.eliminarVehiculo(cedulaCliente, placaVehiculo);
-                        } catch (Administrador.ENoExiste ex) {
-                            Logger.getLogger(EliminarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (Administrador.EVectorNulo ex) {
-                            Logger.getLogger(EliminarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        JOptionPane.showMessageDialog(null, "Eliminacion existosa");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se encontro un cliente con la cedula " + cedulaCliente + " que tenga la placa " + placaVehiculo + " para eliminar");
-                }
-            } catch (Administrador.EYaExiste ex) {
-                Logger.getLogger(EliminarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
+                a.eliminarVehiculo(cedulaCliente, placaVehiculo);
+                JOptionPane.showMessageDialog(null, "Eliminacion existosa");
+            } catch (Administrador.ENoExiste ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            } catch (Administrador.EVectorNulo ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            } finally {
+            	this.dispose();
             }
+            
         }
     }//GEN-LAST:event_botonGuardarEliminacionVActionPerformed
 

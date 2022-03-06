@@ -205,6 +205,12 @@ public class Menu extends javax.swing.JFrame {
         jMenu6.setText("Mostrar");
 
         jMenuItem13.setText("Mostrar mecanicos");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        
         jMenu6.add(jMenuItem13);
 
         jMenuBar1.add(jMenu6);
@@ -339,10 +345,10 @@ public class Menu extends javax.swing.JFrame {
         new EditarVehiculo().setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+        new MostrarMecanicos().setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
     /**
      * @param args the command line arguments
      */

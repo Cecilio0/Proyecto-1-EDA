@@ -14,6 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+import taller.Administrador.ENoExiste;
+import taller.Administrador.EVectorNulo;
+
 /**
  *
  * @author Simon
@@ -372,39 +375,49 @@ public class Servicios extends javax.swing.JFrame {
 
         Administrador a = new Administrador();
 
-        try {
-            if (a.existeCedula(cedula)) {
-                if (a.existeVehiculo(placa)) {
-                    clientePlaca.setEditable(false);
-                    clienteCedula.setEditable(false);
-                    jLabel14.setText("Datos confirmados.");
-                    botonAplicar.setEnabled(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Vehículo no encontrado: " + placa);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
-            }
-        } catch (Administrador.EYaExiste ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-
+        
+        	try {
+				a.buscarCliente(cedula);
+				try {
+					a.buscarVehiculo(placa);
+					clientePlaca.setEditable(false);
+		            clienteCedula.setEditable(false);
+		            jLabel14.setText("Datos confirmados.");
+		            botonAplicar.setEnabled(true);
+				} catch (ENoExiste e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				} catch (EVectorNulo e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			} catch (ENoExiste e) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			} catch (EVectorNulo e) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
+        	
+    		
+      
 
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void botonAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAplicarActionPerformed
         // TODO add your handling code here:
-        int kilometraje = Integer.parseInt(km.getText().trim());
         String cedula = clienteCedula.getText().trim();
         String placa = clientePlaca.getText().trim();
         Administrador a = new Administrador();
 
         if (checkAceite.isSelected()) {
             if (!km.getText().isEmpty()) {
+            	int kilometraje = Integer.parseInt(km.getText().trim());
                 if (!idMecAceite.getText().isEmpty()) {
                     String idMecanico = idMecAceite.getText().trim();
                     try {
                         a.cambioAceite(cedula, placa, idMecanico, kilometraje);
+                        JOptionPane.showMessageDialog(null, "Aceite cambiado de manera exitosa");
                     } catch (Administrador.ENoExiste ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     } catch (Administrador.EVectorNulo ex) {
@@ -420,10 +433,12 @@ public class Servicios extends javax.swing.JFrame {
 
         if (checkFrenos.isSelected()) {
             if (!km.getText().isEmpty()) {
+            	int kilometraje = Integer.parseInt(km.getText().trim());
                 if (!idMecFrenos.getText().isEmpty()) {
                     String idMecanico = idMecFrenos.getText().trim();
                     try {
                         a.cambioPastas(cedula, placa, idMecanico, kilometraje);
+                        JOptionPane.showMessageDialog(null, "Pastas de frenos cambiadas de manera exitosa");
                     } catch (Administrador.ENoExiste ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     } catch (Administrador.EVectorNulo ex) {
@@ -442,6 +457,8 @@ public class Servicios extends javax.swing.JFrame {
                 String idMecanico = idMecInflar.getText().trim();
                 try {
                     a.inflarLlantas(cedula, placa, idMecanico);
+                    JOptionPane.showMessageDialog(null, "llantas infladas de manera exitosa");
+
                 } catch (Administrador.ENoExiste ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 } catch (Administrador.EVectorNulo ex) {
@@ -457,6 +474,8 @@ public class Servicios extends javax.swing.JFrame {
                 String idMecanico = idMecLavado.getText().trim();
                 try {
                     a.lavadoVehiculo(cedula, placa, idMecanico);
+                    JOptionPane.showMessageDialog(null, "Vehiculo lavado de manera exitosa");
+
                 } catch (Administrador.ENoExiste ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 } catch (Administrador.EVectorNulo ex) {
@@ -473,6 +492,8 @@ public class Servicios extends javax.swing.JFrame {
                 String color = pinturaColor.getText().trim();
                 try {
                     a.cambioPintura(cedula, placa, idMecanico, color);
+                    JOptionPane.showMessageDialog(null, "Pintura del vehiculo cambiada de manera exitosa");
+
                 } catch (Administrador.ENoExiste ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 } catch (Administrador.EVectorNulo ex) {
@@ -490,6 +511,8 @@ public class Servicios extends javax.swing.JFrame {
                 double precio = Double.parseDouble(especialPrecio.getText().trim());
                 try {
                     a.servicioEspecial(cedula, placa, idMecanico, detalles, precio);
+                    JOptionPane.showMessageDialog(null, "Servicio desarrollado de manera exitosa");
+
                 } catch (Administrador.ENoExiste ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 } catch (Administrador.EVectorNulo ex) {

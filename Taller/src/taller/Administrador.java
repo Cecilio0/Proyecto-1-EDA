@@ -262,7 +262,7 @@ public class Administrador {
 		if (index < clientes.length && clientes[index] != null && clientes[index].getCedula().equalsIgnoreCase(cedula)) {
 			Cliente[] clientesRestantes = new Cliente[clientes.length-1];
 			System.arraycopy(clientes, 0, clientesRestantes, 0, index);
-			System.arraycopy(clientesRestantes, index+1, clientesRestantes, index, clientes.length-index-1);
+			System.arraycopy(clientes, index+1, clientesRestantes, index, clientes.length-index-1);
 			clientes = clientesRestantes;
 			guardarFicheros();
 		} else {

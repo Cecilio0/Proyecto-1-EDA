@@ -165,48 +165,49 @@ public class BuscarCliente extends javax.swing.JFrame {
         Cliente c = null;
         try {
             c = a.buscarCliente(cedula);
+            String[] info = new String[2];
+            info[0] = ("----------INFORMACIÓN PERSONAL----------\nNombre: " + c.getNombre() + "\nNúmero de Cédula: " + c.getCedula() + "\nTeléfono: " + c.getTelefono() + "\nDirección: " + c.getDireccion() + "\nCorreo: " + c.getCorreo() + "\nDeuda: $" + c.getDeuda() + "\n\n");
+            info[1] = ("----------INFORMACIÓN VEHÍCULOS----------\n");
+            for (int j = 0; j < c.getVehiculos().length; j++) {
+                String llantas, limpio, retiro, tipo;
+                if (c.getVehiculos()[j].isEstadoLlantas()) {
+                    llantas = "Óptimas";
+                } else {
+                    llantas = "No óptimas";
+                }
+
+                if (c.getVehiculos()[j].isLimpio()) {
+                    limpio = "Si";
+                } else {
+                    limpio = "No";
+                }
+
+                if (c.getVehiculos()[j].isEstado()) {
+                    retiro = "Si";
+                } else {
+                    retiro = "No";
+                }
+
+                if (c.getVehiculos()[j] instanceof Carro) {
+                    tipo = "Carro";
+                } else {
+                    tipo = "Moto";
+                }
+
+                info = Arrays.copyOf(info, info.length + 1);
+                info[info.length - 1] = ("Tipo: " + tipo + "\nPlaca: " + c.getVehiculos()[j].getPlaca() + "\nColor: " + c.getVehiculos()[j].getColor() + "\nKilometraje: " + c.getVehiculos()[j].getKilometraje() + "\nKm. Última Rev. Aceite: "
+                        + c.getVehiculos()[j].getKilometrajeAceite() + "\nKm. Última Rev. Pastas: " + c.getVehiculos()[j].getKilometrajePastas() + "\nLimpio: " + limpio + "\nLlantas: " + llantas + "\nListo para Retiro: " + retiro + "\n\n");
+            }
+
+            for (int i = 0; i < info.length; i++) {
+                jTextPane1.setText(jTextPane1.getText() + info[i]);
+            }
         } catch (Administrador.ENoExiste ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } catch (Administrador.EVectorNulo ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-        String[] info = new String[2];
-        info[0] = ("----------INFORMACIÓN PERSONAL----------\nNombre: " + c.getNombre() + "\nNúmero de Cédula: " + c.getCedula() + "\nTeléfono: " + c.getTelefono() + "\nDirección: " + c.getDireccion() + "\nCorreo: " + c.getCorreo() + "\nDeuda: $" + c.getDeuda() + "\n\n");
-        info[1] = ("----------INFORMACIÓN VEHÍCULOS----------\n");
-        for (int j = 0; j < c.getVehiculos().length; j++) {
-            String llantas, limpio, retiro, tipo;
-            if (c.getVehiculos()[j].isEstadoLlantas()) {
-                llantas = "Óptimas";
-            } else {
-                llantas = "No óptimas";
-            }
-
-            if (c.getVehiculos()[j].isLimpio()) {
-                limpio = "Si";
-            } else {
-                limpio = "No";
-            }
-
-            if (c.getVehiculos()[j].isEstado()) {
-                retiro = "Si";
-            } else {
-                retiro = "No";
-            }
-
-            if (c.getVehiculos()[j] instanceof Carro) {
-                tipo = "Carro";
-            } else {
-                tipo = "Moto";
-            }
-
-            info = Arrays.copyOf(info, info.length + 1);
-            info[info.length - 1] = ("Tipo: " + tipo + "\nPlaca: " + c.getVehiculos()[j].getPlaca() + "\nColor: " + c.getVehiculos()[j].getColor() + "\nKilometraje: " + c.getVehiculos()[j].getKilometraje() + "\nKm. Última Rev. Aceite: "
-                    + c.getVehiculos()[j].getKilometrajeAceite() + "\nKm. Última Rev. Pastas: " + c.getVehiculos()[j].getKilometrajePastas() + "\nLimpio: " + limpio + "\nLlantas: " + llantas + "\nListo para Retiro: " + retiro + "\n\n");
-        }
-
-        for (int i = 0; i < info.length; i++) {
-            jTextPane1.setText(jTextPane1.getText() + info[i]);
-        }
+        
 
 
     }//GEN-LAST:event_botonBuscarActionPerformed

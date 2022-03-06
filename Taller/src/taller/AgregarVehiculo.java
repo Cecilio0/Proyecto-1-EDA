@@ -6,6 +6,11 @@ package taller;
 
 import java.util.Date;
 import javax.swing.JOptionPane;
+
+import taller.Administrador.ENoExiste;
+import taller.Administrador.EVectorNulo;
+import taller.Administrador.EYaExiste;
+
 import java.util.*;
 import java.io.*;
 import java.util.logging.Level;
@@ -348,27 +353,22 @@ public class AgregarVehiculo extends javax.swing.JFrame {
                 } else {
                     Administrador a = new Administrador();
                     try {
-                        if (a.existeCedula(cedula)) {
-                            if (!a.existeVehiculo(mtPlaca)) {
-                                try {
-                                    a.addVehiculo(cedula, mtPlaca, mtColor, true, Integer.parseInt(mtKilometraje), mtLlantas, Integer.parseInt(mtTiempos));
-                                } catch (Administrador.ENoExiste ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                } catch (Administrador.EVectorNulo ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                }
-                                
-                                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
-                                //this.dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + mtPlaca);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
-                        }
-                    } catch (Administrador.EYaExiste ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage());
-                    }
+						a.addVehiculo(cedula, mtPlaca, mtColor, true, Integer.parseInt(mtKilometraje), mtLlantas, Integer.parseInt(mtTiempos));
+						JOptionPane.showMessageDialog(null, "Se añadio correctamente el vehiculo");
+						this.dispose();
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					} catch (ENoExiste e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					} catch (EYaExiste e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					} catch (EVectorNulo e) {
+						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, e.getMessage());
+					}
                 }
 
             }
@@ -399,29 +399,22 @@ public class AgregarVehiculo extends javax.swing.JFrame {
                 } else {
                     Administrador a = new Administrador();
                     try {
-                        if (a.existeCedula(cedula)) {
-                            if (!a.existeVehiculo(crPlaca)) {
-                                try {
-                                    a.addVehiculo(cedula, crPlaca, crColor, true, Integer.parseInt(crKilometraje), crLlantas, Integer.parseInt(crNumPuertas), crTraccion);
-                                } catch (Administrador.ENoExiste ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                } catch (Administrador.EVectorNulo ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                }
-                                
-                                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
-                                //this.dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + crPlaca);
-                            }
-                            
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
-                        }
-                    } catch (Administrador.EYaExiste ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage());
-                    }
-
+                            a.addVehiculo(cedula, crPlaca, crColor, true, Integer.parseInt(crKilometraje), crLlantas, Integer.parseInt(crNumPuertas), crTraccion);
+    						JOptionPane.showMessageDialog(null, "Se añadio correctamente el vehiculo");
+    						this.dispose();
+    					} catch (NumberFormatException e) {
+    						// TODO Auto-generated catch block
+    						JOptionPane.showMessageDialog(null, e.getMessage());
+    					} catch (ENoExiste e) {
+    						// TODO Auto-generated catch block
+    						JOptionPane.showMessageDialog(null, e.getMessage());
+    					} catch (EYaExiste e) {
+    						// TODO Auto-generated catch block
+    						JOptionPane.showMessageDialog(null, e.getMessage());
+    					} catch (EVectorNulo e) {
+    						// TODO Auto-generated catch block
+    						JOptionPane.showMessageDialog(null, e.getMessage());
+    					}
                 }
             }
         }
