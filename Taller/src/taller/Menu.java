@@ -57,10 +57,20 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jButton2.setText("DIAGNOSTICO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Placa: ");
 
         jButton3.setText("PAGAR DEUDA");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent e) {
+        		jButton3ActionPerformed(e);
+        	}
+        });
 
         jMenu2.setText("Agregar");
 
@@ -219,11 +229,20 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Servicios().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new Diagnostico().setVisible(true);//falta terminar la ventana diagnostico 
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
         new BuscarMecanico().setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent e) {
+    	new PagarDeuda().setVisible(true);
+    }
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
