@@ -158,7 +158,7 @@ public class EliminarMecanico extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, "Eliminacion Exitosa");
                  this.dispose();
             }else{
-                    JOptionPane.showMessageDialog(null, "No existe un cliente con la cedula: " + idEliminar + " para eliminar");
+                    JOptionPane.showMessageDialog(null, "No existe un mecanico con el id: " + id + " para eliminar");
             }
         }
     }//GEN-LAST:event_botonGuardarEliminacionMActionPerformed
