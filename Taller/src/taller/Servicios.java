@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -369,17 +371,21 @@ public class Servicios extends javax.swing.JFrame {
 
         Administrador a = new Administrador();
 
-        if (a.existeCedula(cedula)) {
-            if (a.existeVehiculo(placa)) {
-                clientePlaca.setEditable(false);
-                clienteCedula.setEditable(false);
-                jLabel14.setText("Datos confirmados.");
-                botonAplicar.setEnabled(true);
+        try {
+            if (a.existeCedula(cedula)) {
+                if (a.existeVehiculo(placa)) {
+                    clientePlaca.setEditable(false);
+                    clienteCedula.setEditable(false);
+                    jLabel14.setText("Datos confirmados.");
+                    botonAplicar.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vehículo no encontrado: " + placa);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Vehículo no encontrado: " + placa);
+                JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
+        } catch (Administrador.EYaExiste ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
 
@@ -396,7 +402,13 @@ public class Servicios extends javax.swing.JFrame {
             if (!km.getText().isEmpty()) {
                 if (!idMecAceite.getText().isEmpty()) {
                     String idMecanico = idMecAceite.getText().trim();
-                    a.cambioAceite(cedula, placa, idMecanico, kilometraje);
+                    try {
+                        a.cambioAceite(cedula, placa, idMecanico, kilometraje);
+                    } catch (Administrador.ENoExiste ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    } catch (Administrador.EVectorNulo ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mecánico (Aceite)");
                 }
@@ -409,7 +421,13 @@ public class Servicios extends javax.swing.JFrame {
             if (!km.getText().isEmpty()) {
                 if (!idMecFrenos.getText().isEmpty()) {
                     String idMecanico = idMecFrenos.getText().trim();
-                    a.cambioPastas(cedula, placa, idMecanico, kilometraje);
+                    try {
+                        a.cambioPastas(cedula, placa, idMecanico, kilometraje);
+                    } catch (Administrador.ENoExiste ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    } catch (Administrador.EVectorNulo ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mecánico (Frenos)");
                 }
@@ -421,7 +439,13 @@ public class Servicios extends javax.swing.JFrame {
         if (checkInflar.isSelected()) {
             if (!idMecInflar.getText().isEmpty()) {
                 String idMecanico = idMecInflar.getText().trim();
-                a.inflarLlantas(cedula, placa, idMecanico);
+                try {
+                    a.inflarLlantas(cedula, placa, idMecanico);
+                } catch (Administrador.ENoExiste ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                } catch (Administrador.EVectorNulo ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mecánico (Inflar)");
             }
@@ -430,7 +454,13 @@ public class Servicios extends javax.swing.JFrame {
         if (checkLavado.isSelected()) {
             if (!idMecLavado.getText().isEmpty()) {
                 String idMecanico = idMecLavado.getText().trim();
-                a.lavadoVehiculo(cedula, placa, idMecanico);
+                try {
+                    a.lavadoVehiculo(cedula, placa, idMecanico);
+                } catch (Administrador.ENoExiste ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                } catch (Administrador.EVectorNulo ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mecánico (Lavado)");
             }
@@ -440,7 +470,13 @@ public class Servicios extends javax.swing.JFrame {
             if (!idMecPintura.getText().isEmpty() || !pinturaColor.getText().isEmpty()) {
                 String idMecanico = idMecPintura.getText().trim();
                 String color = pinturaColor.getText().trim();
-                a.cambioPintura(cedula, placa, idMecanico, color);
+                try {
+                    a.cambioPintura(cedula, placa, idMecanico, color);
+                } catch (Administrador.ENoExiste ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                } catch (Administrador.EVectorNulo ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (Pintura)");
             }
@@ -451,7 +487,13 @@ public class Servicios extends javax.swing.JFrame {
                 String idMecanico = idMecEspecial.getText().trim();
                 String detalles = especialDetalle.getText().trim();
                 double precio = Double.parseDouble(especialPrecio.getText().trim());
-                a.servicioEspecial(cedula, placa, idMecanico, detalles, precio);
+                try {
+                    a.servicioEspecial(cedula, placa, idMecanico, detalles, precio);
+                } catch (Administrador.ENoExiste ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                } catch (Administrador.EVectorNulo ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (Especial)");
             }

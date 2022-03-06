@@ -4,32 +4,44 @@
  */
 package taller;
 
-import java.util.Date;
-import javax.swing.JOptionPane;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
-import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Simon
  */
-public class AgregarVehiculo extends javax.swing.JFrame {
+public class EditarVehiculo extends javax.swing.JFrame {
 
     Mecanico[] mecanicos;
     Cliente[] clientes;
 
     /**
-     * Creates new form AgregarVehiculo
+     * Creates new form EditarVehiculo
      */
-    public AgregarVehiculo() {
+    public EditarVehiculo() {
         initComponents();
 
         clientes = new Cliente[0];
         mecanicos = new Mecanico[0];
 
         cargarFicheros();
+
+        botonGuardar.setEnabled(false);
+        checkMoto.setEnabled(false);
+        checkCarro.setEnabled(false);
+        carroCheckLlantas.setEnabled(false);
+        motoCheckLlantas.setEnabled(false);
+        
+        carroCheckLimpio.setEnabled(false);
+        motoCheckLimpio.setEnabled(false);
     }
 
     public void cargarFicheros() {
@@ -86,18 +98,8 @@ public class AgregarVehiculo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        clienteCedula = new javax.swing.JTextField();
-        checkMoto = new javax.swing.JCheckBox();
-        checkCarro = new javax.swing.JCheckBox();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        clientePlaca = new javax.swing.JTextField();
         motoPlaca = new javax.swing.JTextField();
         motoColor = new javax.swing.JTextField();
         motoKilometraje = new javax.swing.JTextField();
@@ -106,25 +108,83 @@ public class AgregarVehiculo extends javax.swing.JFrame {
         carroColor = new javax.swing.JTextField();
         carroKilometraje = new javax.swing.JTextField();
         carroNumeroPuertas = new javax.swing.JTextField();
-        botonGuardarMoto = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
         carroTraccion = new javax.swing.JTextField();
         carroCheckLlantas = new javax.swing.JCheckBox();
         motoCheckLlantas = new javax.swing.JCheckBox();
-        botonGuardarCarro = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        botonGuardar = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        checkMoto = new javax.swing.JCheckBox();
+        checkCarro = new javax.swing.JCheckBox();
+        botonBuscar = new javax.swing.JButton();
+        carroCheckLimpio = new javax.swing.JCheckBox();
+        motoCheckLimpio = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("AGREGAR VEHÍCULO");
+        jLabel1.setText("EDITAR VEHICULO");
 
-        jLabel2.setText("Número de Cédula:");
+        jLabel3.setText("Placa:");
 
-        clienteCedula.addActionListener(new java.awt.event.ActionListener() {
+        motoPlaca.setEditable(false);
+
+        motoColor.setEditable(false);
+
+        motoKilometraje.setEditable(false);
+
+        motoTiempos.setEditable(false);
+
+        carroPlaca.setEditable(false);
+
+        carroColor.setEditable(false);
+
+        carroKilometraje.setEditable(false);
+
+        carroNumeroPuertas.setEditable(false);
+
+        carroTraccion.setEditable(false);
+
+        carroCheckLlantas.setText("¿Llantas óptimas?");
+        carroCheckLlantas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clienteCedulaActionPerformed(evt);
+                carroCheckLlantasActionPerformed(evt);
             }
         });
+
+        motoCheckLlantas.setText("¿Llantas Óptimas?");
+
+        jLabel17.setText("Tracción:");
+
+        jLabel15.setText("Kilometraje:");
+
+        jLabel13.setText("Placa:");
+
+        jLabel14.setText("Color:");
+
+        jLabel10.setText("Color:");
+
+        jLabel11.setText("Kilometraje:");
+
+        jLabel9.setText("Placa:");
+
+        jLabel16.setText("Número de Puertas:");
+
+        botonGuardar.setText("Guardar");
+        botonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Tiempos:");
 
         checkMoto.setText("Moto");
         checkMoto.addActionListener(new java.awt.event.ActionListener() {
@@ -140,66 +200,26 @@ public class AgregarVehiculo extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Placa:");
-
-        jLabel10.setText("Color:");
-
-        jLabel11.setText("Kilometraje:");
-
-        jLabel12.setText("Tiempos:");
-
-        jLabel13.setText("Placa:");
-
-        jLabel14.setText("Color:");
-
-        jLabel15.setText("Kilometraje:");
-
-        jLabel16.setText("Número de Puertas:");
-
-        botonGuardarMoto.setText("Guardar");
-        botonGuardarMoto.addActionListener(new java.awt.event.ActionListener() {
+        botonBuscar.setText("Buscar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarMotoActionPerformed(evt);
+                botonBuscarActionPerformed(evt);
             }
         });
 
-        jLabel17.setText("Tracción:");
+        carroCheckLimpio.setText("¿Limpio?");
 
-        carroCheckLlantas.setText("¿Llantas óptimas?");
-        carroCheckLlantas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carroCheckLlantasActionPerformed(evt);
-            }
-        });
-
-        motoCheckLlantas.setText("¿Llantas Óptimas?");
-
-        botonGuardarCarro.setText("Guardar");
-        botonGuardarCarro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarCarroActionPerformed(evt);
-            }
-        });
+        motoCheckLimpio.setText("¿Limpio?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(254, 254, 254))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(clienteCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(motoCheckLlantas)
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9)
@@ -212,8 +232,12 @@ public class AgregarVehiculo extends javax.swing.JFrame {
                                     .addComponent(motoPlaca)
                                     .addComponent(motoColor)
                                     .addComponent(motoKilometraje)
-                                    .addComponent(motoTiempos, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(92, 92, 92)
+                                    .addComponent(motoTiempos, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(motoCheckLlantas)
+                                .addGap(18, 18, 18)
+                                .addComponent(motoCheckLimpio)))
+                        .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(67, 67, 67)
@@ -236,32 +260,49 @@ public class AgregarVehiculo extends javax.swing.JFrame {
                                     .addComponent(jLabel16))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(carroCheckLlantas)
                                     .addComponent(carroTraccion)
                                     .addComponent(carroNumeroPuertas)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel15)
                                 .addGap(18, 18, 18)
-                                .addComponent(carroKilometraje, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(106, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(botonGuardarMoto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonGuardarCarro)
-                .addGap(133, 133, 133))
+                                .addComponent(carroKilometraje, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(276, 276, 276)
+                        .addComponent(botonGuardar)))
+                .addGap(0, 86, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(clientePlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(242, 242, 242))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(221, 221, 221))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonBuscar)
+                        .addGap(269, 269, 269))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(carroCheckLlantas)
+                        .addGap(18, 18, 18)
+                        .addComponent(carroCheckLimpio)
+                        .addGap(45, 45, 45))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(clienteCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addComponent(jLabel3)
+                    .addComponent(clientePlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkMoto)
                     .addComponent(checkCarro))
@@ -293,22 +334,99 @@ public class AgregarVehiculo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(carroTraccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(motoCheckLlantas))
+                    .addComponent(motoCheckLlantas)
+                    .addComponent(motoCheckLimpio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(carroCheckLlantas)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonGuardarMoto)
-                    .addComponent(botonGuardarCarro))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(carroCheckLlantas)
+                    .addComponent(carroCheckLimpio))
+                .addGap(18, 18, 18)
+                .addComponent(botonGuardar)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clienteCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteCedulaActionPerformed
+    private void carroCheckLlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carroCheckLlantasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_clienteCedulaActionPerformed
+    }//GEN-LAST:event_carroCheckLlantasActionPerformed
+
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
+        // TODO add your handling code here:
+        Administrador a = new Administrador();
+        String placa = clientePlaca.getText().trim();
+        Vehiculo v = null;
+        try {
+            v = a.buscarVehiculo(placa);
+        } catch (Administrador.ENoExiste ex) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado vehiculo con placa: " + placa);
+        } catch (Administrador.EVectorNulo ex) {
+            JOptionPane.showMessageDialog(null, "ERROR CRITICO. VECTOR NULO");
+        }
+
+        int i1 = -1, i2 = -1;
+        for (int i = 0; i < clientes.length; i++) {
+            for (int j = 0; j < clientes[i].getVehiculos().length; j++) {
+                if (clientes[i].getVehiculos()[j].getPlaca().equals(placa)) {
+                    i1 = i;
+                    i2 = j;
+                }
+            }
+        }
+
+        String mtPlaca = motoPlaca.getText().trim();
+        String mtColor = motoColor.getText().trim();
+        String mtKilometraje = motoKilometraje.getText().trim();
+        String mtTiempos = motoTiempos.getText().trim();
+        boolean mtLlantas = motoCheckLlantas.isSelected();
+        boolean mtLimpio = motoCheckLimpio.isSelected();
+        mtPlaca = mtPlaca.toUpperCase();
+
+        if (checkMoto.isSelected()) {
+            if (motoPlaca.getText().isEmpty() || motoColor.getText().isEmpty() || motoKilometraje.getText().isEmpty() || motoTiempos.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (MOTO)");
+            } else {
+
+                clientes[i1].getVehiculos()[i2].setColor(mtColor);
+                clientes[i1].getVehiculos()[i2].setKilometraje(Integer.parseInt(mtKilometraje));
+                clientes[i1].getVehiculos()[i2].setEstadoLlantas(mtLlantas);
+                clientes[i1].getVehiculos()[i2].setLimpio(mtLimpio);
+
+                guardarFicheros();
+                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
+                this.dispose();
+            }
+
+        }
+
+        String crPlaca = carroPlaca.getText().trim();
+        String crColor = carroColor.getText().trim();
+        String crKilometraje = carroKilometraje.getText().trim();
+        String crNumPuertas = carroNumeroPuertas.getText().trim();
+        String crTraccion = carroTraccion.getText().trim();
+        boolean crLlantas = carroCheckLlantas.isSelected();
+        boolean crLimpio = carroCheckLimpio.isSelected();
+        crPlaca = crPlaca.toUpperCase();
+
+        if (checkCarro.isSelected()) {
+            if (carroPlaca.getText().isEmpty() || carroColor.getText().isEmpty() || carroKilometraje.getText().isEmpty() || carroNumeroPuertas.getText().isEmpty() || carroTraccion.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (CARRO)");
+            } else {
+
+                clientes[i1].getVehiculos()[i2].setColor(crColor);
+                clientes[i1].getVehiculos()[i2].setColor(crColor);
+                clientes[i1].getVehiculos()[i2].setKilometraje(Integer.parseInt(crKilometraje));
+                clientes[i1].getVehiculos()[i2].setEstadoLlantas(crLlantas);
+                clientes[i1].getVehiculos()[i2].setLimpio(crLimpio);
+
+                guardarFicheros();
+                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
+                this.dispose();
+            }
+        }
+
+    }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void checkMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkMotoActionPerformed
         // TODO add your handling code here:
@@ -316,7 +434,6 @@ public class AgregarVehiculo extends javax.swing.JFrame {
             checkCarro.setSelected(false);
             checkMoto.setSelected(true);
         }
-
     }//GEN-LAST:event_checkMotoActionPerformed
 
     private void checkCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkCarroActionPerformed
@@ -327,104 +444,63 @@ public class AgregarVehiculo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_checkCarroActionPerformed
 
-    private void botonGuardarMotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarMotoActionPerformed
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-        if (clienteCedula.getText().isEmpty()) {
+        if (clientePlaca.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
         } else {
-            String cedula = clienteCedula.getText().trim();
+            Administrador a = new Administrador();
+            String placa = clientePlaca.getText().trim();
 
-            String mtPlaca = motoPlaca.getText().trim();
-            String mtColor = motoColor.getText().trim();
-            String mtKilometraje = motoKilometraje.getText().trim();
-            String mtTiempos = motoTiempos.getText().trim();
-            boolean mtLlantas = motoCheckLlantas.isSelected();
-            mtPlaca = mtPlaca.toUpperCase();
+            Vehiculo v = null;
+            try {
+                v = a.buscarVehiculo(placa);
+            } catch (Administrador.ENoExiste ex) {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado vehiculo con placa: " + placa);
+            } catch (Administrador.EVectorNulo ex) {
+                JOptionPane.showMessageDialog(null, "ERROR CRITICO. VECTOR NULO");
+            }
 
-            if (checkMoto.isSelected()) {
-                if (motoPlaca.getText().isEmpty() || motoColor.getText().isEmpty() || motoKilometraje.getText().isEmpty() || motoTiempos.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (MOTO)");
-                } else {
-                    Administrador a = new Administrador();
-                    try {
-                        if (a.existeCedula(cedula)) {
-                            if (!a.existeVehiculo(mtPlaca)) {
-                                try {
-                                    a.addVehiculo(cedula, mtPlaca, mtColor, true, Integer.parseInt(mtKilometraje), mtLlantas, Integer.parseInt(mtTiempos));
-                                } catch (Administrador.ENoExiste ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                } catch (Administrador.EVectorNulo ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                }
-                                
-                                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
-                                //this.dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + mtPlaca);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
-                        }
-                    } catch (Administrador.EYaExiste ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage());
-                    }
-                }
+            if (v != null && v instanceof Carro) {
+                checkCarro.setSelected(true);
+                carroPlaca.setText(v.getPlaca());
+                carroColor.setText(v.getColor());
+                carroKilometraje.setText(Integer.toString(v.getKilometraje()));
+                carroNumeroPuertas.setText(Integer.toString(((Carro) v).getNumPuertas()));
+                carroTraccion.setText(((Carro) v).getTraccion());
 
+                JOptionPane.showMessageDialog(null, "Vehiculo encontrado: CARRO");
+                carroColor.setEditable(true);
+                carroKilometraje.setEditable(true);
+                carroCheckLlantas.setEnabled(true);
+                carroCheckLlantas.setSelected(v.isEstadoLlantas());
+                
+                carroCheckLimpio.setEnabled(true);
+                carroCheckLimpio.setSelected(v.isLimpio());
+
+                botonGuardar.setEnabled(true);
+            }
+
+            if (v != null && v instanceof Moto) {
+                checkMoto.setSelected(true);
+                motoPlaca.setText(v.getPlaca());
+                motoColor.setText(v.getColor());
+                motoKilometraje.setText(Integer.toString(v.getKilometraje()));
+                motoTiempos.setText(Integer.toString(((Moto) v).getTiempos()));
+
+                JOptionPane.showMessageDialog(null, "Vehiculo encontrado: MOTO");
+                motoColor.setEditable(true);
+                motoKilometraje.setEditable(true);
+                motoCheckLlantas.setEnabled(true);
+                motoCheckLlantas.setSelected(v.isEstadoLlantas());
+                
+                motoCheckLimpio.setEnabled(true);
+                motoCheckLimpio.setSelected(v.isLimpio());
+
+                botonGuardar.setEnabled(true);
             }
         }
-    }//GEN-LAST:event_botonGuardarMotoActionPerformed
-
-    private void carroCheckLlantasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carroCheckLlantasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_carroCheckLlantasActionPerformed
-
-    private void botonGuardarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCarroActionPerformed
-        // TODO add your handling code here:
-        if (clienteCedula.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
-        } else {
-            String cedula = clienteCedula.getText().trim();
-            String crPlaca = carroPlaca.getText().trim();
-            String crColor = carroColor.getText().trim();
-            String crKilometraje = carroKilometraje.getText().trim();
-            String crNumPuertas = carroNumeroPuertas.getText().trim();
-            String crTraccion = carroTraccion.getText().trim();
-            boolean crLlantas = carroCheckLlantas.isSelected();
-            crPlaca = crPlaca.toUpperCase();
-
-            if (checkCarro.isSelected()) {
-                if (carroPlaca.getText().isEmpty() || carroColor.getText().isEmpty() || carroKilometraje.getText().isEmpty() || carroNumeroPuertas.getText().isEmpty() || carroTraccion.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (CARRO)");
-                } else {
-                    Administrador a = new Administrador();
-                    try {
-                        if (a.existeCedula(cedula)) {
-                            if (!a.existeVehiculo(crPlaca)) {
-                                try {
-                                    a.addVehiculo(cedula, crPlaca, crColor, true, Integer.parseInt(crKilometraje), crLlantas, Integer.parseInt(crNumPuertas), crTraccion);
-                                } catch (Administrador.ENoExiste ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                } catch (Administrador.EVectorNulo ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                }
-                                
-                                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
-                                //this.dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + crPlaca);
-                            }
-                            
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
-                        }
-                    } catch (Administrador.EYaExiste ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage());
-                    }
-
-                }
-            }
-        }
-    }//GEN-LAST:event_botonGuardarCarroActionPerformed
+    }//GEN-LAST:event_botonBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,27 +519,28 @@ public class AgregarVehiculo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarVehiculo().setVisible(true);
+                new EditarVehiculo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonGuardarCarro;
-    private javax.swing.JButton botonGuardarMoto;
+    private javax.swing.JButton botonBuscar;
+    private javax.swing.JButton botonGuardar;
+    private javax.swing.JCheckBox carroCheckLimpio;
     private javax.swing.JCheckBox carroCheckLlantas;
     private javax.swing.JTextField carroColor;
     private javax.swing.JTextField carroKilometraje;
@@ -472,7 +549,7 @@ public class AgregarVehiculo extends javax.swing.JFrame {
     private javax.swing.JTextField carroTraccion;
     private javax.swing.JCheckBox checkCarro;
     private javax.swing.JCheckBox checkMoto;
-    private javax.swing.JTextField clienteCedula;
+    private javax.swing.JTextField clientePlaca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -482,8 +559,9 @@ public class AgregarVehiculo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JCheckBox motoCheckLimpio;
     private javax.swing.JCheckBox motoCheckLlantas;
     private javax.swing.JTextField motoColor;
     private javax.swing.JTextField motoKilometraje;

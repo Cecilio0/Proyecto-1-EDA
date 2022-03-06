@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -159,50 +161,53 @@ public class BuscarCliente extends javax.swing.JFrame {
         Administrador a = new Administrador();
         String cedula = clienteCedula.getText().trim();
         jTextPane1.setText("");
-        if (a.existeCedula(cedula)) {
-            Cliente c = a.buscarCliente(cedula);
-            String[] info = new String[2];
-            info[0] = ("----------INFORMACIÓN PERSONAL----------\nNombre: " + c.getNombre() + "\nNúmero de Cédula: " + c.getCedula() + "\nTeléfono: " + c.getTelefono() + "\nDirección: " + c.getDireccion() + "\nCorreo: "+c.getCorreo()+"\nDeuda: $"+c.getDeuda()+"\n\n");
-            info[1] = ("----------INFORMACIÓN VEHÍCULOS----------\n");
-            for (int j = 0; j < c.getVehiculos().length; j++) {
-                String llantas, limpio, retiro, tipo;
-                if(c.getVehiculos()[j].isEstadoLlantas()) {
-                    llantas = "Óptimas";
-                } else {
-                    llantas = "No óptimas";
-                }
-                
-                if(c.getVehiculos()[j].isLimpio()) {
-                    limpio = "Si";
-                } else {
-                    limpio = "No";
-                }
-                
-                if(c.getVehiculos()[j].isEstado()) {
-                    retiro = "Si";
-                } else {
-                    retiro = "No";
-                }
-                
-                if(c.getVehiculos()[j] instanceof Carro){
-                    tipo = "Carro";
-                }
-                else {
-                    tipo = "Moto";
-                }
-      
-                info = Arrays.copyOf(info, info.length + 1);
-                info[info.length - 1] = ("Tipo: " + tipo + "\nPlaca: "+c.getVehiculos()[j].getPlaca() + "\nColor: " + c.getVehiculos()[j].getColor() + "\nKilometraje: " + c.getVehiculos()[j].getKilometraje() + "\nKm. Última Rev. Aceite: " + 
-                c.getVehiculos()[j].getKilometrajeAceite() + "\nKm. Última Rev. Pastas: " + c.getVehiculos()[j].getKilometrajePastas() + "\nLimpio: " + limpio + "\nLlantas: " + llantas + "\nListo para Retiro: "+ retiro + "\n\n");
+
+        Cliente c = null;
+        try {
+            c = a.buscarCliente(cedula);
+        } catch (Administrador.ENoExiste ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } catch (Administrador.EVectorNulo ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        String[] info = new String[2];
+        info[0] = ("----------INFORMACIÓN PERSONAL----------\nNombre: " + c.getNombre() + "\nNúmero de Cédula: " + c.getCedula() + "\nTeléfono: " + c.getTelefono() + "\nDirección: " + c.getDireccion() + "\nCorreo: " + c.getCorreo() + "\nDeuda: $" + c.getDeuda() + "\n\n");
+        info[1] = ("----------INFORMACIÓN VEHÍCULOS----------\n");
+        for (int j = 0; j < c.getVehiculos().length; j++) {
+            String llantas, limpio, retiro, tipo;
+            if (c.getVehiculos()[j].isEstadoLlantas()) {
+                llantas = "Óptimas";
+            } else {
+                llantas = "No óptimas";
             }
 
-            for(int i=0; i<info.length;i++){
-                jTextPane1.setText(jTextPane1.getText() + info[i]);
+            if (c.getVehiculos()[j].isLimpio()) {
+                limpio = "Si";
+            } else {
+                limpio = "No";
             }
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
+
+            if (c.getVehiculos()[j].isEstado()) {
+                retiro = "Si";
+            } else {
+                retiro = "No";
+            }
+
+            if (c.getVehiculos()[j] instanceof Carro) {
+                tipo = "Carro";
+            } else {
+                tipo = "Moto";
+            }
+
+            info = Arrays.copyOf(info, info.length + 1);
+            info[info.length - 1] = ("Tipo: " + tipo + "\nPlaca: " + c.getVehiculos()[j].getPlaca() + "\nColor: " + c.getVehiculos()[j].getColor() + "\nKilometraje: " + c.getVehiculos()[j].getKilometraje() + "\nKm. Última Rev. Aceite: "
+                    + c.getVehiculos()[j].getKilometrajeAceite() + "\nKm. Última Rev. Pastas: " + c.getVehiculos()[j].getKilometrajePastas() + "\nLimpio: " + limpio + "\nLlantas: " + llantas + "\nListo para Retiro: " + retiro + "\n\n");
         }
+
+        for (int i = 0; i < info.length; i++) {
+            jTextPane1.setText(jTextPane1.getText() + info[i]);
+        }
+
 
     }//GEN-LAST:event_botonBuscarActionPerformed
 
