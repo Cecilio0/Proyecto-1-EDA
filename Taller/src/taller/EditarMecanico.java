@@ -111,7 +111,7 @@ public class EditarMecanico extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("EDITAR MECÁNICO");
 
-        jLabel2.setText("Número de Cédula:");
+        jLabel2.setText("Número de Id:");
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -220,33 +220,22 @@ public class EditarMecanico extends javax.swing.JFrame {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // TODO add your handling code here:
-        String cedula = mecanicoCedula.getText().trim();
+        String id = mecanicoCedula.getText().trim();
         Administrador a = new Administrador();
+        Mecanico m=null;
         try {
-            if (a.existeCedulaMecanico(cedula)) {
-                
-                Mecanico m=null;
-                try {
-                    m = a.buscarMecanico(cedula);
-                } catch (Administrador.ENoExiste ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                } catch (Administrador.EVectorNulo ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                }
-                
-                mecanicoNombre.setText(m.getNombre());
-                mecanicoDireccion.setText(m.getDireccion());
-                mecanicoTelefono.setText(m.getTelefono());
-                mecanicoCorreo.setText(m.getCorreo());
-                
-                mecanicoCedula.setEditable(false);
-                botonActualizar.setEnabled(true);
-                botonDespedir.setEnabled(true);
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "Mecánico no encontrado: CC" + cedula);
-            }
-        } catch (Administrador.EYaExiste ex) {
+            m = a.buscarMecanico(id);
+            mecanicoNombre.setText(m.getNombre());
+            mecanicoDireccion.setText(m.getDireccion());
+            mecanicoTelefono.setText(m.getTelefono());
+            mecanicoCorreo.setText(m.getCorreo());
+            
+            mecanicoCedula.setEditable(false);
+            botonActualizar.setEnabled(true);
+            botonDespedir.setEnabled(true);
+        } catch (Administrador.ENoExiste ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } catch (Administrador.EVectorNulo ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
@@ -261,7 +250,7 @@ public class EditarMecanico extends javax.swing.JFrame {
 
         int indice = -1;
         for (int i = 0; i < mecanicos.length; i++) {
-            if (mecanicos[i].getCedula().equals(cedula)) {
+            if (mecanicos[i].getId().equals(cedula)) {
                 indice = i;
                 break;
             }
@@ -287,7 +276,7 @@ public class EditarMecanico extends javax.swing.JFrame {
         String cedula = mecanicoCedula.getText().trim();
         int indice = -1;
         for (int i = 0; i < mecanicos.length; i++) {
-            if (mecanicos[i].getCedula().equals(cedula)) {
+            if (mecanicos[i].getId().equals(cedula)) {
                 indice = i;
                 break;
             }

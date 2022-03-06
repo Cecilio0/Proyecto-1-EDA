@@ -150,17 +150,16 @@ public class EliminarMecanico extends javax.swing.JFrame {
         } else { 
             String id = idEliminar.getText().trim();
             Administrador a = new Administrador();
-            if(a.existeId(id)){
-                try {
-                    a.eliminarMecanico(id);
-                } catch (Administrador.ENoExiste ex) {
-                    Logger.getLogger(EliminarMecanico.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                 JOptionPane.showMessageDialog(null, "Eliminacion Exitosa");
-                 this.dispose();
-            }else{
-                    JOptionPane.showMessageDialog(null, "No existe un mecanico con el id: " + id + " para eliminar");
+            try {
+                a.eliminarMecanico(id);
+                JOptionPane.showMessageDialog(null, "Eliminacion Exitosa");
+                
+            } catch (Administrador.ENoExiste ex) {
+            	JOptionPane.showMessageDialog(null, ex.getMessage());
+            } finally {
+            	this.dispose();
             }
+             
         }
     }//GEN-LAST:event_botonGuardarEliminacionMActionPerformed
 

@@ -22,7 +22,7 @@ public class Cliente extends Persona implements Serializable {
     }
   
     public double getDeuda() {
-        return deuda;
+        return calcularDeuda();
     }
 
     public Date getFechaRegistro() {
@@ -97,7 +97,7 @@ public class Cliente extends Persona implements Serializable {
 				if(!vehiculos[i].getHistorial()[j].isPagada()) {
 					total+= vehiculos[i].getHistorial()[j].getPrecio();
 					infoFactura = Arrays.copyOf(infoFactura, infoFactura.length+1);
-					infoFactura[infoFactura.length-1] = vehiculos[i].getHistorial()[j].toString();
+					infoFactura[infoFactura.length-1] = vehiculos[i].getHistorial()[j].mostrar();
 					vehiculos[i].getHistorial()[j].setPagada(true);
 				}
 			}

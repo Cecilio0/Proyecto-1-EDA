@@ -145,19 +145,13 @@ public class EliminarCliente extends javax.swing.JFrame {
             String cedula = cedulaEliminar.getText().trim();
             Administrador a = new Administrador();
             try {
-                if(a.existeCedula(cedula)){
-                    try {
-                        a.eliminarCliente(cedula);
-                    } catch (Administrador.ENoExiste ex) {
-                        Logger.getLogger(EliminarCliente.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    JOptionPane.showMessageDialog(null, "Eliminacion Exitosa");
-                    this.dispose();
-                } else{
-                    JOptionPane.showMessageDialog(null, "No existe un cliente con la cedula: " + cedula + " para eliminar");
-                }
-            } catch (Administrador.EYaExiste ex) {
-                Logger.getLogger(EliminarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            	a.eliminarCliente(cedula);
+            	JOptionPane.showMessageDialog(null, "Eliminacion Exitosa");
+            	
+            } catch (Administrador.ENoExiste ex) {
+            	JOptionPane.showMessageDialog(null, ex.getMessage());
+            } finally {
+            	this.dispose();
             }
         }
     }//GEN-LAST:event_botonGuardarEliminacionCActionPerformed
