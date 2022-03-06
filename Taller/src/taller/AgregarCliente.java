@@ -6,13 +6,10 @@ package taller;
 
 import java.util.Date;
 import javax.swing.JOptionPane;
-
-import taller.Administrador.ENoExiste;
-import taller.Administrador.EYaExiste;
-
 import java.util.*;
-import java.awt.HeadlessException;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 /**
  *
@@ -180,21 +177,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         botonGuardar.setText("Guardar");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-					botonGuardarActionPerformed(evt);
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (HeadlessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (EYaExiste e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ENoExiste e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                botonGuardarActionPerformed(evt);
             }
         });
 
@@ -387,7 +370,7 @@ public class AgregarCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_checkMotoActionPerformed
 
-    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, HeadlessException, EYaExiste, ENoExiste {//GEN-FIRST:event_botonGuardarActionPerformed
+    private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
         // TODO add your handling code here:
         if (clienteNombre.getText().isEmpty() || clienteCedula.getText().isEmpty()
                 || clienteDireccion.getText().isEmpty() || clienteTelefono.getText().isEmpty()
@@ -402,9 +385,11 @@ public class AgregarCliente extends javax.swing.JFrame {
             String correo = clienteCorreo.getText().trim();
 
             int FNDia = Integer.parseInt(clienteFNDia.getText().trim());
-            int FNMes = Integer.parseInt(clienteFNMes.getText().trim())-1;
-            int FNAno = Integer.parseInt(clienteFNAno.getText().trim())-1900;
-            Date FN = new Date(FNDia, FNMes, FNAno);
+            int FNMes = Integer.parseInt(clienteFNMes.getText().trim());
+            int FNAno = Integer.parseInt(clienteFNAno.getText().trim());
+            LocalDate FN1 = LocalDate.of(FNAno, FNMes, FNDia);
+            ZoneId dziD = ZoneId.systemDefault();
+            Date FN = Date.from(FN1.atStartOfDay(dziD).toInstant());
 
             String mtPlaca = motoPlaca.getText().trim();
             String mtColor = motoColor.getText().trim();
