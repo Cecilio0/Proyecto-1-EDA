@@ -34,6 +34,7 @@ public class EditarCliente extends javax.swing.JFrame {
 
         cargarFicheros();
         botonActualizar.setEnabled(false);
+        setResizable(false);
     }
 
     public void cargarFicheros() {

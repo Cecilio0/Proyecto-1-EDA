@@ -34,6 +34,7 @@ public class Servicios extends javax.swing.JFrame {
 
         cargarFicheros();
         botonAplicar.setEnabled(false);
+        setResizable(false);
     }
 
     public void cargarFicheros() {

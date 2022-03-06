@@ -35,6 +35,7 @@ public class EditarMecanico extends javax.swing.JFrame {
         cargarFicheros();
         botonActualizar.setEnabled(false);
         botonDespedir.setEnabled(false);
+        setResizable(false);
     }
 
     public void cargarFicheros() {

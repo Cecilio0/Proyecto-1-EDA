@@ -31,6 +31,7 @@ public class PagarDeuda extends JFrame{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 		
 		inicializar();
 		
@@ -76,7 +77,7 @@ public class PagarDeuda extends JFrame{
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		} finally {
-			setVisible(false);
+			this.dispose();
 		}
 	}
 }

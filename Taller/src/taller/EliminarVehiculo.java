@@ -27,6 +27,7 @@ public class EliminarVehiculo extends javax.swing.JFrame {
         clientes = new Cliente[0];
         mecanicos = new Mecanico[0];
         cargarFicheros();
+        setResizable(false);
     }
     public void cargarFicheros() {
         try {

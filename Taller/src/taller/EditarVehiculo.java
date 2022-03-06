@@ -42,6 +42,7 @@ public class EditarVehiculo extends javax.swing.JFrame {
         
         carroCheckLimpio.setEnabled(false);
         motoCheckLimpio.setEnabled(false);
+        setResizable(false);
     }
 
     public void cargarFicheros() {

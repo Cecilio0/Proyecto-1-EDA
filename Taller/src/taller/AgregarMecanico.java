@@ -21,9 +21,10 @@ public class AgregarMecanico extends javax.swing.JFrame {
     public AgregarMecanico() {
         initComponents();
         clientes = new Cliente [0];
-	mecanicos = new Mecanico [0];
+        mecanicos = new Mecanico [0];
         
         cargarFicheros();
+        setResizable(false);
     }
     
     	public void cargarFicheros() {
@@ -102,23 +103,23 @@ public class AgregarMecanico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("AGREGAR MECÁNICO");
+        jLabel1.setText("AGREGAR MECÃ�NICO");
 
         jLabel2.setText("Nombre:");
 
-        jLabel3.setText("Número de Cédula:");
+        jLabel3.setText("NÃºmero de CÃ©dula:");
 
         jLabel4.setText("Fecha de Nacimiento:");
 
-        jLabel5.setText("Dirección:");
+        jLabel5.setText("DirecciÃ³n:");
 
-        jLabel6.setText("Número de Teléfono:");
+        jLabel6.setText("NÃºmero de TelÃ©fono:");
 
-        jLabel7.setText("Correo Electrónico:");
+        jLabel7.setText("Correo ElectrÃ³nico:");
 
         jLabel8.setText("Salario:");
 
-        jLabel9.setText("(El ID del empleado será generado automáticamente)");
+        jLabel9.setText("(El ID del empleado serÃ¡ generado automÃ¡ticamente)");
 
         botonCrear.setText("Crear");
         botonCrear.addActionListener(new java.awt.event.ActionListener() {

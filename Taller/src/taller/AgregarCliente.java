@@ -32,6 +32,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         mecanicos = new Mecanico[0];
 
         cargarFicheros();
+        setResizable(false);
     }
 
     public void cargarFicheros() {
