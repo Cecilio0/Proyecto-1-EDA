@@ -35,7 +35,6 @@ public class PagarDeuda extends JFrame{
 		
 		inicializar();
 		
-		setResizable(false);
 		setTitle("Pagar Deuda");
 		
 		

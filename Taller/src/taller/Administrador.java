@@ -446,6 +446,7 @@ public class Administrador {
 	public String[] mantenimientoGeneral (String cedula, String placa, String idMecanico) throws ENoExiste, EVectorNulo {//lee el vector de boolean que devuelve diagnostico y los ejecuta
 		String [] cambios = new String [4];
 		boolean [] diagnostico = diagnostico (cedula, placa);
+		buscarCliente(cedula);
 		Vehiculo v = buscarVehiculo(placa);//hacer try catch de no hya vehiculo con esa placa
 		if (diagnostico[0]) {
 			cambioAceite(cedula, placa, idMecanico, v.getKilometraje());
