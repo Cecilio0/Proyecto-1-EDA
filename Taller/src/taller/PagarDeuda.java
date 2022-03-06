@@ -56,7 +56,7 @@ public class PagarDeuda extends JFrame{
 		contentPane.add(txtCedula);
 		txtCedula.setColumns(10);
 		
-		JLabel lblCedula = new JLabel("Cedula: ");
+		JLabel lblCedula = new JLabel("Cédula: ");
 		lblCedula.setBounds(128, 115, 50, 13);
 		contentPane.add(lblCedula);
 	}

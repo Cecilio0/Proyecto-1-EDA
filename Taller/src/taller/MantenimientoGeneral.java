@@ -68,7 +68,7 @@ public class MantenimientoGeneral extends JFrame {
 		contentPane.add(txtCedula);
 		txtCedula.setColumns(10);
 		
-		lblCedula = new JLabel("Cedula: ");
+		lblCedula = new JLabel("Cédula: ");
 		lblCedula.setBounds(91, 89, 62, 13);
 		contentPane.add(lblCedula);
 		
@@ -76,7 +76,7 @@ public class MantenimientoGeneral extends JFrame {
 		lblPlaca.setBounds(91, 118, 45, 13);
 		contentPane.add(lblPlaca);
 		
-		JLabel lblMecanico = new JLabel("Id Mecanico: ");
+		JLabel lblMecanico = new JLabel("Id Mecánico: ");
 		lblMecanico.setBounds(91, 147, 78, 13);
 		contentPane.add(lblMecanico);
 	}

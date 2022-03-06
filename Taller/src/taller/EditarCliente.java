@@ -109,7 +109,7 @@ public class EditarCliente extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("EDITAR CLIENTE");
 
-        jLabel2.setText("NÃºmero de CÃ©dula:");
+        jLabel2.setText("Número de Cédula:");
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,11 +120,11 @@ public class EditarCliente extends javax.swing.JFrame {
 
         jLabel4.setText("Nombre:");
 
-        jLabel7.setText("DirecciÃ³n:");
+        jLabel7.setText("Dirección:");
 
-        jLabel8.setText("NÃºmero de TelÃ©fono:");
+        jLabel8.setText("Número de Teléfono:");
 
-        jLabel9.setText("Correo ElectrÃ³nico:");
+        jLabel9.setText("Correo Electrónico:");
 
         botonActualizar.setText("Actualizar");
         botonActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -262,37 +262,6 @@ public class EditarCliente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditarCliente().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonActualizar;

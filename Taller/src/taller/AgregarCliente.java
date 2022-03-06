@@ -135,15 +135,15 @@ public class AgregarCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre:");
 
-        jLabel3.setText("N煤mero de Documento:");
+        jLabel3.setText("N鷐ero de Documento:");
 
         jLabel4.setText("Fecha de Nacimiento:");
 
-        jLabel5.setText("Direcci贸n:");
+        jLabel5.setText("Direcci髇:");
 
-        jLabel6.setText("N煤mero de Tel茅fono:");
+        jLabel6.setText("N鷐ero de Tel閒ono:");
 
-        jLabel7.setText("Correo Electr贸nico:");
+        jLabel7.setText("Correo Electr髇ico:");
 
         jLabel8.setText("D/M/AAAA");
 
@@ -175,7 +175,7 @@ public class AgregarCliente extends javax.swing.JFrame {
 
         jLabel15.setText("Kilometraje:");
 
-        jLabel16.setText("N煤mero de Puertas:");
+        jLabel16.setText("N鷐ero de Puertas:");
 
         botonGuardar.setText("Guardar");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -184,16 +184,16 @@ public class AgregarCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel17.setText("Tracci贸n:");
+        jLabel17.setText("Tracci髇:");
 
-        carroCheckLlantas.setText("驴Llantas 贸ptimas?");
+        carroCheckLlantas.setText("縇lantas 髉timas?");
         carroCheckLlantas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carroCheckLlantasActionPerformed(evt);
             }
         });
 
-        motoCheckLlantas.setText("驴Llantas 脫ptimas?");
+        motoCheckLlantas.setText("縇lantas 髉timas?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -491,37 +491,6 @@ public class AgregarCliente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AgregarCliente().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonGuardar;

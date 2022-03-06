@@ -103,23 +103,23 @@ public class AgregarMecanico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("AGREGAR MECÃ�NICO");
+        jLabel1.setText("AGREGAR MECÁNICO");
 
         jLabel2.setText("Nombre:");
 
-        jLabel3.setText("NÃºmero de CÃ©dula:");
+        jLabel3.setText("Número de Cédula:");
 
         jLabel4.setText("Fecha de Nacimiento:");
 
-        jLabel5.setText("DirecciÃ³n:");
+        jLabel5.setText("Dirección:");
 
-        jLabel6.setText("NÃºmero de TelÃ©fono:");
+        jLabel6.setText("Número de Teléfono:");
 
-        jLabel7.setText("Correo ElectrÃ³nico:");
+        jLabel7.setText("Correo Electrónico:");
 
         jLabel8.setText("Salario:");
 
-        jLabel9.setText("(El ID del empleado serÃ¡ generado automÃ¡ticamente)");
+        jLabel9.setText("(El ID del empleado será generado automáticamente)");
 
         botonCrear.setText("Crear");
         botonCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -261,37 +261,6 @@ public class AgregarMecanico extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarMecanico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarMecanico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarMecanico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarMecanico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AgregarMecanico().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrear;

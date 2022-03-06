@@ -131,7 +131,7 @@ public class EditarVehiculo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("EDITAR VEHICULO");
+        jLabel1.setText("EDITAR VEHÍCULO");
 
         jLabel3.setText("Placa:");
 
@@ -153,16 +153,16 @@ public class EditarVehiculo extends javax.swing.JFrame {
 
         carroTraccion.setEditable(false);
 
-        carroCheckLlantas.setText("Â¿Llantas Ã³ptimas?");
+        carroCheckLlantas.setText("¿Llantas Óptimas?");
         carroCheckLlantas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carroCheckLlantasActionPerformed(evt);
             }
         });
 
-        motoCheckLlantas.setText("Â¿Llantas Ã“ptimas?");
+        motoCheckLlantas.setText("¿Llantas Óptimas?");
 
-        jLabel17.setText("TracciÃ³n:");
+        jLabel17.setText("Tracción:");
 
         jLabel15.setText("Kilometraje:");
 
@@ -176,7 +176,7 @@ public class EditarVehiculo extends javax.swing.JFrame {
 
         jLabel9.setText("Placa:");
 
-        jLabel16.setText("NÃºmero de Puertas:");
+        jLabel16.setText("Número de Puertas:");
 
         botonGuardar.setText("Guardar");
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -208,9 +208,9 @@ public class EditarVehiculo extends javax.swing.JFrame {
             }
         });
 
-        carroCheckLimpio.setText("Â¿Limpio?");
+        carroCheckLimpio.setText("¿Limpio?");
 
-        motoCheckLimpio.setText("Â¿Limpio?");
+        motoCheckLimpio.setText("¿Limpio?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -506,38 +506,6 @@ public class EditarVehiculo extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditarVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditarVehiculo().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonGuardar;

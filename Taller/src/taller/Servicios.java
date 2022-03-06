@@ -145,7 +145,7 @@ public class Servicios extends javax.swing.JFrame {
 
         jLabel3.setText("Kilometraje:");
 
-        jLabel4.setText("Mec√°nico (ID):");
+        jLabel4.setText("Mec·nico (ID):");
 
         idMecAceite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,9 +160,9 @@ public class Servicios extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Mec√°nico (ID):");
+        jLabel6.setText("Mec·nico (ID):");
 
-        jLabel7.setText("N√∫mero de C√©dula:");
+        jLabel7.setText("N˙mero de CÈdula:");
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -173,21 +173,21 @@ public class Servicios extends javax.swing.JFrame {
 
         checkInflar.setText("Inflar Llantas");
 
-        jLabel5.setText("Mec√°nico (ID):");
+        jLabel5.setText("Mec·nico (ID):");
 
         checkLavado.setText("Lavado");
 
-        jLabel8.setText("Mec√°nico (ID):");
+        jLabel8.setText("Mec·nico (ID):");
 
         checkPintura.setText("Cambio de Pintura:");
 
-        jLabel9.setText("Mec√°nico (ID):");
+        jLabel9.setText("Mec·nico (ID):");
 
         jLabel10.setText("Color:");
 
         checkEspecial.setText("Especial");
 
-        jLabel11.setText("Mec√°nico (ID):");
+        jLabel11.setText("Mec·nico (ID):");
 
         jLabel12.setText("Detalle:");
 
@@ -424,7 +424,7 @@ public class Servicios extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mec√°nico (Aceite)");
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mec·nico (Aceite)");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor complete el campo de Kilometraje");
@@ -445,7 +445,7 @@ public class Servicios extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mec√°nico (Frenos)");
+                    JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mec·nico (Frenos)");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor complete el campo de Kilometraje");
@@ -465,7 +465,7 @@ public class Servicios extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mec√°nico (Inflar)");
+                JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mec·nico (Inflar)");
             }
         }
 
@@ -474,7 +474,7 @@ public class Servicios extends javax.swing.JFrame {
                 String idMecanico = idMecLavado.getText().trim();
                 try {
                     a.lavadoVehiculo(cedula, placa, idMecanico);
-                    JOptionPane.showMessageDialog(null, "Vehiculo lavado de manera exitosa");
+                    JOptionPane.showMessageDialog(null, "VehÌculo lavado de manera exitosa");
 
                 } catch (Administrador.ENoExiste ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -482,7 +482,7 @@ public class Servicios extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mec√°nico (Lavado)");
+                JOptionPane.showMessageDialog(null, "Por favor ingrese el ID del mec·nico (Lavado)");
             }
         }
 
@@ -492,7 +492,7 @@ public class Servicios extends javax.swing.JFrame {
                 String color = pinturaColor.getText().trim();
                 try {
                     a.cambioPintura(cedula, placa, idMecanico, color);
-                    JOptionPane.showMessageDialog(null, "Pintura del vehiculo cambiada de manera exitosa");
+                    JOptionPane.showMessageDialog(null, "Pintura del vehÌculo cambiada de manera exitosa");
 
                 } catch (Administrador.ENoExiste ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -532,39 +532,6 @@ public class Servicios extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Servicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Servicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Servicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Servicios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Servicios().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAplicar;
     private javax.swing.JButton botonBuscar;
