@@ -7,6 +7,7 @@ public class Administrador {
 	private Cliente[] clientes;
 	private Mecanico[] mecanicos;
 	
+	
 	//Excepcion EYaExiste
 	class EYaExiste extends Exception{
 		public EYaExiste(String s) {

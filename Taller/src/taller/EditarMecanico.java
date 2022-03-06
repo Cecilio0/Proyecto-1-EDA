@@ -104,9 +104,9 @@ public class EditarMecanico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("EDITAR MECÁNICO");
+        jLabel1.setText("EDITAR MECÃ�NICO");
 
-        jLabel2.setText("Número de Cédula:");
+        jLabel2.setText("NÃºmero de CÃ©dula:");
 
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,11 +117,11 @@ public class EditarMecanico extends javax.swing.JFrame {
 
         jLabel4.setText("Nombre:");
 
-        jLabel7.setText("Dirección:");
+        jLabel7.setText("DirecciÃ³n:");
 
-        jLabel8.setText("Número de Teléfono:");
+        jLabel8.setText("NÃºmero de TelÃ©fono:");
 
-        jLabel9.setText("Correo Electrónico:");
+        jLabel9.setText("Correo ElectrÃ³nico:");
 
         botonActualizar.setText("Actualizar");
         botonActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +219,7 @@ public class EditarMecanico extends javax.swing.JFrame {
             botonActualizar.setEnabled(true);
 
         } else {
-            JOptionPane.showMessageDialog(null, "Mecánico no encontrado: CC" + cedula);
+            JOptionPane.showMessageDialog(null, "MecÃ¡nico no encontrado: CC" + cedula);
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
 
