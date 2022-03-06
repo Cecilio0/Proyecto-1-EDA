@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -206,20 +208,31 @@ public class EditarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cedula = clienteCedula.getText().trim();
         Administrador a = new Administrador();
-        if (a.existeCedula(cedula)) {
-
-            Cliente c = a.buscarCliente(cedula);
-
-            clienteNombre.setText(c.getNombre());
-            clienteDireccion.setText(c.getDireccion());
-            clienteTelefono.setText(c.getTelefono());
-            clienteCorreo.setText(c.getCorreo());
-
-            clienteCedula.setEditable(false);
-            botonActualizar.setEnabled(true);
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
+        try {
+            if (a.existeCedula(cedula)) {
+                
+                Cliente c=null;
+                try {
+                    c = a.buscarCliente(cedula);
+                } catch (Administrador.ENoExiste ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                } catch (Administrador.EVectorNulo ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+                
+                clienteNombre.setText(c.getNombre());
+                clienteDireccion.setText(c.getDireccion());
+                clienteTelefono.setText(c.getTelefono());
+                clienteCorreo.setText(c.getCorreo());
+                
+                clienteCedula.setEditable(false);
+                botonActualizar.setEnabled(true);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente no encontrado: CC" + cedula);
+            }
+        } catch (Administrador.EYaExiste ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }//GEN-LAST:event_botonBuscarActionPerformed

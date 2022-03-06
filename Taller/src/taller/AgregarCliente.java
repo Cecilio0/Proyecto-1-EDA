@@ -10,6 +10,8 @@ import java.util.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -411,18 +413,28 @@ public class AgregarCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (MOTO)");
                 } else {
                     Administrador a = new Administrador();
-                    if (!a.existeCedula(cedula)) {
-                        if (!a.existeVehiculo(mtPlaca)) {
-                            Date hoy = Calendar.getInstance().getTime();
-                            a.addCliente(nombre, cedula, FN, direccion, telefono, correo, hoy, mtPlaca, mtColor, true, Integer.parseInt(mtKilometraje), mtLlantas, Integer.parseInt(mtTiempos));
-
-                            JOptionPane.showMessageDialog(null, "Guardado Exitoso");
-                            this.dispose();
+                    try {
+                        if (!a.existeCedula(cedula)) {
+                            if (!a.existeVehiculo(mtPlaca)) {
+                                Date hoy = Calendar.getInstance().getTime();
+                                try {
+                                    a.addCliente(nombre, cedula, FN, direccion, telefono, correo, hoy, mtPlaca, mtColor, true, Integer.parseInt(mtKilometraje), mtLlantas, Integer.parseInt(mtTiempos));
+                                } catch (Administrador.ENoExiste ex) {
+                                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                                } catch (Administrador.EVectorNulo ex) {
+                                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                                }
+                                
+                                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
+                                this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + mtPlaca);
+                            }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + mtPlaca);
+                            JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);
+                    } catch (Administrador.EYaExiste ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
                 }
             }
@@ -432,19 +444,29 @@ public class AgregarCliente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (CARRO)");
                 } else {
                     Administrador a = new Administrador();
-                    if (!a.existeCedula(cedula)) {
-                        if (!a.existeVehiculo(crPlaca)) {
-                            Date hoy = Calendar.getInstance().getTime();
-                            a.addCliente(nombre, cedula, FN, direccion, telefono, correo, hoy, crPlaca, crColor, true, Integer.parseInt(crKilometraje), crLlantas, Integer.parseInt(crNumPuertas), crTraccion);
-
-                            JOptionPane.showMessageDialog(null, "Guardado Exitoso");
-                            this.dispose();
+                    try {
+                        if (!a.existeCedula(cedula)) {
+                            if (!a.existeVehiculo(crPlaca)) {
+                                Date hoy = Calendar.getInstance().getTime();
+                                try {
+                                    a.addCliente(nombre, cedula, FN, direccion, telefono, correo, hoy, crPlaca, crColor, true, Integer.parseInt(crKilometraje), crLlantas, Integer.parseInt(crNumPuertas), crTraccion);
+                                } catch (Administrador.ENoExiste ex) {
+                                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                                } catch (Administrador.EVectorNulo ex) {
+                                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                                }
+                                
+                                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
+                                this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + crPlaca);
+                            }
+                            
                         } else {
-                            JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + crPlaca);
+                            JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);
                         }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);
+                    } catch (Administrador.EYaExiste ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
 
                 }

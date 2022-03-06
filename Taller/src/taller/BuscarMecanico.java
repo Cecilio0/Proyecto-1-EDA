@@ -14,6 +14,8 @@ import java.util.*;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -163,7 +165,14 @@ public class BuscarMecanico extends javax.swing.JFrame {
         formato = new DecimalFormat("#,###.00");
         jTextPane1.setText("");
         if (a.existeId(idMecanico)) {
-            Mecanico m = a.buscarMecanico(idMecanico);
+            Mecanico m = null;
+            try {
+                m = a.buscarMecanico(idMecanico);
+            } catch (Administrador.ENoExiste ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            } catch (Administrador.EVectorNulo ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
             String[] info = new String[2];
             String estado = "N/A";
             if (m.getFechaSalida() != null) {
