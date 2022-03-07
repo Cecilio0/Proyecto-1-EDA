@@ -137,40 +137,47 @@ public class CalcularFinanzas extends javax.swing.JFrame {
         if (FNDia.getText().isEmpty() || FNMes.getText().isEmpty() || FNAno.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
         } else {
-            int Dia = Integer.parseInt(FNDia.getText().trim());
-            int Mes = Integer.parseInt(FNMes.getText().trim());
-            int Ano = Integer.parseInt(FNAno.getText().trim());
-            LocalDate FN1 = LocalDate.of(Ano, Mes, Dia);
-            ZoneId dziD = ZoneId.systemDefault();
-            Date FN = Date.from(FN1.atStartOfDay(dziD).toInstant());
-            Administrador a = new Administrador();
+        	if (Integer.parseInt(FNDia.getText().trim()) > 0 && Integer.parseInt(FNMes.getText().trim()) > 0 && Integer.parseInt(FNAno.getText().trim()) > 1900) {
+        		  int Dia = Integer.parseInt(FNDia.getText().trim());
+                  int Mes = Integer.parseInt(FNMes.getText().trim());
+                  int Ano = Integer.parseInt(FNAno.getText().trim());
+                  LocalDate FN1 = LocalDate.of(Ano, Mes, Dia);
+                  ZoneId dziD = ZoneId.systemDefault();
+                  Date FN = Date.from(FN1.atStartOfDay(dziD).toInstant());
+                  Administrador a = new Administrador();
+        		
+        		  int contTrabajos = 0;
+                  for (Cliente cliente : clientes) {
+                      for (int j = 0; j < cliente.getVehiculos().length; j++) {
+                          for (int k = 0; k < cliente.getVehiculos()[j].getHistorial().length; k++) {
+                              if (cliente.getVehiculos()[j].getHistorial()[k].getMes() + 1 == FN1.getMonthValue()) {
+                                  contTrabajos++;
+                              }
+                          }
+                      }
+                  }
 
-            int contTrabajos = 0;
-            for (Cliente cliente : clientes) {
-                for (int j = 0; j < cliente.getVehiculos().length; j++) {
-                    for (int k = 0; k < cliente.getVehiculos()[j].getHistorial().length; k++) {
-                        if (cliente.getVehiculos()[j].getHistorial()[k].getMes() + 1 == FN1.getMonthValue()) {
-                            contTrabajos++;
-                        }
-                    }
-                }
-            }
+                  int contEmpleados = 0;
+                  for (Mecanico mecanico : mecanicos) {
+                      if (mecanico.getFechaSalida() == null || mecanico.getFechaSalida().before(FN)) {
+                          contEmpleados++;
+                      }
+                  }
+                  formato = new DecimalFormat("#,###.00");
+                  System.out.println(FN);
 
-            int contEmpleados = 0;
-            for (Mecanico mecanico : mecanicos) {
-                if (mecanico.getFechaSalida() == null || mecanico.getFechaSalida().before(FN)) {
-                    contEmpleados++;
-                }
-            }
-            formato = new DecimalFormat("#,###.00");
-            System.out.println(FN);
+                  jTextArea1.setText("");
 
-            jTextArea1.setText("");
+                  a.calcularIngresos(FN);
 
-            a.calcularIngresos(FN);
+                  jTextArea1.setText("Ingresos: " + formato.format(a.calcularIngresos(FN)) + "\nTotal de trabajos hechos: " + contTrabajos + "\n\nNomina: " + formato.format(a.calcularNomina(FN)) + "\nTotal de empleados considerados: " + contEmpleados + "\n\nUtilidad: " + formato.format(a.calcularUtilidad(FN)));
 
-            jTextArea1.setText("Ingresos: " + formato.format(a.calcularIngresos(FN)) + "\nTotal de trabajos hechos: " + contTrabajos + "\n\nNomina: " + formato.format(a.calcularNomina(FN)) + "\nTotal de empleados considerados: " + contEmpleados + "\n\nUtilidad: " + formato.format(a.calcularUtilidad(FN)));
+        	} else {
+        		JOptionPane.showMessageDialog(null, "Ingrese una fecha válida");
+        	}
+            
 
+          
         }
     }//GEN-LAST:event_botonCalcularActionPerformed
 

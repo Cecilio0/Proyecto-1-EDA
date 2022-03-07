@@ -54,7 +54,7 @@ public class Historial implements Serializable {
     }
 
     public String mostrar() {
-        return "Servicio: " + accion + "\tPrecio: " + precio + "\tFecha: " + fechaDevolucion;
+        return "Servicio: " + accion + "   Precio: " + precio + "   Fecha: " + fechaDevolucion.toString();
     }
 
     public int getMes() {

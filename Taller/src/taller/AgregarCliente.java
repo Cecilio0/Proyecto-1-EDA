@@ -7,6 +7,7 @@ package taller;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import java.util.*;
+import java.awt.JobAttributes;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -381,98 +382,103 @@ public class AgregarCliente extends javax.swing.JFrame {
                 || clienteFNMes.getText().isEmpty() || clienteFNAno.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
         } else {
-            String nombre = clienteNombre.getText().trim();
-            String cedula = clienteCedula.getText().trim();
-            String direccion = clienteDireccion.getText().trim();
-            String telefono = clienteTelefono.getText().trim();
-            String correo = clienteCorreo.getText().trim();
+        	if (Integer.parseInt(clienteFNDia.getText().trim()) > 0 && Integer.parseInt(clienteFNMes.getText().trim()) > 0 && Integer.parseInt(clienteFNAno.getText().trim()) > 1900) {
+        		 String nombre = clienteNombre.getText().trim();
+                 String cedula = clienteCedula.getText().trim();
+                 String direccion = clienteDireccion.getText().trim();
+                 String telefono = clienteTelefono.getText().trim();
+                 String correo = clienteCorreo.getText().trim();
 
-            int FNDia = Integer.parseInt(clienteFNDia.getText().trim());
-            int FNMes = Integer.parseInt(clienteFNMes.getText().trim());
-            int FNAno = Integer.parseInt(clienteFNAno.getText().trim());
-            LocalDate FN1 = LocalDate.of(FNAno, FNMes, FNDia);
-            ZoneId dziD = ZoneId.systemDefault();
-            Date FN = Date.from(FN1.atStartOfDay(dziD).toInstant());
+                 int FNDia = Integer.parseInt(clienteFNDia.getText().trim());
+                 int FNMes = Integer.parseInt(clienteFNMes.getText().trim());
+                 int FNAno = Integer.parseInt(clienteFNAno.getText().trim());
+                 LocalDate FN1 = LocalDate.of(FNAno, FNMes, FNDia);
+                 ZoneId dziD = ZoneId.systemDefault();
+                 Date FN = Date.from(FN1.atStartOfDay(dziD).toInstant());
 
-            String mtPlaca = motoPlaca.getText().trim();
-            String mtColor = motoColor.getText().trim();
-            String mtKilometraje = motoKilometraje.getText().trim();
-            String mtTiempos = motoTiempos.getText().trim();
-            boolean mtLlantas = motoCheckLlantas.isSelected();
+                 String mtPlaca = motoPlaca.getText().trim();
+                 String mtColor = motoColor.getText().trim();
+                 String mtKilometraje = motoKilometraje.getText().trim();
+                 String mtTiempos = motoTiempos.getText().trim();
+                 boolean mtLlantas = motoCheckLlantas.isSelected();
 
-            String crPlaca = carroPlaca.getText().trim();
-            String crColor = carroColor.getText().trim();
-            String crKilometraje = carroKilometraje.getText().trim();
-            String crNumPuertas = carroNumeroPuertas.getText().trim();
-            String crTraccion = carroTraccion.getText().trim();
-            boolean crLlantas = carroCheckLlantas.isSelected();
-            mtPlaca = mtPlaca.toUpperCase();
-            crPlaca = crPlaca.toUpperCase();
+                 String crPlaca = carroPlaca.getText().trim();
+                 String crColor = carroColor.getText().trim();
+                 String crKilometraje = carroKilometraje.getText().trim();
+                 String crNumPuertas = carroNumeroPuertas.getText().trim();
+                 String crTraccion = carroTraccion.getText().trim();
+                 boolean crLlantas = carroCheckLlantas.isSelected();
+                 mtPlaca = mtPlaca.toUpperCase();
+                 crPlaca = crPlaca.toUpperCase();
 
-            if (checkMoto.isSelected()) {
-                if (motoPlaca.getText().isEmpty() || motoColor.getText().isEmpty() || motoKilometraje.getText().isEmpty() || motoTiempos.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (MOTO)");
-                } else {
-                    Administrador a = new Administrador();
-                    try {
-                        if (!a.existeCedula(cedula)) {
-                            if (!a.existeVehiculo(mtPlaca)) {
-                                Date hoy = Calendar.getInstance().getTime();
-                                try {
-                                    a.addCliente(nombre, cedula, FN, direccion, telefono, correo, hoy, mtPlaca, mtColor, true, Integer.parseInt(mtKilometraje), mtLlantas, Integer.parseInt(mtTiempos));
-                                } catch (Administrador.ENoExiste ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                } catch (Administrador.EVectorNulo ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                }
-                                
-                                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
-                                this.dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + mtPlaca);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);
-                        }
-                    } catch (Administrador.EYaExiste ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage());
-                    }
-                }
-            }
+                 if (checkMoto.isSelected()) {
+                     if (motoPlaca.getText().isEmpty() || motoColor.getText().isEmpty() || motoKilometraje.getText().isEmpty() || motoTiempos.getText().isEmpty()) {
+                         JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (MOTO)");
+                     } else {
+                         Administrador a = new Administrador();
+                         try {
+                             if (!a.existeCedula(cedula)) {
+                                 if (!a.existeVehiculo(mtPlaca)) {
+                                     Date hoy = Calendar.getInstance().getTime();
+                                     try {
+                                         a.addCliente(nombre, cedula, FN, direccion, telefono, correo, hoy, mtPlaca, mtColor, true, Integer.parseInt(mtKilometraje), mtLlantas, Integer.parseInt(mtTiempos));
+                                     } catch (Administrador.ENoExiste ex) {
+                                         JOptionPane.showMessageDialog(null, ex.getMessage());
+                                     } catch (Administrador.EVectorNulo ex) {
+                                         JOptionPane.showMessageDialog(null, ex.getMessage());
+                                     }
+                                     
+                                     JOptionPane.showMessageDialog(null, "Guardado Exitoso");
+                                     this.dispose();
+                                 } else {
+                                     JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + mtPlaca);
+                                 }
+                             } else {
+                                 JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);
+                             }
+                         } catch (Administrador.EYaExiste ex) {
+                             JOptionPane.showMessageDialog(null, ex.getMessage());
+                         }
+                     }
+                 }
 
-            if (checkCarro.isSelected()) {
-                if (carroPlaca.getText().isEmpty() || carroColor.getText().isEmpty() || carroKilometraje.getText().isEmpty() || carroNumeroPuertas.getText().isEmpty() || carroTraccion.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (CARRO)");
-                } else {
-                    Administrador a = new Administrador();
-                    try {
-                        if (!a.existeCedula(cedula)) {
-                            if (!a.existeVehiculo(crPlaca)) {
-                                Date hoy = Calendar.getInstance().getTime();
-                                try {
-                                    a.addCliente(nombre, cedula, FN, direccion, telefono, correo, hoy, crPlaca, crColor, true, Integer.parseInt(crKilometraje), crLlantas, Integer.parseInt(crNumPuertas), crTraccion);
-                                } catch (Administrador.ENoExiste ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                } catch (Administrador.EVectorNulo ex) {
-                                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                                }
-                                
-                                JOptionPane.showMessageDialog(null, "Guardado Exitoso");
-                                this.dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + crPlaca);
-                            }
-                            
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);
-                        }
-                    } catch (Administrador.EYaExiste ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage());
-                    }
+                 if (checkCarro.isSelected()) {
+                     if (carroPlaca.getText().isEmpty() || carroColor.getText().isEmpty() || carroKilometraje.getText().isEmpty() || carroNumeroPuertas.getText().isEmpty() || carroTraccion.getText().isEmpty()) {
+                         JOptionPane.showMessageDialog(null, "Por favor complete todos los campos (CARRO)");
+                     } else {
+                         Administrador a = new Administrador();
+                         try {
+                             if (!a.existeCedula(cedula)) {
+                                 if (!a.existeVehiculo(crPlaca)) {
+                                     Date hoy = Calendar.getInstance().getTime();
+                                     try {
+                                         a.addCliente(nombre, cedula, FN, direccion, telefono, correo, hoy, crPlaca, crColor, true, Integer.parseInt(crKilometraje), crLlantas, Integer.parseInt(crNumPuertas), crTraccion);
+                                     } catch (Administrador.ENoExiste ex) {
+                                         JOptionPane.showMessageDialog(null, ex.getMessage());
+                                     } catch (Administrador.EVectorNulo ex) {
+                                         JOptionPane.showMessageDialog(null, ex.getMessage());
+                                     }
+                                     
+                                     JOptionPane.showMessageDialog(null, "Guardado Exitoso");
+                                     this.dispose();
+                                 } else {
+                                     JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + crPlaca);
+                                 }
+                                 
+                             } else {
+                                 JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);
+                             }
+                         } catch (Administrador.EYaExiste ex) {
+                             JOptionPane.showMessageDialog(null, ex.getMessage());
+                         }
 
-                }
-            }
+                     }
+                 }
 
+        	} else {
+        		JOptionPane.showMessageDialog(null, "por favor ingrese una fecha v�lida");
+        	}
+           
         }
     }//GEN-LAST:event_botonGuardarActionPerformed
 

@@ -85,6 +85,9 @@ public class Cliente extends Persona implements Serializable {
 	}
 	
 	public String[] pagoDeuda() {//paga toda la deuda del cliente y convierte todos los historiales no pagos a pagos
+		for (int i = 0; i < vehiculos.length; i++) {
+			vehiculos[i].setEstado(true);//permite retirar el vehiculo del taller
+		}
 		deuda = 0;
 		return factura();
 	}

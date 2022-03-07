@@ -196,7 +196,7 @@ public class Administrador {
 			if (!existeVehiculo(placa)) {
 				buscarCliente(cedula).addVehiculo(placa, color, estado, kilometraje, estadoLlantas, tiempos);
 				guardarFicheros();
-      }
+			}
 		}
 	}
 	
@@ -345,6 +345,7 @@ public class Administrador {
 		//double precio = 50;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto y escribir los precios en ficheros para poderlos cambiar(extra)
 		buscarVehiculo(placa).setKilometraje(kilometraje);
 		buscarVehiculo(placa).setKilometrajeAceite(kilometraje);
+		buscarVehiculo(placa).setEstado(false);
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
 
 		guardarFicheros();
@@ -354,9 +355,10 @@ public class Administrador {
 		Date date = new Date();		
 		String accion = "Inflar llantas";
 		Mecanico mecanico = buscarMecanico(idMecanico);//hacer try catch de no hay mecanico con ese id
-		double precio= 25;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
+		double precio= 500;//escribir esto con if de manera que si es carro sea un precio distinto al de una moto
 		buscarVehiculo(placa).setEstadoLlantas(true);
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
+		buscarVehiculo(placa).setEstado(false);
 
 		guardarFicheros();
 	}
@@ -374,6 +376,7 @@ public class Administrador {
 		buscarVehiculo(placa).setKilometraje(kilometraje);
 		buscarVehiculo(placa).setKilometrajePastas(kilometraje);
 		addHistorial(hoy, m, accion, precio, cedula, placa);
+		buscarVehiculo(placa).setEstado(false);
 
 		guardarFicheros();
 	}
@@ -391,6 +394,7 @@ public class Administrador {
 		}
 		buscarVehiculo(placa).setLimpio(true);
 		addHistorial(hoy, m, accion, precio, cedula, placa);
+		buscarVehiculo(placa).setEstado(false);
 
 		guardarFicheros();
 	}
@@ -400,6 +404,7 @@ public class Administrador {
 		Date hoy = Calendar.getInstance().getTime();
 		Mecanico m = buscarMecanico(idMecanico);
 		addHistorial(hoy, m, accion, precio, cedula, placa);
+		buscarVehiculo(placa).setEstado(false);
 
 		guardarFicheros();
 	}
@@ -417,6 +422,7 @@ public class Administrador {
 		}
 		buscarVehiculo(placa).setColor(color);//revisar si esto si cambia el dato original en el main
 		addHistorial(date, mecanico, accion, precio, cedula, placa);
+		buscarVehiculo(placa).setEstado(false);
 
 		guardarFicheros();
 	}

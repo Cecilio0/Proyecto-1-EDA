@@ -229,32 +229,35 @@ public class AgregarMecanico extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos");
         } else {
-        
-        Administrador a = new Administrador();
-        String nombre = empleadoNombre.getText().trim();
-        String cedula = empleadoCedula.getText().trim();
-        String direccion = empleadoDireccion.getText().trim();
-        String telefono = empleadoTelefono.getText().trim();
-        String correo = empleadoCorreo.getText().trim();
-        double salario = Double.parseDouble(empleadoSalario.getText().trim());
-        
-        int FNDia = Integer.parseInt(empleadoFNDia.getText().trim());
-        int FNMes = Integer.parseInt(empleadoFNMes.getText().trim());
-        int FNAno = Integer.parseInt(empleadoFNAno.getText().trim());
-        LocalDate FN1 = LocalDate.of(FNAno, FNMes, FNDia);
-        ZoneId dziD = ZoneId.systemDefault();
-        Date FN = Date.from(FN1.atStartOfDay(dziD).toInstant());
-        
-        String id = a.generarId();
-        
-        Mecanico m = new Mecanico(nombre, cedula, FN, direccion, telefono, correo, id, salario);
-        mecanicos = Arrays.copyOf(mecanicos, mecanicos.length+1);
-        mecanicos[mecanicos.length-1] = m;
-        
-        guardarFicheros();
-        
-        JOptionPane.showMessageDialog(null, "Guardado Exitoso\nEl ID generado es: " + id);
-        this.dispose();
+        	if (Integer.parseInt(empleadoFNDia.getText().trim()) > 0 && Integer.parseInt(empleadoFNMes.getText().trim()) > 0 && Integer.parseInt(empleadoFNAno.getText().trim()) > 1900) {
+                Administrador a = new Administrador();
+                String nombre = empleadoNombre.getText().trim();
+                String cedula = empleadoCedula.getText().trim();
+                String direccion = empleadoDireccion.getText().trim();
+                String telefono = empleadoTelefono.getText().trim();
+                String correo = empleadoCorreo.getText().trim();
+                double salario = Double.parseDouble(empleadoSalario.getText().trim());
+                
+                int FNDia = Integer.parseInt(empleadoFNDia.getText().trim());
+                int FNMes = Integer.parseInt(empleadoFNMes.getText().trim());
+                int FNAno = Integer.parseInt(empleadoFNAno.getText().trim());
+                LocalDate FN1 = LocalDate.of(FNAno, FNMes, FNDia);
+                ZoneId dziD = ZoneId.systemDefault();
+                Date FN = Date.from(FN1.atStartOfDay(dziD).toInstant());
+                
+                String id = a.generarId();
+                
+                Mecanico m = new Mecanico(nombre, cedula, FN, direccion, telefono, correo, id, salario);
+                mecanicos = Arrays.copyOf(mecanicos, mecanicos.length+1);
+                mecanicos[mecanicos.length-1] = m;
+                
+                guardarFicheros();
+                
+                JOptionPane.showMessageDialog(null, "Guardado Exitoso\nEl ID generado es: " + id);
+                this.dispose();
+        	} else {
+        		JOptionPane.showMessageDialog(null, "por favor ingrese una fecha válida");
+        	}
         }
     }//GEN-LAST:event_botonCrearActionPerformed
 
