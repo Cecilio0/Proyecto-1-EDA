@@ -7,14 +7,12 @@ import java.io.*;
 
 public class Cliente extends Persona implements Serializable {
     private Vehiculo[] vehiculos;
-    private double deuda;
     private Date fechaRegistro;
 
     public Cliente(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, String correo, Date fechaRegistro) {
         super(nombre, cedula, fechaNacimiento, direccion, telefono, correo);
         vehiculos = new Vehiculo[0];
         this.fechaRegistro = fechaRegistro;
-        this.deuda = 0;
     }
 
     public Vehiculo[] getVehiculos() {
@@ -27,10 +25,6 @@ public class Cliente extends Persona implements Serializable {
 
     public Date getFechaRegistro() {
         return fechaRegistro;
-    }
-    
-    public void setDeuda(double deuda) {
-        this.deuda = deuda;
     }
     
     // addVehiculo || carro
@@ -88,7 +82,6 @@ public class Cliente extends Persona implements Serializable {
 		for (int i = 0; i < vehiculos.length; i++) {
 			vehiculos[i].setEstado(true);//permite retirar el vehiculo del taller
 		}
-		deuda = 0;
 		return factura();
 	}
 	

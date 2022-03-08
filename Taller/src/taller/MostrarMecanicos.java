@@ -147,8 +147,6 @@ public class MostrarMecanicos extends javax.swing.JFrame {
 
         jTextPane1.setText("");
         if (mecanicos.length!=0) {
-            Mecanico m = null;
-
             for (int i = 0; i < a.mostrarMecanicos().length; i++) {
                 jTextPane1.setText(jTextPane1.getText() + a.mostrarMecanicos()[i] +"\n");
             }

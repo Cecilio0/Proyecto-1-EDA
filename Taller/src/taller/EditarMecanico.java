@@ -34,7 +34,6 @@ public class EditarMecanico extends javax.swing.JFrame {
 
         cargarFicheros();
         botonActualizar.setEnabled(false);
-        botonDespedir.setEnabled(false);
         setResizable(false);
     }
 
@@ -104,7 +103,6 @@ public class EditarMecanico extends javax.swing.JFrame {
         mecanicoTelefono = new javax.swing.JTextField();
         mecanicoCorreo = new javax.swing.JTextField();
         botonActualizar = new javax.swing.JButton();
-        botonDespedir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -132,13 +130,6 @@ public class EditarMecanico extends javax.swing.JFrame {
         botonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonActualizarActionPerformed(evt);
-            }
-        });
-
-        botonDespedir.setText("Despedir");
-        botonDespedir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonDespedirActionPerformed(evt);
             }
         });
 
@@ -179,8 +170,7 @@ public class EditarMecanico extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(botonActualizar)
                         .addGap(185, 185, 185)
-                        .addComponent(botonDespedir)
-                        .addGap(26, 26, 26))))
+                        )))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,8 +200,7 @@ public class EditarMecanico extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonActualizar)
-                    .addComponent(botonDespedir))
+                    .addComponent(botonActualizar))
                 .addGap(28, 28, 28))
         );
 
@@ -232,7 +221,6 @@ public class EditarMecanico extends javax.swing.JFrame {
             
             mecanicoCedula.setEditable(false);
             botonActualizar.setEnabled(true);
-            botonDespedir.setEnabled(true);
         } catch (Administrador.ENoExiste ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } catch (Administrador.EVectorNulo ex) {
@@ -282,9 +270,6 @@ public class EditarMecanico extends javax.swing.JFrame {
             }
         }
         
-        Date hoy = Calendar.getInstance().getTime();
-        mecanicos[indice].setFechaSalida(hoy);
-        
         guardarFicheros();
 
         JOptionPane.showMessageDialog(null, "Guardado Exitoso");
@@ -298,7 +283,6 @@ public class EditarMecanico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonBuscar;
-    private javax.swing.JButton botonDespedir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

@@ -147,12 +147,6 @@ public class Servicios extends javax.swing.JFrame {
 
         jLabel4.setText("Mecánico (ID):");
 
-        idMecAceite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idMecAceiteActionPerformed(evt);
-            }
-        });
-
         checkFrenos.setText("Cambio de Pastas de Frenos");
         checkFrenos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -524,10 +518,6 @@ public class Servicios extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_botonAplicarActionPerformed
-
-    private void idMecAceiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idMecAceiteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idMecAceiteActionPerformed
 
     /**
      * @param args the command line arguments

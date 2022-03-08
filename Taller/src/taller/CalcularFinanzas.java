@@ -157,18 +157,11 @@ public class CalcularFinanzas extends javax.swing.JFrame {
                       }
                   }
 
-                  int contEmpleados = 0;
-                  for (Mecanico mecanico : mecanicos) {
-                      if (mecanico.getFechaSalida() == null || mecanico.getFechaSalida().before(FN)) {
-                          contEmpleados++;
-                      }
-                  }
+                  int contEmpleados = mecanicos.length;
                   formato = new DecimalFormat("#,###.00");
                   System.out.println(FN);
 
                   jTextArea1.setText("");
-
-                  a.calcularIngresos(FN);
 
                   jTextArea1.setText("Ingresos: " + formato.format(a.calcularIngresos(FN)) + "\nTotal de trabajos hechos: " + contTrabajos + "\n\nNomina: " + formato.format(a.calcularNomina(FN)) + "\nTotal de empleados considerados: " + contEmpleados + "\n\nUtilidad: " + formato.format(a.calcularUtilidad(FN)));
 

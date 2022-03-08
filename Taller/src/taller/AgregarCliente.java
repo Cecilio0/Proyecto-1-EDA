@@ -431,7 +431,7 @@ public class AgregarCliente extends javax.swing.JFrame {
                                      JOptionPane.showMessageDialog(null, "Guardado Exitoso");
                                      this.dispose();
                                  } else {
-                                     JOptionPane.showMessageDialog(null, "Ya existe un vehÃ­culo con placa: " + mtPlaca);
+                                     JOptionPane.showMessageDialog(null, "Ya existe un vehículo con placa: " + mtPlaca);
                                  }
                              } else {
                                  JOptionPane.showMessageDialog(null, "Ya existe un cliente con CC" + cedula);

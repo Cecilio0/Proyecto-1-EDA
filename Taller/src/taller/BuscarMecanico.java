@@ -175,20 +175,15 @@ public class BuscarMecanico extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
             String[] info = new String[2];
-            String estado = "N/A";
-            if (m.getFechaSalida() != null) {
-                estado = "Inactivo";
-            } else {
-                estado = "Activo";
-            }
-            info[0] = ("----------INFORMACIÃ“N PERSONAL----------\nNombre: " + m.getNombre() + "\nNÃºmero de CÃ©dula: " + m.getCedula() + "\nTelÃ©fono: " + m.getTelefono() + "\nDirecciÃ³n: " + m.getDireccion() + "\nCorreo: " + m.getCorreo() + "\nEstado: " + estado + "\n\n");
-            info[1] = ("----------INFORMACIÃ“N TRABAJOS----------\n");
+            String estado = "Activo";
+            info[0] = ("----------INFORMACIÓN PERSONAL----------\nNombre: " + m.getNombre() + "\número de Cédula: " + m.getCedula() + "\nTeléfono: " + m.getTelefono() + "\nDirección: " + m.getDireccion() + "\nCorreo: " + m.getCorreo() + "\nEstado: " + estado + "\n\n");
+            info[1] = ("----------INFORMACIÓN TRABAJOS----------\n");
             for (int i = 0; i < clientes.length; i++) {
                 for (int j = 0; j < clientes[i].getVehiculos().length; j++) {
                     for (int k = 0; k < clientes[i].getVehiculos()[j].getHistorial().length; k++) {
                         if (clientes[i].getVehiculos()[j].getHistorial()[k].getMecanico().getId().equalsIgnoreCase(idMecanico)) {
                             info = Arrays.copyOf(info, info.length + 1);
-                            info[info.length - 1] = ("\nPlaca: " + clientes[i].getVehiculos()[j].getPlaca() + "\nAccion: " + clientes[i].getVehiculos()[j].getHistorial()[k].getAccion() + "\nPrecio: " + formato.format(clientes[i].getVehiculos()[j].getHistorial()[k].getPrecio()) + "\nFecha: " + getFechaFormat(clientes[i].getVehiculos()[j].getHistorial()[k].getFechaIngreso())+"\n");
+                            info[info.length - 1] = ("\nPlaca: " + clientes[i].getVehiculos()[j].getPlaca() + "\nAcción: " + clientes[i].getVehiculos()[j].getHistorial()[k].getAccion() + "\nPrecio: " + formato.format(clientes[i].getVehiculos()[j].getHistorial()[k].getPrecio()) + "\nFecha: " + getFechaFormat(clientes[i].getVehiculos()[j].getHistorial()[k].getFechaIngreso())+"\n");
                         }
                     }
                 }
@@ -199,7 +194,7 @@ public class BuscarMecanico extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Mecanico no encontrado: ID " + idMecanico);
+            JOptionPane.showMessageDialog(null, "Mecánico no encontrado: ID " + idMecanico);
         }
     }//GEN-LAST:event_botonBuscarActionPerformed
 

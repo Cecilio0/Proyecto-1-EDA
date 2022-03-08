@@ -130,7 +130,7 @@ public class Administrador {
 		for (int i = 0; i < 3; i++) {
 			id.append((int) (Math.random() * 10));
 		}
-		while (existeId(id.toString())) {
+		while (existeId(id.toString())) {//se hace toString debido a que anteriormente se maneja id como int
 			id.delete(0, id.length());
 			for (int i = 0; i < 3; i++) {
 				id.append((int) (Math.random() * 10));
@@ -159,7 +159,7 @@ public class Administrador {
 
 	// addCliente | Moto
 	public void addCliente(String nombre, String cedula, Date fechaNacimiento, String direccion, String telefono, String correo, Date fechaRegistro, String placa, String color, boolean estado, int kilometraje, boolean estadoLlantas, int tiempos) throws EYaExiste, ENoExiste, EVectorNulo{//que devuelva el error ya hay cliente con esta cedula
-		if (!existeCedula(cedula)) {
+		if (!existeCedula(cedula) && !existeCedulaMecanico(cedula)) {
 			Cliente c = new Cliente(nombre, cedula, fechaNacimiento, direccion, telefono, correo, fechaRegistro);
 			clientes = Arrays.copyOf(clientes, clientes.length + 1);
 			clientes[clientes.length - 1] = c;
@@ -299,20 +299,6 @@ public class Administrador {
 			throw new ENoExiste("No existe un ");
 		}
 	}
-	
-	public String[] mostrarHistorial(String cedula, String placa) throws ENoExiste, EVectorNulo {//devuelve el historial de un vehiculo
-		int j = buscarCliente(cedula).buscarVehiculo(placa).getHistorial().length;
-		String[] info = new String[j];
-		for (int i = 0; i < j; i++) {
-			info[i] = buscarCliente(cedula).buscarVehiculo(placa).getHistorial()[i].mostrar();
-		}
-		if (info == null || info.length == 0) {
-			info = Arrays.copyOf(info, info.length+1);
-			info[info.length-1] = "Este vehiculo no tiene historial";
-		}
-		return info;
-		//hacer try catch de no hay cliente con esa cedula, try catch de no hay vehiculo con esa placa y Crear excepcion de no hay historial
-	}
 
 	public String[] mostrarMecanicos() {//devuelve un string que cada posicion muestre un mecanico con nombre y id y es necesario considerar la creacion de excepciones cuando no haya mecanicos
 		if (mecanicos == null || mecanicos.length == 0) {
@@ -325,13 +311,7 @@ public class Administrador {
 		}
 		return info;
 	}
-	
-	public void actualizarVehiculo(String placa, int kilometraje, boolean estadoLlantas, boolean limpio) throws ENoExiste, EVectorNulo {//actualiza la informacion del vehiculo
-		buscarVehiculo(placa).setKilometraje(kilometraje);
-		buscarVehiculo(placa).setEstadoLlantas(estadoLlantas);
-		buscarVehiculo(placa).setLimpio(limpio);
-	}
-	
+		
 	public void cambioAceite (String cedula, String placa, String idMecanico, int kilometraje) throws ENoExiste, EVectorNulo {// "cambia" el aceite de un vehiculo, para su correcto funcionamiento debe cambiar el kilometrajeUltimaRevision por kilometraje, ademas debe crear un dato tipo historial
 		Date date = new Date();		
 		String accion = "Cambio de aceite";
@@ -484,7 +464,7 @@ public class Administrador {
 	public double calcularNomina(Date fecha) {//Excepcion de vector nulo
 		double nomina = 0;
 		for (Mecanico mecanico : mecanicos) {
-			if (mecanico != null && mecanico.getFechaSalida() == null || mecanico.getFechaSalida().before(fecha)) {
+			if (mecanico != null) {
 				nomina += mecanico.getSalario();
 			}
 		}
